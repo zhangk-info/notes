@@ -1,8 +1,8 @@
-# SpringCloud:
+# 0, SpringCloud:
 
 
 
-## 0,SpringCloud升级,部分组件停用:
+## SpringCloud升级,部分组件停用:
 
 1,Eureka停用,可以使用zk作为服务注册中心
 
@@ -24,7 +24,7 @@
 
 
 
-# 环境搭建:
+# 1，环境搭建:
 
 
 
@@ -2060,7 +2060,7 @@ GlobalFilter,全局过滤器:
 
 
 
-# 消息总线:
+# 7.消息总线:
 
 ## SpringCloud Bus:
 
@@ -2615,6 +2615,17 @@ service定义发送消息
 启动7001.8001,80,9411
 
 ![](.\图片\sleuth的9.png)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
