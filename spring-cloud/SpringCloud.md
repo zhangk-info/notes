@@ -151,7 +151,7 @@ mybatis:
 
 使用RestTemplate调用pay模块,
 
-​	![](.\图片\order模块2.png)
+![](.\图片\order模块2.png)
 
 ![](.\图片\order模块3.png)
 
@@ -203,7 +203,7 @@ mybatis:
 
 Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
-​	![](.\图片\Eureka的1.png)
+![](.\图片\Eureka的1.png)
 
 
 
@@ -1353,7 +1353,7 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 **==当断路器开启后:==**
 
-​	![](.\图片\Hystrix的44.png)
+![](.\图片\Hystrix的44.png)
 
 
 
@@ -2225,7 +2225,7 @@ GlobalFilter,全局过滤器:
 
 ![](.\图片\Bus的11.png)
 
-​	![](.\图片\Bus的12.png)
+![](.\图片\Bus的12.png)
 
 **可以看到,实际上就是通过==微服务的名称+端口号==进行指定**
 
@@ -3141,7 +3141,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 ![](.\图片\Alibaba的53.png)
 
-​	![](.\图片\Alibaba的54.png)
+![](.\图片\Alibaba的54.png)
 
 ### ==使用sentinel:==
 
@@ -3173,15 +3173,15 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 2.   配置文件
 
-    ![](.\图片\Alibaba的55.png)
+  ![](.\图片\Alibaba的55.png)
 
 3.   主启动类
 
-    ![](.\图片\Alibaba的56.png)
+  ![](.\图片\Alibaba的56.png)
 
 4.   controller\
 
-    ![](.\图片\sentinel的1.png)
+  ![](.\图片\sentinel的1.png)
 
 5.   到这里就可以启动8401
 
@@ -3191,7 +3191,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     ​	访问localhost/8401/testA
 
-    ![](.\图片\sentinel的2.png)
+ ![](.\图片\sentinel的2.png)
 
 6.   可以看到.已经开始监听了
 
@@ -3215,19 +3215,19 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 1.   直接快速失败
 
-    ![](.\图片\sentinel的9.png)
+  ![](.\图片\sentinel的9.png)
 
-    ![](.\图片\sentinel的5.png)
+  ![](.\图片\sentinel的5.png)
 
        ==直接失败的效果:==
 
-    ![](.\图片\sentinel的6.png)
+  ![](.\图片\sentinel的6.png)
 
 2.  线程数:
 
-    ​		![](.\图片\sentinel的8.png)
+  ![](.\图片\sentinel的8.png)
 
-    ​	![](.\图片\sentinel的10.png)
+  ![](.\图片\sentinel的10.png)
 
     ```
     比如a请求过来,处理很慢,在一直处理,此时b请求又过来了
@@ -3235,17 +3235,17 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
     		那么就会报错
     ```
 
-    ![](.\图片\sentinel的11.png)
+ ![](.\图片\sentinel的11.png)
 
     
 
 3.   关联:
 
-     ![](.\图片\sentinel的12.png)
+![](.\图片\sentinel的12.png)
 
      ==应用场景:  比如**支付接口**达到阈值,就要限流下**订单的接口**,防止一直有订单==
 
-     ![](.\图片\sentinel的13.png)
+   ![](.\图片\sentinel的13.png)
 
      **当testA达到阈值,qps大于1,就让testB之后的请求直接失败**
 
@@ -3258,21 +3258,21 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 5.   预热Warm up:
 
-    ​	 ![](.\图片\sentinel的14.png)
+![](.\图片\sentinel的14.png)
 
-      ![](.\图片\sentinel的15.png)
+![](.\图片\sentinel的15.png)
 
-     ![](.\图片\sentinel的16.png)
+![](.\图片\sentinel的16.png)
 
      ==应用场景==
 
-     ![](.\图片\sentinel的17.png)
+![](.\图片\sentinel的17.png)
 
 6.   排队等待:
 
-    ![](.\图片\sentinel的18.png)
+![](.\图片\sentinel的18.png)
 
-    ![](.\图片\sentinel的19.png)
+![](.\图片\sentinel的19.png)
 
 
 
@@ -3380,7 +3380,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 ![](.\图片\sentinel的36.png)
 
-​	![](.\图片\sentinel的37.png)
+![](.\图片\sentinel的37.png)
 
 比如:
 
@@ -3512,11 +3512,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     添加我们自己的commone包的依赖
 
-    ![](.\图片\sentinel的55.png)
+![](.\图片\sentinel的55.png)
 
 2.   额外创建一个controller类
 
-    ​	 ![](.\图片\sentinel的56.png)
+![](.\图片\sentinel的56.png)
 
      
 
@@ -3526,19 +3526,19 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     **这样也是可以的,也就是不一定要指定访问路径**
 
-    ![](.\图片\sentinel的57.png)
+![](.\图片\sentinel的57.png)
 
 4.   测试.
 
     可以看到已经进入降级方法了
 
-    ![](.\图片\sentinel的58.png)
+![](.\图片\sentinel的58.png)
 
 5.   ==此时我们关闭8401服务==
 
     可以看到,这些定义的规则是临时的,关闭服务,规则就没有了
 
-    ![](.\图片\sentinel的59.png)
+![](.\图片\sentinel的59.png)
 
 
 
@@ -3552,27 +3552,27 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 1.  ==单独创建一个类,用于处理限流==
 
-    ![](.\图片\sentinel的的1.png)
+![](.\图片\sentinel的的1.png)
 
 2.  ==在controller中,指定使用自定义类中的方法作为降级方法==
 
-    ![](.\图片\sentinel的的2.png)
+![](.\图片\sentinel的的2.png)
 
 3.   ==Sentinel中定义流控规则==:
 
      这里资源名,是以url指定,也可以使用@SentinelResource注解value的值指定
 
-     ![](.\图片\sentinel的的5.png)
+![](.\图片\sentinel的的5.png)
 
      
 
 4.  ==测试==:
 
-    ![](.\图片\sentinel的的3.png)
+![](.\图片\sentinel的的3.png)
 
 5.  ==整体==:
 
-    ![](.\图片\sentinel的的4.png)
+![](.\图片\sentinel的的4.png)
 
 6.   
 
@@ -3610,7 +3610,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     2.   配置文件
 
-        ![](.\图片\sentinel的的8.png)*
+  ![](.\图片\sentinel的的8.png)*
 
     3.   主启动类 
 
@@ -3629,7 +3629,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     4.   controller
 
-        ![](.\图片\sentinel的的9.png)
+  ![](.\图片\sentinel的的9.png)
 
          **然后启动9003.9004**
 
@@ -3641,31 +3641,31 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     2.   配置文件
 
-        ![](.\图片\sentinel的的10.png)
+  ![](.\图片\sentinel的的10.png)
 
     3.   主启动类
 
-        ![](.\图片\sentinel的的11.png)
+  ![](.\图片\sentinel的的11.png)
 
     4.  配置类
 
-        ![](.\图片\sentinel的的12.png)
+  ![](.\图片\sentinel的的12.png)
 
     5.   controller
 
-        ![](.\图片\sentinel的的13.png)
+  ![](.\图片\sentinel的的13.png)
 
         
 
     6.   **==为业务方法添加fallback来指定降级方法==**:
 
-        ![](.\图片\sentinel的的14.png)
+  ![](.\图片\sentinel的的14.png)
 
         ​	==重启order==
 
         测试:
 
-        ![](.\图片\sentinel的的15.png)
+  ![](.\图片\sentinel的的15.png)
 
          
 
@@ -3679,11 +3679,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     7.   **==为业务方法添加blockHandler,看看是什么效果==**
 
-         ![](.\图片\sentinel的的16.png)
+   ![](.\图片\sentinel的的16.png)
 
          **重启84,访问业务方法:**
 
-        ![](.\图片\sentinel的的17.png)
+  ![](.\图片\sentinel的的17.png)
 
          可以看到.,直接报错了,并没有降级
 
@@ -3693,15 +3693,15 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     8.   **==如果fallback和blockHandler都配置呢?==**]
 
-         ![](.\图片\sentinel的的18.png)
+   ![](.\图片\sentinel的的18.png)
 
          **设置qps规则,阈值1**
 
-         ![](.\图片\sentinel的的19.png)
+   ![](.\图片\sentinel的的19.png)
 
          ==测试:==
 
-        ![](.\图片\sentinel的的20.png)
+  ![](.\图片\sentinel的的20.png)
 
          
 
@@ -3709,13 +3709,13 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     9.  **==@SentinelResource还有一个属性,exceptionsToIgnore==**
 
-         ![](.\图片\sentinel的的21.png)
+   ![](.\图片\sentinel的的21.png)
 
          **exceptionsToIgnore指定一个异常类,**
 
         ​					**表示如果当前方法抛出的是指定的异常,不降级,直接对用户抛出异常**
 
-         ![](.\图片\sentinel的的22.png)
+   ![](.\图片\sentinel的的22.png)
 
          
 
@@ -3733,31 +3733,31 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     1.  pom
 
-        ![](.\图片\sentinel的的23.png)
+  ![](.\图片\sentinel的的23.png)
 
     2.  配置文件
 
-        ![](.\图片\sentinel的的24.png)
+  ![](.\图片\sentinel的的24.png)
 
     3.  主启动类,也要修改
 
-        ![](.\图片\sentinel的的25.png)
+  ![](.\图片\sentinel的的25.png)
 
     4.  创建远程调用pay模块的接口
 
-        ![](.\图片\sentinel的的26.png)
+  ![](.\图片\sentinel的的26.png)
 
     5.  创建这个接口的实现类,用于降级
 
-        ![](.\图片\sentinel的的27.png)
+  ![](.\图片\sentinel的的27.png)
 
     6.   再次修改接口,指定降级类
 
-        ![](.\图片\sentinel的的28.png)
+  ![](.\图片\sentinel的的28.png)
 
     7.   controller添加远程调用
 
-        ![](.\图片\sentinel的的29.png)
+  ![](.\图片\sentinel的的29.png)
 
     8.  测试
 
@@ -3765,7 +3765,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     9.   测试,如果关闭9003.看看84会不会降级
 
-        ![](.\图片\sentinel的的30.png)
+  ![](.\图片\sentinel的的30.png)
 
         **可以看到,正常降级了**
 
@@ -3809,7 +3809,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     添加:
 
-     ![](.\图片\sentinel的的33.png)
+![](.\图片\sentinel的的33.png)
 
      **实际上就是指定,我们的规则要保证在哪个名称空间的哪个分组下**
 
@@ -3819,11 +3819,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 3.   **在nacos中创建一个配置文件,dataId就是上面配置文件中指定的**
 
-     ![](.\图片\sentinel的的34.png)
+![](.\图片\sentinel的的34.png)
 
      ==json中,这些属性的含义:==
 
-    ​	![](.\图片\sentinel的的35.png)
+    ![](.\图片\sentinel的的35.png)
 
      
 
@@ -3831,19 +3831,19 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 4.   启动8401:
 
-     ![](.\图片\sentinel的的36.png)
+![](.\图片\sentinel的的36.png)
 
      可以看到,直接读取到了规则
 
 5.   关闭8401
 
-    ![](.\图片\sentinel的的37.png)
+![](.\图片\sentinel的的37.png)
 
 6.   此时重启8401,如果sentinel又可以正常读取到规则,那么证明持久化成功
 
     可以看到,又重新出现了
 
-     ![](.\图片\sentinel的的38.png)
+![](.\图片\sentinel的的38.png)
 
     
 
@@ -3891,11 +3891,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 2.  **修改file.conf**
 
-     ![](.\图片\seala的4.png)
+![](.\图片\seala的4.png)
 
-     ![](.\图片\seala的5.png)
+![](.\图片\seala的5.png)
 
-     ![](.\图片\seala的6.png)
+![](.\图片\seala的6.png)
 
 3.   **mysql建库建表**
 
@@ -3907,7 +3907,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     配置seata作为微服务,指定注册中心
 
-    ![](.\图片\seala的7.png)
+![](.\图片\seala的7.png)
 
 5.   启动
 
@@ -3927,15 +3927,15 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 1.  创建三个数据库
 
-    ![](.\图片\seala的9.png)
+![](.\图片\seala的9.png)
 
 2.   创建对应的表
 
-    ![](.\图片\seala的10.png)
+![](.\图片\seala的10.png)
 
 3.   创建回滚日志表,方便查看
 
-    ![](.\图片\seala的11.png)
+![](.\图片\seala的11.png)
 
     **注意==每个库都要执行一次==这个sql,生成回滚日志表**
 
@@ -4433,7 +4433,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
          
         ```
 
-        ![](.\图片\seala的12.png)
+  ![](.\图片\seala的12.png)
 
          
 
@@ -4532,11 +4532,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 5.   **全局创建完成后,首先测试不加seata**
 
-     ![](.\图片\seala的14.png)
+![](.\图片\seala的14.png)
 
      
 
-     ![](.\图片\seala的13.png)
+![](.\图片\seala的13.png)
 
 ​    
 
@@ -4610,7 +4610,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 ![](.\图片\seala的20.png)
 
-​	![](.\图片\seala的19.png)
+![](.\图片\seala的19.png)
 
 
 
