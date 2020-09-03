@@ -3888,6 +3888,13 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 ### seata安装:
 
 1.  **下载安装seata的安装包**
+-p 9898:9898 可能没有默认集成metrics
+
+docker run --name seata-server \
+        -p 8091:8091 -d \
+        -e SEATA_CONFIG_NAME=file:/root/seata-config/registry \
+        -v /data/seata/config:/root/seata-config  \
+        seataio/seata-server
 
 2.  **修改file.conf**
 
