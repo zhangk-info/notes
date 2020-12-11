@@ -1,0 +1,75 @@
+version: '3.7'
+
+x-image:
+  &default-image
+    redis:latest
+x-restart:
+  &default-restart
+    always
+x-command:
+  &default-command
+    redis-server /etc/redis/redis.conf
+x-netmode:
+  &default-netmode
+    host
+
+services:
+  redis1:
+    image: *default-image
+    restart: *default-restart
+    container_name: redis-m1
+    command: *default-command
+    volumes:
+      - ./16379/data:/data
+      - ./16379/conf/redis.conf:/etc/redis/redis.conf
+    network_mode: *default-netmode
+
+  redis2:
+    image: *default-image
+    restart: *default-restart
+    container_name: redis-m2
+    command: *default-command
+    volumes:
+      - ./16380/data:/data
+      - ./16380/conf/redis.conf:/etc/redis/redis.conf
+    network_mode: *default-netmode
+
+  redis3:
+    image: *default-image
+    restart: *default-restart
+    container_name: redis-m3
+    command: *default-command
+    volumes:
+      - ./16381/data:/data
+      - ./16381/conf/redis.conf:/etc/redis/redis.conf
+    network_mode: *default-netmode
+
+  redis4:
+    image: *default-image
+    restart: *default-restart
+    container_name: redis-s1
+    command: *default-command
+    volumes:
+      - ./16382/data:/data
+      - ./16382/conf/redis.conf:/etc/redis/redis.conf
+    network_mode: *default-netmode
+
+  redis:
+    image: *default-image
+    restart: *default-restart
+    container_name: redis-s2
+    command: *default-command
+    volumes:
+      - ./16383/data:/data
+      - ./16383/conf/redis.conf:/etc/redis/redis.conf
+    network_mode: *default-netmode
+
+  redis6:
+    image: *default-image
+    restart: *default-restart
+    container_name: redis-s3
+    command: *default-command
+    volumes:
+      - ./16384/data:/data
+      - ./16384/conf/redis.conf:/etc/redis/redis.conf
+    network_mode: *default-netmode
