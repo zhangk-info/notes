@@ -1,0 +1,63 @@
+是什么 
+去哪儿下
+能干嘛
+怎么玩
+
+Ribbon是一个客户端负载均衡Load Balance工具
+负责将用户的请求平摊的分配到多个服务器，从而达到系统的HA(High Avaliability)高可用。
+
+进程内LB : 客户端，如，Ribbon 。进程内LB指将LB逻辑集成到消费方，消费方从服务注册中心获取可用服务提供方，然后自己通过策略从服务提供方中选择出一个合适的。
+集中式LB : 服务端，如，nginx 。集中式LB设施可以是硬件如F5，也可以是软件如nginx。集中式LB由设施负责把访问请求通过策略转发至服务的提供方。
+
+Ribbon通过RestTemplate进行调用:Ribbon=LB+RestTemplate 
+
+Ribbon在工作时分成两步
+1.先选择服务注册中心，它有限选择同一个区域内负载较少的server。
+2.根据用户指定的策略，从服务注册中心取到的服务注册列表中选择一个地址进行调用。
+
+Ribbon提供了多种负载均衡策略：如：轮询、随机、根据响应时间加权（权重）等。
+
+新版本的"spring-cloud-starter-netflix-eureka-client"已经默认集成了Ribbon，引入了"spring-cloud-starter-netflix-ribbon"
+
+Ribbon的启用
+@RibbonClients
+
+@Configuration
+public class RestTemplateConfig {
+
+    @Bean
+    @LoadBalanced //启用ribbon做负载均衡
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+}
+
+Ribbon核心组件IRule
+IRule是一个负载均衡算法的接口，它有7中落地的实现。
+RoundRobinRule	默认策略，轮询
+RodomRule	随机策略
+RetryRule		重试策略，在一个配置时间段内当选择的server不成功，则尝试选择一个可用的server
+BestAvaliableRule	最低并发策略，逐个考察server,如果server断路器打开，则忽略，再选择其中并发连接最低的server
+AvaliabilityFilterRule	过滤掉一只连接失败并标记为 circuit triped 的server,过滤掉那些高并发的server(active connections超过配置的阀值)
+ResponseTimeWeightedRule	响应时间加权策略，根据server的响应时间分配权重。响应时间越长，权重越低，被选择到的概率也就越低。
+ZoneAvoidanceRule	区域权衡策略，综合判断server所在区域的性能和server的可用性轮询选择server，并判定一个AWS Zone的运行性能是否可用，剔除不可用的Zone中的所有server
+
+
+Ribbon负载策略替换:
+一，全局配置方式
+1.自定义配置类不能放在@ComponentScan所扫描的当前包下以及子包下，否则我们的自定义配置就会被所有Ribbion客户端所共享，达不到特殊化定制的目的。即，不能放在Application同级及子包下。
+2.写自定义配置
+3.在主启动内写入注解@RibbonClients
+二，配置文件方式
+server-name:
+  ribbon:
+    NFLoadBalancerRuleClassName:com.netflix.loadbalancer.RandomRule
+
+List<ServerInstance> instances = discoveryClient.getInstances("server-name");
+轮询算法：请求总数取模服务总数得到服务列表的下标 instance = instances.get(total % instances.size())
+
+
+
+
+
+

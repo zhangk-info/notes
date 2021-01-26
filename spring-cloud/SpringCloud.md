@@ -3896,6 +3896,7 @@ docker run --name seata-server \
         -v /data/seata/config:/root/seata-config  \
         seataio/seata-server
 
+
 2.  **修改file.conf**
 
 ![](.\图片\seala的4.png)

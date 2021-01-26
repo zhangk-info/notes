@@ -1,0 +1,79 @@
+分布式遇到的问题：
+如果“扇出”的链路上某个微服务的调用响应时间过长或不可用，对服务调用就会占用越来越多系统资源，进而引起系统崩溃。即：雪崩效应。
+
+Hystrix断路器是一个用于处理分布式系统的延迟和容错的开源库，在分布式系统中，许多依赖不可避免的会调用失败，比如超时、异常等，Hystrix能够保证在一个依赖出问题的情况下，不会导致整体服务失败，避免级联故障，以提高分布式系统的弹性。
+
+“断路器”本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（熔断），向调用方返回一个符合预期的、可处理的备选响应（FallBack）,而不是长时间的等待或者抛出调用方无法处理的异常，这样就保证了服务的调用方的线程不会被长时间、不必要的占用，从而避免了分布式系统中的蔓延，乃至雪崩。
+
+Hystrix重要概念：
+服务降级：向调用方放回一个符合预期的、可处理的备选响应（FallBack）
+服务熔断：服务达到最大服务访问后（或不可用或响应时间太长），直接拒绝访问，然后调用服务降级方法达到快速返回友好提示。当检测到服务调用正常后，恢复调用链路。
+服务限流：
+
+
+Hystrix会监控微服务间调用的情况，当失败的调用到一定的阀值，缺省是5秒内20次调用失败，就会启动熔断机制。
+
+熔断类型：close  open  half-open 
+close表达没熔断，open表示熔断，half-open表示半开，慢慢单个尝试，直到恢复
+
+
+
+Hystrix的使用3种方式
+一、服务降级的方法上使用方式
+1.引入jar包 spring-boot-starter-netflix-hystrix
+2.添加注解 @EnableHystrix 或者 @EnableCircuitBreaker
+3.在方法上添加注解配置
+@HystrixCommand(fallbackMethod = "TimeOutHandler", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+    })
+4.编写兜底方法，兜底方法的参数和返回值必须和原方法一致
+
+二、服务降级的一个类全局配置
+1.在整个类上配置全局的服务降级方法
+@DefaultProperties(defaultFallback = "GlobalHandler")
+2.编写兜底方法
+3.在需要降级的方法上添加注解配置@HystrixCommand
+
+注：除了服务端自己要实现服务降级。客户端也需要实现服务降级以处理服务端服务宕机等情况下的友好提示。
+
+三、结合feign使用
+1.编写application.yml配置，启用feign的hystrix
+feign:
+  hystrix:
+    enabled: true
+2.编写一个class实现@FeignClient注解的接口并实现所有方法的兜底方法
+//客户端调用服务端，发现服务端宕机了。
+@Component
+class ErrorFallback implements PaymentHystrixService{
+
+    @Override
+    public String testHystrix() {
+        return "ErrorFallback";
+    }
+}
+3.在@FeignClient中配置fallback指向2中编写的类
+
+
+四、hystrix断路器的使用
+1.在方法上添加注解配置
+@HystrixCommand(fallbackMethod = "TimeOutHandler2", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+            //10秒时间内10次请求，失败率达到60%，跳闸
+            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),//是否开启断路器
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),//请求次数
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),//时间窗口期
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")//失败率达到多少后跳闸
+    })
+2.hystrix断路器的工作原理
+（1）判断是否开启断路器circuitBreaker.enabled=true
+（2）判断是否开启缓存，是直接返回缓存的内容
+（3）判断断路器状态是否为close，否直接服务降级
+（4）判断服务状态是否正常，资源是否可用（线程池、请求队列，信号量是否满），是直接服务降级
+（5）请求服务，返回结果。
+（6）记录结果，Hystrix有一个计数器。记录成功，失败，拒绝，超时等信息
+（7）如果失败，服务降级。成功返回
+（8）如果失败达到配置的阀值。链路open断开。
+（9）尝试恢复half open半开，一段时间后允许单个请求通过，如果请求成功链路close，恢复。如果失败，继续open断开。直到完全恢复。
+
+
+

@@ -1,0 +1,7 @@
+Feign是一个声明式WebService客户端。使用Feign能让编写WebService客户端更加简单。只需要创建一个接口，并在接口上添加一个feign的注解就能实现。
+
+Feign = RestTemplate + Ribbon + 声明式：以前调用服务得通过RestTemplate调用，并通过Ribbon实现负载均衡。Feign是在两者的基础上做了进一层的封装。
+
+OpenFeign在feign的基础上增加了SpringMvc的@RequestMapping注解下的接口解析，并通过代理的方式产生实现类，实现类中做负载均衡并调用其他服务。
+
+
