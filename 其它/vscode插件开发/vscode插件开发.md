@@ -57,7 +57,7 @@ function activate(context) {
 
 			console.log(workspacePath)
 			let onDiskPath = vscode.Uri.file(
-				path.join(workspacePath, 'images', 'yunmel.png')
+				path.join(workspacePath, 'images', '**.png')
 			);
 			let catSrc = panel.webview.asWebviewUri(onDiskPath);
 
