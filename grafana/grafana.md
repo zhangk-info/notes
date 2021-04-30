@@ -31,3 +31,6 @@ https://grafana.com/grafana/dashboards
 https://grafana.com/docs/grafana/latest/developers/plugins/
 * panel开发文档
 https://grafana.com/tutorials/build-a-panel-plugin/
+
+### 3.* 版本的中国地图
+https://gitee.com/Gaytutu/grafana-chinamap-panel/tree/master/src
