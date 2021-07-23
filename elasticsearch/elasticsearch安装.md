@@ -1,5 +1,6 @@
 
 #elasticsearch docker 启动
+官网 https://www.elastic.co/guide/en/elasticsearch/reference/7.13/docker.html#docker-cli-run-dev-mode
 ```
 docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
 -e "discovery.type=single-node" \
@@ -7,8 +8,9 @@ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
 -v /mnt/docker-volumes/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
 -v /mnt/docker-volumes/elasticsearch/data:/usr/share/elasticsearch/data \
 -v /mnt/docker-volumes/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
--d elasticsearch:7.10.1
+-d docker.elastic.co/elasticsearch/elasticsearch:7.13.4
 
+这里不建议用docker.elastic.co/elasticsearch/elasticsearch:7.13.4外网的
 
 docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
 -e "discovery.type=single-node" \
@@ -16,10 +18,12 @@ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
 -v /mnt/docker-volumes/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
 -v /mnt/docker-volumes/elasticsearch/data:/usr/share/elasticsearch/data \
 -v /mnt/docker-volumes/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
--d elasticsearch:7.10.1
+-d elasticsearch:7.13.4
 
+可能会出现 container init exited prematurely 是文件的问题 elasticsearch.yml需要先创建
 chmod -R 777 /mnt/docker-volumes/elasticsearch
-在elasticsearch中写入 
+
+在elasticsearch.yml中写入 
 http.host : 0.0.0.0
 cluster.name : elasticsearch
 
@@ -42,26 +46,24 @@ cluster.name : elasticsearch
 
 docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.200.30:9200/ -p 5601:5601 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
--d kibana:7.10.1
+-d kibana:7.13.4
 
 docker run --name kibana --link YOUR_ELASTICSEARCH_CONTAINER_NAME_OR_ID:elasticsearch -p 5601:5601 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
--d kibana:7.10.1
+-d kibana:7.13.4
 
 
 docker run --name kibana --link elasticsearch:elasticsearch -p 5601:5601 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
--d kibana:7.10.1 
+-d kibana:7.13.4 
 
 http://ip:5601/
 
 
 server.port: 5602
-# !important
-server.host: "0.0.0.0"
-server.name: "kibana"
-# !important
-elasticsearch.url: ["http://192.168.200.30:9200"]
+server.host: "0.0.0.0" # !important
+server.name: "kibana" # !important
+elasticsearch.url: ["http://192.168.200.30:9200"] # !important
 kibana.index: ".kibana"
 elasticsearch.username: "elastic"
 elasticsearch.password: "paic1234A"
@@ -72,10 +74,13 @@ xpack.reporting.encryptionKey: encryptionKeyreporting12345678909876543210
 
 docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.200.30:9200/ -p 5602:5602 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
--d kibana:7.10.1
-
+-d kibana:7.13.4
 ```
 
 #安装中文分词器
 在plugins目录下创建目录ik 下载插件并解压授权
-wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.10.1/elasticsearch-analysis-ik-7.10.1.zip
+wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.13.4/elasticsearch-analysis-ik-7.13.4.zip
+
+
+# elasticsearch设置密码
+https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls-docker.html

@@ -18,4 +18,20 @@ docker run -p 31001:3306 --name mariadb-db -v /data/mysql/db/conf/:/etc/mysql/co
 记得重启 systemctl restart docker
 
 # 从一个服务器复制文件到另一个服务器 
-scp /data/backup.zip developer@192.168.1.100:/data/ 
+scp /data/backup.zip developer@192.168.1.100:/data/
+
+# docker 镜像加速
+创建或修改 /etc/docker/daemon.json 文件
+{
+  "registry-mirrors": [
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn"
+  ]
+}
+
+systemctl daemon-reload
+systemctl restart docker 
+
+# 升级系统软件
+yum upgrade -y
