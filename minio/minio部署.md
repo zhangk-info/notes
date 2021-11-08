@@ -1,5 +1,6 @@
 ## 以下为踩坑记录
 1. 安装docker 
+yum install docker-ce
 yum install docker
 2. 部署docker镜像 并 启动一个容器
 docker run -p 9000:9000 --name minio1   -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE"   -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"   -v /mnt/data:/data   -v /mnt/config:/root/.minio   minio/minio server /data
