@@ -5,3 +5,6 @@
 ### 推荐字体 : dialog 
 
 ### 推荐theme : one dark theme
+
+### console中文乱码
+CMD support plugin插件造成的 禁用
