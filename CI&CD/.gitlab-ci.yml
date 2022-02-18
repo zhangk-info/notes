@@ -1,0 +1,58 @@
+#########################################################
+# 语法参考：
+# https://docs.gitlab.com/ee/ci/yaml/README.html
+#
+# Gitlab预定义的变量：
+# https://docs.gitlab.com/ee/ci/variables/README.html#predefined-variables-environment-variables
+#########################################################
+
+# 设置变量
+variables:
+  GRADLE_CLI_OPTS: "-g $CI_PROJECT_DIR/.gradle/caches"
+
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - echo $CI_PROJECT_DIR
+
+# 使用缓存，提高速度
+cache:
+  paths:
+    - $CI_PROJECT_DIR/.gradle/caches
+
+# “编译”
+compile-source:
+  stage: build
+  script:
+    - gradle $GRADLE_CLI_OPTS assemble
+
+# “测试”，其中 test 为基本的“测试”任务，jacocoTestReport 为生成“测试报告”
+test-and-report:
+  stage: test
+  image: gradle:7.3-jdk11
+  script:
+    - gradle $GRADLE_CLI_OPTS test jacocoTestReport
+    - cat $CI_PROJECT_DIR/build/reports/jacoco/index.html
+
+# 生成“Api文档”
+#generate-api-doc:
+#  stage: test
+#  script:
+#    - gradle $GRADLE_CLI_OPTS asciidoctor
+
+# 生成“Docker镜像”并推送到私有仓库
+build-docker-image-and-push:
+  stage: deploy
+  script:
+    - gradle $GRADLE_CLI_OPTS jib
+  tags: # tag 属性可以标记这个任务将在含有特定 tag 的 CI Runner 上运行
+    - prod
+  only:
+    - tags # 表示仅在打tag的时候执行
+#  only: # 表示仅在develop/release分支上执行
+#    refs:
+#      - develop
+#      - release
