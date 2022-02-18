@@ -8,7 +8,7 @@
 指定该节点是否存储索引数据，默认为true。
 1.5、index.number_of_shards: 5
 设置默认索引分片个数，默认为5片。
-1.6、index.number_of_replicas: 1
+1.6、index.number_of_replicas: 1 
 设置默认索引副本个数，默认为1个副本。
 1.7、path.conf: /path/to/conf
 设置配置文件的存储路径，默认是es根目录下的config文件夹。
