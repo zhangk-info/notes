@@ -1,87 +1,3 @@
- ## ES中的倒排序索引
-```
-将结果（term）作为索引key，结果对应的id数组作为索引value
-如 ： 年龄 
-10 [1,3,4,5,6]
-8 [14,16]
-12 [11,13,15]
-11 [2,7,8,9,10]
-13 [12]
-年龄10,8,12,11,13就是一个个term
-每个term对应的docIds的数据就是 posting list
-对结果集进行排序[8,10,11,12,13] 就形成了 term dictionary
-term dictionary太大 不能全部放入内存中 于是对term dictionay建立索引 就形成了 term index
-
-位图 : 什么是bitset|bitmap
-1. 我们的docId必须是一个数字
-2. term的个数要足够的少
-3. 此时我们可以用一个bit来标记某个term中存储的posting list
-例子：
-男 [1,3,4,5,6]
-女 [2,7,8,9,10]
-那么 用一个10位的bit标记term为男的posting list:
-    1011110000
-对应的第1,3,4,5,6被标记为1:true
-
-一个byte就可以代表8个文档 所以100万个文档只需要12.5万个byte = 125000b = 125kb
-位图极大的减少了内存使用
-
-```
-
-## ES中的前缀树（字典树）: 多叉树
-```
-又称单词查找树，Trie树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计，排序和保存大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。
-它的优点是：利用字符串的公共前缀来减少查询时间，最大限度地减少无谓的字符串比较，查询效率比哈希树高。
-```
-
-## spring-data-elasticsearch 注解解释
-* https://docs.spring.io/spring-data/elasticsearch/docs/4.0.3.RELEASE/reference/html/#elasticsearch.mapping.meta-model.annotations
-### @Document
-```
-这个主键对应的ElasticsearchCase#createIndex()方法
-
-indexName 索引名称
-type 类型
-useServerConfiguration 是否使用系统配置
-shards 集群模式下分片存储，默认分5片
-replicas 数据复制几份，默认一份
-refreshInterval 多久刷新数据 默认:1s
-indexStoreType 索引存储模式 默认:fs，为深入研究
-createIndex 是否创建索引，默认:true
-```
-
-### @Id
-
-
-### @Field
-踩坑 字段类型对于es来说很重要 不能随便变更 比如从字符串到时间，从float到double，都是不能再有数据之后再转换的，此时必须使用 elasticsearch-dump数据转换（读取重插入）
-这个主键对应的ElasticsearchCase#setMappings()方法
-```
-type 字段类型 默认根据java类型推断,可选类型：Text,Integer,Long,Date,Float,Double,Boolean,Object,Auto,Nested,Ip,Attachment,Keyword,新的数据类型请参考官网
-index 默认tru,非查询索引字段可以指定为false
-format 数据格式，可以理解为一个正则拦截可存储的数据格式
-pattern 使用场景：format = DateFormat.custom, pattern = "uuuu-MM-dd HH:mm:ss:SSS"
-    uuuu是重点！ ： https://www.elastic.co/guide/en/elasticsearch/reference/current/migrate-to-java-time.html#java-time-migration-incompatible-date-formats
-        @Field(name = "created_date_time", type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd HH:mm:ss")
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-searchAnalyzer 搜索的分词，新的ik分词只有ik_smart和ik_max_word两个模式
-store 是否单独存储，应该是存储在_source
-analyzer 分词模式
-ignoreFields 
-includeInParent 
-fielddata  默认为false，当对文本字段进行排序，聚合操作时会抛出异常。改成true解决
-    * Text fields are not optimised for operations that require per-document field data like aggregations and sorting, so these operations are disabled by default. Please use a keyword field instead. Alternatively, set fielddata=true on [***] in order to load field data by uninverting the inverted index. Note that this can use significant memory.
-```
-
-```
-作者：zhaoyunxing
-链接：https://www.jianshu.com/p/7019d93219f5
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-```
-
-### @TypeAlias
-可以隐藏类名称，设置生成的index，对应_source里面的_class属性
 
 
 ## ES 中的查询
@@ -143,7 +59,7 @@ term认为my friends是一个词，只能精确匹配出title字段内容包含"
 ```
     扫描所有倒排索引, 性能较差.
 ```
-* prefix ：前缀检索 
+* prefix ：前缀检索
 * wildcard ：通配符检索
 * regexp ： 正则检索
 * fuzzy ： 纠错检索

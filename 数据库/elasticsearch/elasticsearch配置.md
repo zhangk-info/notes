@@ -1,15 +1,18 @@
 1.1、cluster.name: elasticsearch
 配置es的集群名称，默认是elasticsearch，es会自动发现在同一网段下的es，如果在同一网段下有多个集群，就可以用这个属性来区分不同的集群。
+生产环境中，一定要修改这个值。否则可能导致未知node无端加入集群，造成集群异常。
 1.2、node.name:"Franz Kafka"
 节点名，默认随机指定一个name列表中名字，该列表在es的jar包中config文件夹里name.txt文件中，其中有很多作者添加的有趣名字。
 1.3、node.master: true
 指定该节点是否有资格被选举成为node，默认是true，es是默认集群中的第一台机器为master，如果这台机挂了就会重新选举master。
 1.4、node.data: true
-指定该节点是否存储索引数据，默认为true。
+指定该节点是否存储索引数据，默认为true。 小集群（一般小于10）可以执行所有节点都可存储数据
 1.5、index.number_of_shards: 5
 设置默认索引分片个数，默认为5片。
-1.6、index.number_of_replicas: 1 
+1.6、index.number_of_replicas: 1
 设置默认索引副本个数，默认为1个副本。
+index.refresh_interval: 1
+多久执行一次刷新操作，这使得对索引的最近更改对搜索可见。
 1.7、path.conf: /path/to/conf
 设置配置文件的存储路径，默认是es根目录下的config文件夹。
 1.8、path.data: /path/to/data
