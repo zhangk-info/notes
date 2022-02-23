@@ -96,6 +96,8 @@ https://www.cnblogs.com/wanghaokun/p/10366689.html
 * allkeys-random：所有的key使用随机淘汰的方式进行淘汰。
 * volatile-random：所有设置了过期时间的key使用随机淘汰的方式进行淘汰。
 * volatile-ttl：所有设置了过期时间的key根据过期时间进行淘汰，越早过期就越快被淘汰。
+* volatile-lfu：从所有配置了过期时间的键中驱逐使用频率最少的键
+* allkeys-lfu：从所有键中驱逐使用频率最少的键
 
 #### lru算法（Least Recently Used）：最近最少使用。数据的历史访问记录时间来进行淘汰数据。
 
