@@ -12,7 +12,7 @@
 
 4,Hystrix停更,改为resilence4j
 
-​		或者阿里巴巴的sentienl
+*		或者阿里巴巴的sentienl
 
 5.Zuul改为gateway
 
@@ -36,11 +36,11 @@
 
 ## 2,创建子模块,pay模块
 
-![](.\图片\sc的3.png)
+![](.\img\sc的3.png)
 
 ### 1,子模块名字:
 
-​		cloud_pay_8001
+*		cloud_pay_8001
 
 ### 2,pom依赖
 
@@ -69,43 +69,43 @@ mybatis:
 
 ### 4,主启动类    
 
-​		....
+*		....
 
 ### 5,业务类
 
 #### 1,sql
 
-![](.\图片\sc的4.png)
+![](.\img\sc的4.png)
 
 #### 	2,实体类
 
-![](.\图片\sc的5.png)
+![](.\img\sc的5.png)
 
 #### 3,.entity类
 
-![](.\图片\sc的6.png)
+![](.\img\sc的6.png)
 
 #### 4,dao层:
 
-![](.\图片\sc的7.png)
+![](.\img\sc的7.png)
 
 #### 5,mapper配置文件类
 
-​				**在resource下,创建mapper/PayMapper.xml**
+*				**在resource下,创建mapper/PayMapper.xml**
 
-![](.\图片\sc的8.png)
+![](.\img\sc的8.png)
 
 #### 6,写service和serviceImpl
 
-![](.\图片\sc的9.png)
+![](.\img\sc的9.png)
 
-![sc的9](.\图片\sc的10.png)
+![sc的9](.\img\sc的10.png)
 
 #### 7,controller
 
-![](.\图片\sc的11.png)
+![](.\img\sc的11.png)
 
-![](.\图片\sc的12.png)
+![](.\img\sc的12.png)
 
 
 
@@ -115,9 +115,9 @@ mybatis:
 
 ## 3,热部署:
 
-![](.\图片\sc的13.png)
+![](.\img\sc的13.png)
 
-![](.\图片\sc的14.png)
+![](.\img\sc的14.png)
 
 .....
 
@@ -131,13 +131,13 @@ mybatis:
 
 ## 4,order模块
 
-![](.\图片\sc的3.png)
+![](.\img\sc的3.png)
 
 ### **1,pom**		
 
 ### **2,yml配置文件**
 
-![](.\图片\order模块1.png)
+![](.\img\order模块1.png)
 
 ### **3,主启动类**
 
@@ -145,25 +145,25 @@ mybatis:
 
 ### **5,写controller类**
 
-​		因为这里是消费者类,主要是消费,那么就没有service和dao,需要调用pay模块的方法
+*		因为这里是消费者类,主要是消费,那么就没有service和dao,需要调用pay模块的方法
 
-​		并且这里还没有微服务的远程调用,那么如果要调用另外一个模块,则需要使用基本的api调用
+*		并且这里还没有微服务的远程调用,那么如果要调用另外一个模块,则需要使用基本的api调用
 
 使用RestTemplate调用pay模块,
 
-![](.\图片\order模块2.png)
+![](.\img\order模块2.png)
 
-![](.\图片\order模块3.png)
+![](.\img\order模块3.png)
 
 
 
-​	将restTemplate注入到容器
+*	将restTemplate注入到容器
 
-![](.\图片\order模块4.png)
+![](.\img\order模块4.png)
 
 编写controller:
 
-![](.\图片\order模块5.png)
+![](.\img\order模块5.png)
 
 
 
@@ -175,15 +175,15 @@ mybatis:
 
 ### 2,抽取公共pom
 
-![](.\图片\commons模块.png)
+![](.\img\commons模块.png)
 
 ### 3,entity和实体类放入commons中
 
-![](.\图片\commons模块2.png)
+![](.\img\commons模块2.png)
 
 ### 4,使用mavne,将commone模块打包(install),
 
-​		其他模块引入commons
+*		其他模块引入commons
 
 
 
@@ -203,17 +203,17 @@ mybatis:
 
 Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
-![](.\图片\Eureka的1.png)
+![](.\img\Eureka的1.png)
 
 
 
-![](.\图片\Eureka的2.png)
+![](.\img\Eureka的2.png)
 
-![](.\图片\Eureka的3.png)
+![](.\img\Eureka的3.png)
 
 
 
- ![](.\图片\Eureka的4.png)
+ ![](.\img\Eureka的4.png)
 
 
 
@@ -223,17 +223,17 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### **2,引入pom依赖**
 
-​		eurka最新的依赖变了
+*		eurka最新的依赖变了
 
-![](.\图片\Eureka的5.png)
+![](.\img\Eureka的5.png)
 
 #### 3,配置文件:
 
-![](.\图片\Eureka的6.png)
+![](.\img\Eureka的6.png)
 
 #### 4,主启动类	
 
-![](.\图片\Eureka的7.png)
+![](.\img\Eureka的7.png)
 
 #### **5,此时就可以启动当前项目了**
 
@@ -243,15 +243,15 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 ##### 1.主启动类上,加注解,表示当前是eureka客户端
 
-![](.\图片\Eureka的10.png)
+![](.\img\Eureka的10.png)
 
 ##### 2,修改pom,引入
 
-![](.\图片\Eureka的8.png)
+![](.\img\Eureka的8.png)
 
 ##### 3,修改配置文件:
 
-![](.\图片\Eureka的9.png)
+![](.\img\Eureka的9.png)
 
 ##### 4,pay模块重启,就可以注册到eureka中了
 
@@ -269,7 +269,7 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### 集群原理:
 
-![](.\图片\Eureka的11.png)
+![](.\img\Eureka的11.png)
 
  ```java
 1,就是pay模块启动时,注册自己,并且自身信息也放入eureka
@@ -278,13 +278,13 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
  	并且还会缓存一份到本地,每30秒更新一次
  ```
 
-![](.\图片\Eureka的12.png)
+![](.\img\Eureka的12.png)
 
 **集群构建原理:**
 
-​		互相注册
+*		互相注册
 
-![](.\图片\Eureka的13.png)
+![](.\img\Eureka的13.png)
 
 
 
@@ -294,29 +294,28 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 ##### 1,pom文件:
 
-​		粘贴7001的即可
+*		粘贴7001的即可
 
 ##### 2,配置文件:
 
-​		在写配置文件前,修改一下主机的hosts文件
+*		在写配置文件前,修改一下主机的hosts文件
 
-![](.\图片\Eureka的14.png)
+![](.\img\Eureka的14.png)
 
 首先修改之前的7001的eureka项目,因为多个eureka需要互相注册
 
-![](.\图片\Eureka的15.png)
-
+![](.\img\Eureka的15.png)
 然后修改7002
 
-​			**7002也是一样的,只不过端口和地址改一下**
+*			**7002也是一样的,只不过端口和地址改一下**
 
 ##### 3,主启动类:
 
-​		复制7001的即可
+*		复制7001的即可
 
 ##### 4,然后启动7001,7002即可
 
-*![](.\图片\Eureka的16.png)*
+*![](.\img\Eureka的16.png)*
 
 
 
@@ -326,13 +325,13 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 ##### 1,只需要修改配置文件即可:
 
-![](.\图片\Eureka的17.png)
+![](.\img\Eureka的17.png)
 
 ##### 2,两个模块都修改上面的都一样即可
 
-​			然后启动两个模块
+*			然后启动两个模块
 
-​			要先启动7001,7002,然后是pay模块8001,然后是order(80)
+*			要先启动7001,7002,然后是pay模块8001,然后是order(80)
 
 
 
@@ -340,7 +339,7 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### 0,创建新模块,8002
 
-​	名称: cloud_pay_8002
+*	名称: cloud_pay_8002
 
 #### 1,pom文件,复制8001的
 
@@ -348,25 +347,25 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### 3,配置文件复制8001的
 
-​		端口修改一下,改为8002
+*		端口修改一下,改为8002
 
-​		服务名称不用改,用一样的
+*		服务名称不用改,用一样的
 
 #### 4.主启动类,复制8001的
 
 #### 5,mapper,service,controller都复制一份
 
-​		然后就启动服务即可
+*		然后就启动服务即可
 
-​		此时访问order模块,发现并没有负载均衡到两个pay,模块中,而是只访问8001
+*		此时访问order模块,发现并没有负载均衡到两个pay,模块中,而是只访问8001
 
-​		虽然我们是使用RestTemplate访问的微服务,但是也可以负载均衡的
+*		虽然我们是使用RestTemplate访问的微服务,但是也可以负载均衡的
 
-​		![](.\图片\Eureka的18.png)
+*		![](.\img\Eureka的18.png)
 
 **注意这样还不可以,需要让RestTemplate开启负载均衡注解,还可以指定负载均衡算法,默认轮询**
 
-![](.\图片\Eureka的19.png)
+![](.\img\Eureka的19.png)
 
 
 
@@ -380,7 +379,7 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### 1,修改配置文件:
 
-![](.\图片\Eureka的20.png)
+![](.\img\Eureka的20.png)
 
 
 
@@ -388,21 +387,21 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 ### 5,eureka服务发现:
 
-![](.\图片\Eureka的21.png)
+![](.\img\Eureka的21.png)
 
 以pay模块为例
 
 #### 1,首先添加一个注解,在controller中
 
-![](.\图片\Eureka的22.png)
+![](.\img\Eureka的22.png)
 
-![](.\图片\Eureka的23.png)
+![](.\img\Eureka的23.png)
 
 
 
 #### 2,在主启动类上添加一个注解
 
-![](.\图片\Eureka的24.png)
+![](.\img\Eureka的24.png)
 
 **然后重启8001.访问/payment/discover**y
 
@@ -412,31 +411,31 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 ### 6,Eureka自我保护:
 
-![](.\图片\Eureka的26.png)
+![](.\img\Eureka的26.png)
 
-![](.\图片\Eureka的27.png)
+![](.\img\Eureka的27.png)
 
-![](.\图片\Eureka的25.png)
+![](.\img\Eureka的25.png)
 
 
 
-![](.\图片\Eureka的28.png)
+![](.\img\Eureka的28.png)
 
 
 
 **eureka服务端配置:**
 
-![](.\图片\Eureka的29.png)
+![](.\img\Eureka的29.png)
 
-![](.\图片\Eureka的30.png)
+![](.\img\Eureka的30.png)
 
-​			**设置接受心跳时间间隔**
+*			**设置接受心跳时间间隔**
 
 
 
 **客户端(比如pay模块):**
 
-![](.\图片\Eureka的31.png)
+![](.\img\Eureka的31.png)
 
 
 
@@ -468,15 +467,15 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### 2,配置文件
 
-![](.\图片\zookeeper的3.png)
+![](.\img\zookeeper的3.png)
 
 #### 3,主启动类
 
-![](.\图片\zookeeper的1.png)
+![](.\img\zookeeper的1.png)
 
 #### 4,controller
 
-![](.\图片\zookeeper的2.png)
+![](.\img\zookeeper的2.png)
 
 #### 5,然后就可以启动
 
@@ -485,7 +484,7 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 解决:
 		修改pom文件,改为与我们zk版本匹配的jar包
 
-![](.\图片\zookeeper的4.png)
+![](.\img\zookeeper的4.png)
 
 **此时8003就注册到zk中了**
 
@@ -516,19 +515,19 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 #### 3,配置文件
 
-![](.\图片\zookeeper的5.png)
+![](.\img\zookeeper的5.png)
 
 #### 4主启动类:
 
-![](.\图片\zookeeper的1.png)
+![](.\img\zookeeper的1.png)
 
 #### 5,RestTemolate
 
-![注意,这里使用RestTemolate,要先注册它](.\图片\zookeeper的6.png)
+![注意,这里使用RestTemolate,要先注册它](.\img\zookeeper的6.png)
 
 #### 6,controller
 
-![](.\图片\zookeeper的7.png)
+![](.\img\zookeeper的7.png)
 
 **然后启动即可注册到zk**
 
@@ -536,7 +535,7 @@ Eureka用于**==服务注册==**,目前官网**已经停止更新**
 
 只需要修改配置文件:
 
-![](.\图片\zookeeper的5.png)
+![](.\img\zookeeper的5.png)
 
 这个connect-string指定多个zk地址即可
 
@@ -564,11 +563,11 @@ connect-string: 1.2.3.4,2.3.4.5
 
 ## 8,Consul:
 
-![](.\图片\consul的1.png)
+![](.\img\consul的1.png)
 
 
 
-![](.\图片\consul的2.png)
+![](.\img\consul的2.png)
 
 
 
@@ -578,7 +577,7 @@ connect-string: 1.2.3.4,2.3.4.5
 
 需要下载一个安装包
 
-![](.\图片\consul的3.png)
+![](.\img\consul的3.png)
 
 启动是一个命令行界面,需要输入consul agen-dev启动
 
@@ -594,15 +593,15 @@ cloud_consule_pay_8006
 
 #### 3,配置文件
 
-![](.\图片\consul的4.png)
+![](.\img\consul的4.png)
 
 #### 4,主启动类
 
-![](.\图片\consul的5.png)
+![](.\img\consul的5.png)
 
 #### 5,controller
 
-![](.\图片\consul的6.png)
+![](.\img\consul的6.png)
 
 #### 6,启动服务
 
@@ -622,11 +621,11 @@ cloud-consul-order-80
 
 #### 2,配置文件
 
-![](.\图片\consul的7.png)
+![](.\img\consul的7.png)
 
 #### 3,主启动类
 
-![](.\图片\consul的5.png)
+![](.\img\consul的5.png)
 
 #### 4,RestTemplate注册
 
@@ -634,7 +633,7 @@ cloud-consul-order-80
 
 #### 5,controller
 
-![](.\图片\consul的8.png)
+![](.\img\consul的8.png)
 
 #### 6,启动服务,测试
 
@@ -646,11 +645,11 @@ cloud-consul-order-80
 
 ## 9,三个注册中心的异同:
 
-![](.\图片\consul的9.png)
+![](.\img\consul的9.png)
 
-![](.\图片\consul的10.png)
+![](.\img\consul的10.png)
 
-![](.\图片\consul的11.png)
+![](.\img\consul的11.png)
 
 
 
@@ -664,15 +663,15 @@ cloud-consul-order-80
 
 ## 10,Ribbon负载均衡:
 
-![](.\图片\Ribbon.png)
+![](.\img\Ribbon.png)
 
 **Ribbon目前也进入维护,基本上不准备更新了**
 
-![](.\图片\Ribbon的2.png)
+![](.\img\Ribbon的2.png)
 
 **进程内LB(本地负载均衡)**
 
-![](.\图片\Ribbon的5.png)
+![](.\img\Ribbon的5.png)
 
 
 
@@ -680,7 +679,7 @@ cloud-consul-order-80
 
 **集中式LB(服务端负载均衡)**
 
-![](.\图片\Ribbon的4.png)
+![](.\img\Ribbon的4.png)
 
 
 
@@ -690,21 +689,21 @@ cloud-consul-order-80
 
 **区别**
 
-![](.\图片\Ribbon的3.png)
+![](.\img\Ribbon的3.png)
 
 
 
 **Ribbon就是负载均衡+RestTemplate**
 
-![](.\图片\Ribbon的6.png)
+![](.\img\Ribbon的6.png)
 
 
 
-![](.\图片\Ribbon的7.png)
+![](.\img\Ribbon的7.png)
 
 
 
-![](.\图片\Ribbon的8.png)
+![](.\img\Ribbon的8.png)
 
 
 
@@ -716,7 +715,7 @@ cloud-consul-order-80
 
 #### 1,默认我们使用eureka的新版本时,它默认集成了ribbon:
 
-![](.\图片\Ribbon的9.png)
+![](.\img\Ribbon的9.png)
 
 **==这个starter中集成了reibbon了==**
 
@@ -726,15 +725,15 @@ cloud-consul-order-80
 
 **放到order模块中,因为只有order访问pay时需要负载均衡**
 
-![](.\图片\Ribbon的10.png)
+![](.\img\Ribbon的10.png)
 
 
 
 #### 3,RestTemplate类:
 
-![](.\图片\Ribbon的11.png)
+![](.\img\Ribbon的11.png)
 
-![](.\图片\Ribbon的12.png)
+![](.\img\Ribbon的12.png)
 
 ```java
 RestTemplate的:
@@ -752,7 +751,7 @@ RestTemplate的:
 
 **Rule接口有7个实现类,每个实现类代表一个负载均衡算法**
 
-![](.\图片\Ribbon的14.png)
+![](.\img\Ribbon的14.png)
 
 
 
@@ -764,7 +763,7 @@ RestTemplate的:
 
 **==这里使用eureka的那一套服务==**
 
-![](.\图片\Ribbon的15.png)
+![](.\img\Ribbon的15.png)
 
 **==也就是不能放在主启动类所在的包及子包下==**
 
@@ -772,15 +771,15 @@ RestTemplate的:
 
 ##### 2,额外创建一个包
 
-![](.\图片\Ribbon的16.png)
+![](.\img\Ribbon的16.png)
 
 ##### 3,创建配置类,指定负载均衡算法
 
-![](.\图片\Ribbon的17.png)
+![](.\img\Ribbon的17.png)
 
 ##### 4,在主启动类上加一个注解
 
-![](.\图片\Ribbon的18.png)
+![](.\img\Ribbon的18.png)
 
 **表示,访问CLOUD_pAYMENT_SERVICE的服务时,使用我们自定义的负载均衡算法**
 
@@ -794,9 +793,9 @@ RestTemplate的:
 
 ##### 1,ribbon的轮询算法原理
 
-![](.\图片\Ribbon的19.png)
+![](.\img\Ribbon的19.png)
 
-![](.\图片\Ribbon的21.png)
+![](.\img\Ribbon的21.png)
 
 
 
@@ -804,37 +803,37 @@ RestTemplate的:
 
 **1,给**pay模块(8001,8002),的controller方法添加一个方法,返回当前节点端口
 
-![](.\图片\Ribbon的23.png)
+![](.\img\Ribbon的23.png)
 
-![](.\图片\Ribbon的22.png)
+![](.\img\Ribbon的22.png)
 
 **2,修改order模块**
 
 去掉@LoadBalanced
 
-![](.\图片\Ribbon的24.png)
+![](.\img\Ribbon的24.png)
 
 
 
 ##### 3,自定义接口
 
-![](.\图片\Ribbon的29.png)
+![](.\img\Ribbon的29.png)
 
-​					==具体的算法在实现类中实现==
+*					==具体的算法在实现类中实现==
 
 ##### 4,接口实现类
 
-![](.\图片\Ribbon的25.png)
+![](.\img\Ribbon的25.png)
 
-![](.\图片\Ribbon的26.png)
+![](.\img\Ribbon的26.png)
 
 
 
 ##### 5,修改controller:
 
-![](.\图片\Ribbon的27.png)
+![](.\img\Ribbon的27.png)
 
-![](.\图片\Ribbon的28.png)
+![](.\img\Ribbon的28.png)
 
 
 
@@ -870,13 +869,13 @@ RestTemplate的:
 
 ## 11,OpenFeign
 
-![](.\图片\Feign的1.png)
+![](.\img\Feign的1.png)
 
 **是一个声明式的web客户端,只需要创建一个接口,添加注解即可完成微服务之间的调用**
 
 
 
-![](.\图片\Feign的2.png)
+![](.\img\Feign的2.png)
 
 ==就是A要调用B,Feign就是在A中创建一个一模一样的B对外提供服务的的接口,我们调用这个接口,就可以服务到B==
 
@@ -884,7 +883,7 @@ RestTemplate的:
 
 ### **Feign与OpenFeign区别**
 
-![](.\图片\Feign的3.png)
+![](.\img\Feign的3.png)
 
 
 
@@ -905,19 +904,19 @@ RestTemplate的:
 
 #### 3,配置文件
 
-![](.\图片\Feign的4.png)
+![](.\img\Feign的4.png)
 
 #### 4,主启动类
 
-![](.\图片\Feign的5.png)
+![](.\img\Feign的5.png)
 
 #### 5,fegin需要调用的其他的服务的接口
 
-![](.\图片\Feign的6.png)
+![](.\img\Feign的6.png)
 
 #### 6,controller
 
-![](.\图片\Feign的7.png)
+![](.\img\Feign的7.png)
 
 #### 7测试:
 
@@ -943,7 +942,7 @@ RestTemplate的:
 
 **因为OpenFeign的底层是ribbon进行负载均衡,所以它的超时时间是由ribbon控制**
 
-![](.\图片\Feign的8.png)
+![](.\img\Feign的8.png)
 
 
 
@@ -951,12 +950,12 @@ RestTemplate的:
 
 ### OpenFeign日志:
 
-![](.\图片\Feign的9.png)
+![](.\img\Feign的9.png)
 
 
 
 **OpenFeign的日志级别有:**
-![](.\图片\Feign的10.png)
+![](.\img\Feign的10.png)
 
 
 
@@ -966,15 +965,15 @@ RestTemplate的:
 
 **实现在配置类中添加OpenFeign的日志类**
 
-![](.\图片\Feign的11.png)
+![](.\img\Feign的11.png)
 
 #### 2,为指定类设置日志级别:
 
-![](.\图片\Feign的13.png)
+![](.\img\Feign的13.png)
 
 **配置文件中:**
 
-![](.\图片\Feign的12.png)
+![](.\img\Feign的12.png)
 
 
 
@@ -988,17 +987,17 @@ RestTemplate的:
 
 ## 12,Hystrix服务降级
 
-![](.\图片\Hystrix的2.png)
+![](.\img\Hystrix的2.png)
 
 
 
-![](.\图片\Hystrix的3.png)
+![](.\img\Hystrix的3.png)
 
 
 
 
 
-![](.\图片\Hystrix的4.png)
+![](.\img\Hystrix的4.png)
 
 
 
@@ -1018,7 +1017,7 @@ RestTemplate的:
 
 **当某个服务出现问题,卡死了,不能让用户一直等待,需要关闭所有对此服务的访问**
 
-​			**然后调用服务降级**
+*			**然后调用服务降级**
 
 
 
@@ -1040,19 +1039,19 @@ RestTemplate的:
 
 ##### 3,配置文件
 
-![](.\图片\Hystrix的5.png)
+![](.\img\Hystrix的5.png)
 
 ##### 4,主启动类
 
-![](.\图片\Hystrix的8.png)
+![](.\img\Hystrix的8.png)
 
 ##### 5,service
 
-![](.\图片\Hystrix的6.png)
+![](.\img\Hystrix的6.png)
 
 ##### 6controller
 
-![](.\图片\Hystrix的7.png)
+![](.\img\Hystrix的7.png)
 
 ##### 7,先测试:
 
@@ -1076,35 +1075,35 @@ RestTemplate的:
 
 ##### 3,配置文件
 
-![](.\图片\Hystrix的9.png)
+![](.\img\Hystrix的9.png)
 
 ##### 4,主启动类
 
-![](.\图片\Hystrix的11.png)
+![](.\img\Hystrix的11.png)
 
 ##### 5,远程调用pay模块的接口:
 
-![](.\图片\Hystrix的12.png)
+![](.\img\Hystrix的12.png)
 
 ##### 6,controller:
 
-![](.\图片\Hystrix的13.png)
+![](.\img\Hystrix的13.png)
 
 ##### 7,测试
 
-​			启动order模块,访问pay
+*			启动order模块,访问pay
 
-​			再次压测2万并发,发现order访问也变慢了
+*			再次压测2万并发,发现order访问也变慢了
 
-![](.\图片\Hystrix的14.png)
+![](.\img\Hystrix的14.png)
 
 
 
 **解决:**
 
-![](.\图片\Hystrix的15.png)
+![](.\img\Hystrix的15.png)
 
-##### ![](.\图片\Hystrix的16.png)
+##### ![](.\img\Hystrix的16.png)
 
 
 
@@ -1118,17 +1117,17 @@ RestTemplate的:
 
 ###### 1,为service的指定方法(会延迟的方法)添加@HystrixCommand注解
 
-![](.\图片\Hystrix的17.png)
+![](.\img\Hystrix的17.png)
 
 ###### 2,主启动类上,添加激活hystrix的注解
 
-![](.\图片\Hystrix的18.png)
+![](.\img\Hystrix的18.png)
 
 ###### 3,触发异常
 
-![](.\图片\Hystrix的19.png)
+![](.\img\Hystrix的19.png)
 
-![](.\图片\Hystrix的20.png)**可以看到,也触发了降级**
+![](.\img\Hystrix的20.png)**可以看到,也触发了降级**
 
 
 
@@ -1136,21 +1135,21 @@ RestTemplate的:
 
 一般服务降级,都是放在客户端(order模块),
 
-![](.\图片\Hystrix的21.png)
+![](.\img\Hystrix的21.png)
 
 ###### 1,修改配置文件:
 
-![](.\图片\Hystrix的22.png)
+![](.\img\Hystrix的22.png)
 
 ###### **2,主启动类添加直接,启用hystrix:**
 
-![](.\图片\Hystrix的23.png)
+![](.\img\Hystrix的23.png)
 
-​	
+*	
 
 ###### 3,修改controller,添加降级方法什么的
 
-![](.\图片\Hystrix的24.png)
+![](.\img\Hystrix的24.png)
 
 
 
@@ -1160,7 +1159,7 @@ RestTemplate的:
 
 **注意:,这里pay模块和order模块都开启了服务降级**
 
-​			但是order这里,设置了1.5秒就降级,所以访问时,一定会降级
+*			但是order这里,设置了1.5秒就降级,所以访问时,一定会降级
 
  
 
@@ -1169,7 +1168,7 @@ RestTemplate的:
 **上面出现的问题:**
 		1,降级方法与业务方法写在了一块,耦合度高
 
-​		2.每个业务方法都写了一个降级方法,重复代码多
+*		2.每个业务方法都写了一个降级方法,重复代码多
 
 ##### **解决重复代码的问题**:
 
@@ -1177,25 +1176,25 @@ RestTemplate的:
 
 ###### 1,创建一个全局方法
 
-![](.\图片\Hystrix的26.png)
+![](.\img\Hystrix的26.png)
 
 ###### 2,使用注解指定其为全局降级方法(默认降级方法)
 
-![](.\图片\Hystrix的27.png)
+![](.\img\Hystrix的27.png)
 
-![](.\图片\Hystrix的25.png)
+![](.\img\Hystrix的25.png)
 
 
 
 ###### 3,业务方法使用默认降级方法:
 
-![](.\图片\Hystrix的28.png)
+![](.\img\Hystrix的28.png)
 
 
 
 ###### 4,测试:
 
-![](.\图片\Hystrix的29.png)
+![](.\img\Hystrix的29.png)
 
 
 
@@ -1213,15 +1212,15 @@ RestTemplate的:
 
 ###### 1,Payservice接口是远程调用pay模块的,我们这里创建一个类实现service接口,在实现类中统一处理异常
 
-![](.\图片\Hystrix的30.png)
+![](.\img\Hystrix的30.png)
 
 ###### 2,修改配置文件:添加:
 
-![](.\图片\Hystrix的31.png)
+![](.\img\Hystrix的31.png)
 
 ###### 	3,让PayService的实现类生效:
 
-![](.\图片\Hystrix的32.png)
+![](.\img\Hystrix的32.png)
 
 ```java
 它的运行逻辑是:
@@ -1236,7 +1235,7 @@ RestTemplate的:
 
 ==此时将pay服务关闭,order再次访问==
 
-![](.\图片\Hystrix的33.png)
+![](.\img\Hystrix的33.png)
 
 可以看到,并没有报500错误,而是降级访问==实现类==的同名方法
 
@@ -1244,7 +1243,7 @@ RestTemplate的:
 
 问题:
 
-​		**这样虽然解决了代码耦合度问题,但是又出现了过多重复代码的问题,每个方法都有一个降级方法**
+*		**这样虽然解决了代码耦合度问题,但是又出现了过多重复代码的问题,每个方法都有一个降级方法**
 
 
 
@@ -1254,13 +1253,13 @@ RestTemplate的:
 
 ### 使用服务熔断:
 
-![](.\图片\Hystrix的34.png)
+![](.\img\Hystrix的34.png)
 
 **比如并发达到1000,我们就拒绝其他用户访问,在有用户访问,就访问降级方法**
 
 
 
-![](.\图片\Hystrix的35.png)
+![](.\img\Hystrix的35.png)
 
 
 
@@ -1268,12 +1267,12 @@ RestTemplate的:
 
 ##### **1,修改Payservice接口,添加服务熔断相关的方法:**
 
-![](.\图片\Hystrix的37.png)
+![](.\img\Hystrix的37.png)
 
 这里属性整体意思是:
 			10秒之内(窗口,会移动),如果并发==超过==10个,或者10个并发中,失败了6个,就开启熔断器
 
-![image-20200414152637247](.\图片\Hystrix的43.png)
+![image-20200414152637247](.\img\Hystrix的43.png)
 
 
 
@@ -1283,7 +1282,7 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 
 
-![](.\图片\Hystrix的36.png)
+![](.\img\Hystrix的36.png)
 
 ```java
 断路器的打开和关闭,是按照一下5步决定的
@@ -1301,7 +1300,7 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 添加一个测试方法;
 
-![](.\图片\Hystrix的39.png)
+![](.\img\Hystrix的39.png)
 
 
 
@@ -1311,15 +1310,15 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 ==多次访问,并且错误率超过60%:==
 
-![](.\图片\Hystrix的40.png)
+![](.\img\Hystrix的40.png)
 
 此时服务熔断,此时即使访问正确的也会报错:
 
-![](.\图片\Hystrix的41.png)
+![](.\img\Hystrix的41.png)
 
 **但是,当过了几秒后,又恢复了**
 
-​				因为在10秒窗口期内,它自己会尝试接收部分请求,发现服务可以正常调用,慢慢的当错误率低于60%,取消熔断
+*				因为在10秒窗口期内,它自己会尝试接收部分请求,发现服务可以正常调用,慢慢的当错误率低于60%,取消熔断
 
 
 
@@ -1335,9 +1334,9 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 **全部在这个方法中记录,以成员变量的形式记录,**
 
-​		以后需要什么属性,查看这个类即可
+*		以后需要什么属性,查看这个类即可
 
-![](.\图片\Hystrix的38.png)
+![](.\img\Hystrix的38.png)
 
 
 
@@ -1349,25 +1348,25 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 ### 总结:
 
-![](.\图片\Hystrix的42.png)
+![](.\img\Hystrix的42.png)
 
 **==当断路器开启后:==**
 
-![](.\图片\Hystrix的44.png)
+![](.\img\Hystrix的44.png)
 
 
 
 **==其他参数:==**
 
-![](.\图片\Hystrix的45.png)
+![](.\img\Hystrix的45.png)
 
-![](.\图片\Hystrix的46.png)
+![](.\img\Hystrix的46.png)
 
-![](.\图片\Hystrix的47.png)
+![](.\img\Hystrix的47.png)
 
-![](.\图片\Hystrix的48.png)
+![](.\img\Hystrix的48.png)
 
-![](.\图片\Hystrix的49.png)
+![](.\img\Hystrix的49.png)
 
 
 
@@ -1402,7 +1401,7 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 #### HystrixDashboard
 
-![](.\图片\Hystrix的51.png)
+![](.\img\Hystrix的51.png)
 
 #### 2,使用HystrixDashboard:
 
@@ -1414,31 +1413,31 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 ##### 3,配置文件
 
-![](.\图片\Hystrix的52.png)
+![](.\img\Hystrix的52.png)
 
 ##### 4,主启动类
 
-![](.\图片\Hystrix的53.png)
+![](.\img\Hystrix的53.png)
 
 ##### 5,修改所有pay模块(8001,8002,8003...)
 
 **他们都添加一个pom依赖:**
 
-![](.\图片\Hystrix的54.png)
+![](.\img\Hystrix的54.png)
 
 之前的pom文件中都添加过了,==这个是springboot的监控组件==
 
 ##### 6,启动9001即可
 
-​			访问: **localhost:9001/hystrix**
+*			访问: **localhost:9001/hystrix**
 
 ##### 7,注意,此时仅仅是可以访问HystrixDashboard,并不代表已经监控了8001,8002
 
-​							如果要监控,还需要配置:(8001为例)
+*							如果要监控,还需要配置:(8001为例)
 
 ==8001的主启动类添加:==
 
-![](.\图片\Hystrix的55.png)
+![](.\img\Hystrix的55.png)
 
 **其他8002,8003都是一样的**
 
@@ -1448,21 +1447,21 @@ IdUtil是Hutool包下的类,这个Hutool就是整合了所有的常用方法,比
 
 **然后在web界面,指定9001要监控8001:**
 
-##### ![](.\图片\Hystrix的56.png)
+##### ![](.\img\Hystrix的56.png)
 
 
 
-![](.\图片\Hystrix的57.png)
+![](.\img\Hystrix的57.png)
 
-![](.\图片\Hystrix的59.png)
+![](.\img\Hystrix的59.png)
 
-![](.\图片\Hystrix的58.png)
+![](.\img\Hystrix的58.png)
 
-![](.\图片\Hystrix的60.png)
+![](.\img\Hystrix的60.png)
 
-![](.\图片\Hystrix的61.png)
+![](.\img\Hystrix的61.png)
 
-![](.\图片\Hystrix的62.png)
+![](.\img\Hystrix的62.png)
 
 
 
@@ -1490,35 +1489,35 @@ zuul停更了,
 
 
 
-![](.\图片\gateway的1.png)
+![](.\img\gateway的1.png)
 
-![](.\图片\gateway的2.png)
+![](.\img\gateway的2.png)
 
 **gateway之所以性能号,因为底层使用WebFlux,而webFlux底层使用netty通信(NIO)**
 
 
 
-![](.\图片\gateway的3.png)
+![](.\img\gateway的3.png)
 
 
 
 ### GateWay的特性:
 
-![](.\图片\gateway的4.png)
+![](.\img\gateway的4.png)
 
 
 
 ### GateWay与zuul的区别:
 
-![](.\图片\gateway的5.png)
+![](.\img\gateway的5.png)
 
 
 
 ### zuul1.x的模型:
 
-![](.\图片\gateway的6.png)
+![](.\img\gateway的6.png)
 
-![](.\图片\gateway的7.png)
+![](.\img\gateway的7.png)
 
 
 
@@ -1528,7 +1527,7 @@ zuul停更了,
 
 **是一个非阻塞的web框架,类似springmvc这样的**
 
-![](.\图片\gateway的8.png)
+![](.\img\gateway的8.png)
 
 
 
@@ -1536,7 +1535,7 @@ zuul停更了,
 
 #### 1,路由:
 
-![](.\图片\gateway的9.png)
+![](.\img\gateway的9.png)
 
 就是根据某些规则,将请求发送到指定服务上
 
@@ -1544,7 +1543,7 @@ zuul停更了,
 
 #### 2,断言:
 
-![](.\图片\gateway的10.png)
+![](.\img\gateway的10.png)
 
 就是判断,如果符合条件就是xxxx,反之yyyy
 
@@ -1552,9 +1551,9 @@ zuul停更了,
 
 #### 3,过滤:
 
-![](.\图片\gateway的11.png)
+![](.\img\gateway的11.png)
 
-​	**路由前后,过滤请求**
+*	**路由前后,过滤请求**
 
 
 
@@ -1562,9 +1561,9 @@ zuul停更了,
 
 ### GateWay的工作原理:
 
-![](.\图片\gateway的12.png)
+![](.\img\gateway的12.png)
 
-![](.\图片\gateway的13.png)
+![](.\img\gateway的13.png)
 
 
 
@@ -1580,27 +1579,27 @@ zuul停更了,
 
 #### 2,配置文件
 
-![](.\图片\gateway的14.png)
+![](.\img\gateway的14.png)
 
 #### 3,主启动类
 
-![](.\图片\gateway的15.png)
+![](.\img\gateway的15.png)
 
 #### 4,针对pay模块,设置路由:
 
-![](.\图片\gateway的16.png)
+![](.\img\gateway的16.png)
 
-![](.\图片\gateway的18.png)
+![](.\img\gateway的18.png)
 
 **==修改GateWay模块(9527)的配置文件==:**
 
-![](.\图片\gateway的17.png)
+![](.\img\gateway的17.png)
 
 这里表示,
 
-​			当访问localhost:9527/payment/get/1时,     
+*			当访问localhost:9527/payment/get/1时,     
 
-​			路由到localhost:8001/payment/get/1
+*			路由到localhost:8001/payment/get/1
 
 
 
@@ -1615,9 +1614,9 @@ zuul停更了,
 
 访问:
 
-​		localhost:9527/payment/get/1
+*		localhost:9527/payment/get/1
 
-![](.\图片\gateway的19.png)
+![](.\img\gateway的19.png)
 
 
 
@@ -1627,13 +1626,13 @@ zuul停更了,
 
 #### 6,GateWay的网关配置,
 
-​		**GateWay的网关配置,除了支持配置文件,还支持硬编码方式**
+*		**GateWay的网关配置,除了支持配置文件,还支持硬编码方式**
 
 #### 7使用硬编码配置GateWay:
 
 ##### 创建配置类:
 
-![](.\图片\gateway的20.png)
+![](.\img\gateway的20.png)
 
 #### 8,然后重启服务即可
 
@@ -1649,11 +1648,11 @@ zuul停更了,
 
 需要:
 
-​		1个eureka,2个pay模块
+*		1个eureka,2个pay模块
 
 #### 修改GateWay模块的配置文件:
 
-![](.\图片\gateway的21.png)
+![](.\img\gateway的21.png)
 
 
 
@@ -1667,17 +1666,17 @@ zuul停更了,
 
 ### Pridicate断言:
 
-![](.\图片\gateway的24.png)
+![](.\img\gateway的24.png)
 
 **我们之前在配置文件中配置了断言:**
 
-![](.\图片\gateway的22.png)
+![](.\img\gateway的22.png)
 
 **这个断言表示,如果外部访问路径是指定路径,就路由到指定微服务上**
 
 可以看到,这里有一个Path,这个是断言的一种,==断言的类型==:
 
-![](.\图片\gateway的23.png)
+![](.\img\gateway的23.png)
 
 
 
@@ -1686,15 +1685,15 @@ After:
 		可以指定,只有在指定时间后,才可以路由到指定微服务
 ```
 
-![](.\图片\gateway的26.png)
+![](.\img\gateway的26.png)
 
-​				这里表示,只有在==2020年的2月21的15点51分37秒==之后,访问==才可以路由==
+*				这里表示,只有在==2020年的2月21的15点51分37秒==之后,访问==才可以路由==
 
-​				在此之前的访问,都会报404
+*				在此之前的访问,都会报404
 
 如何获取当前时区?**
 
-![](.\图片\gateway的25.png)
+![](.\img\gateway的25.png)
 
 
 
@@ -1705,7 +1704,7 @@ between:
 		需要指定两个时间,在他们之间的时间才可以访问
 ```
 
-![](.\图片\gateway的27.png)
+![](.\img\gateway的27.png)
 
 
 
@@ -1716,9 +1715,9 @@ cookie:
 		只有包含某些指定cookie(key,value),的请求才可以路由
 ```
 
-![](.\图片\gateway的28.png)
+![](.\img\gateway的28.png)
 
-![](.\图片\gateway的29.png)
+![](.\img\gateway的29.png)
 
 
 
@@ -1727,12 +1726,12 @@ Header:
 		只有包含指定请求头的请求,才可以路由
 ```
 
-![](.\图片\gateway的31.png)
+![](.\img\gateway的31.png)
 
-![](.\图片\gateway的32.png)
+![](.\img\gateway的32.png)
 
 测试:
-![](.\图片\gateway的33.png)
+![](.\img\gateway的33.png)
 
 
 
@@ -1747,13 +1746,13 @@ host:
     那么这里就可以设置,只有用户是www.aa.com的请求,才进行路由
 ```
 
-![](.\图片\gateway的34.png)
+![](.\img\gateway的34.png)
 
-![gateway的34](.\图片\gateway的35.png)
+![gateway的34](.\img\gateway的35.png)
 
-![](.\图片\gateway的36.png)
+![](.\img\gateway的36.png)
 
-![](.\图片\gateway的37.png)
+![](.\img\gateway的37.png)
 
 可以看到,如果带了域名访问,就可以,但是直接访问ip地址.就报错了
 
@@ -1768,7 +1767,7 @@ method:
 		只有指定请求才可以路由,比如get请求...
 ```
 
-![](.\图片\gateway的38.png)
+![](.\img\gateway的38.png)
 
 ```java
 path:
@@ -1776,7 +1775,7 @@ path:
      比如访问,/abc才路由
 ```
 
-![](.\图片\gateway的39.png)
+![](.\img\gateway的39.png)
 
 
 
@@ -1785,7 +1784,7 @@ Query:
 		必须带有请求参数才可以访问
 ```
 
-![](.\图片\gateway的40.png)
+![](.\img\gateway的40.png)
 
 
 
@@ -1795,7 +1794,7 @@ Query:
 
 ### Filter过滤器:
 
-![](.\图片\gateway的41.png)
+![](.\img\gateway的41.png)
 
 
 
@@ -1807,13 +1806,13 @@ Query:
 
 #### 种类:
 
-![](.\图片\gateway的42.png)
+![](.\img\gateway的42.png)
 
 GateWayFilter,单一的过滤器
 
 **与断言类似,比如闲置,请求头,只有特定的请求头才放行,反之就过滤**:
 
-![](.\图片\gateway的43.png)
+![](.\img\gateway的43.png)
 
 GlobalFilter,全局过滤器:
 
@@ -1825,13 +1824,13 @@ GlobalFilter,全局过滤器:
 
 实现两个接口
 
-![](.\图片\gateway的44.png)
+![](.\img\gateway的44.png)
 
-​	**然后启动服务,即可,因为过滤器通过@COmponet已经加入到容器了**
+*	**然后启动服务,即可,因为过滤器通过@COmponet已经加入到容器了**
 
-![](.\图片\gateway的46.png)
+![](.\img\gateway的46.png)
 
-![](.\图片\gateway的45.png)
+![](.\img\gateway的45.png)
 
 
 
@@ -1872,13 +1871,13 @@ GlobalFilter,全局过滤器:
 
 所以有了springconfig配置中心
 
-![](.\图片\springconfig的1.png)
+![](.\img\springconfig的1.png)
 
-![](.\图片\springconfig的2.png)
+![](.\img\springconfig的2.png)
 
-![](.\图片\springconfig的3.png)
+![](.\img\springconfig的3.png)
 
-![](.\图片\springconfig的4.png)
+![](.\img\springconfig的4.png)
 
 
 
@@ -1890,7 +1889,7 @@ GlobalFilter,全局过滤器:
 
 **初始化git环境:**
 
-![](.\图片\springconfig的5.png)
+![](.\img\springconfig的5.png)
 
 
 
@@ -1902,15 +1901,15 @@ GlobalFilter,全局过滤器:
 
 #### 3,配置文件
 
-![](.\图片\springconfig的6.png)
+![](.\img\springconfig的6.png)
 
 #### 4,主启动类
 
-![](.\图片\springconfig的7.png)
+![](.\img\springconfig的7.png)
 
 #### 5,修改hosts:
 
-![](.\图片\springconfig的8.png)
+![](.\img\springconfig的8.png)
 
 #### 6,配置完成
 
@@ -1918,33 +1917,33 @@ GlobalFilter,全局过滤器:
 
 启动3344	(要先启动eureka)
 
-![](.\图片\springconfig的9.png)
+![](.\img\springconfig的9.png)
 
 它实际上就是,读取到配置文件中的GitHub的地址,然后拼接上/master/config-dev.yml
 
 #### 7,读取配置文件的规则:
 
-![](.\图片\springconfig的10.png)
+![](.\img\springconfig的10.png)
 
 
 
 ==2,==
 
-![](.\图片\springconfig的11.png)
+![](.\img\springconfig的11.png)
 
 **这里默认会读取master分支,因为我们配置文件中配置了**
 
-![](.\图片\springconfig的12.png)
+![](.\img\springconfig的12.png)
 
 ==3==
 
-![](.\图片\springconfig的13.png)
+![](.\img\springconfig的13.png)
 
 注意,这个方式读取到的配置是==json格式==的
 
 **所有规则:**
 
-![](.\图片\springconfig的14.png)
+![](.\img\springconfig的14.png)
 
 
 
@@ -1960,37 +1959,36 @@ GlobalFilter,全局过滤器:
 
 注意这个配置文件就不是application.yml
 
-​			而是bootstrap.yml
+*			而是bootstrap.yml
 
 这个配置文件的作用是,先到配置中心加载配置,然后加载到application.yml中
 
-![](.\图片\springconfig的15.png)
+![](.\img\springconfig的15.png)
 
-![](.\图片\springconfig的16.png)
+![](.\img\springconfig的16.png)
 
 
 
 #### 4,主启动类:
 
-![](.\图片\springconfig的17.png)
+![](.\img\springconfig的17.png)
 
 #### 5,controller类
 
 就是上面提到的,以rest风格将配置对外暴露
 
-![](.\图片\springconfig的18.png)
+![](.\img\springconfig的18.png)
 
-![](.\图片\springconfig的19.png)
+![](.\img\springconfig的19.png)
 
 **如果客户端运行正常,就会读取到github上配置文件的,config.info下的配置**
 
 #### 6,测试:
 
 启动3344,3355
+访问3355的  /configInfo
 
-​	访问3355的  /configInfo
-
-![](.\图片\springconfig的21.png)
+![](.\img\springconfig的21.png)
 
 
 
@@ -2008,15 +2006,15 @@ GlobalFilter,全局过滤器:
 
 ##### 1,修改3355,添加一个pom依赖:
 
-![](.\图片\springconfig的22.png)
+![](.\img\springconfig的22.png)
 
 ##### 2,修改配置文件,添加一个配置:
 
-![](.\图片\springconfig的23.png)
+![](.\img\springconfig的23.png)
 
 ##### 3,修改controller:
 
-![](.\图片\springconfig的24.png)
+![](.\img\springconfig的24.png)
 
 
 
@@ -2026,7 +2024,7 @@ GlobalFilter,全局过滤器:
 
 因为此时,还需要==外部==发送post请求通知3355
 
-![](.\图片\springconfig的25.png)
+![](.\img\springconfig的25.png)
 
 **此时在刷新3355,发现可以获取到最新的配置文件了,这就实现了动态获取配置文件,因为3355并没有重启**
 
@@ -2034,11 +2032,11 @@ GlobalFilter,全局过滤器:
 
 具体流程就是:
 
-​			我们启动好服务后
+*			我们启动好服务后
 
-​			运维人员,修改了配置文件,然后发送一个post请求通知3355
+*			运维人员,修改了配置文件,然后发送一个post请求通知3355
 
-​			3355就可以获取最新配置文件
+*			3355就可以获取最新配置文件
 
 
 
@@ -2046,13 +2044,13 @@ GlobalFilter,全局过滤器:
 
 **问题:**
 
-​		如果有多个客户端怎么办(3355,3356,3357.....)
+*		如果有多个客户端怎么办(3355,3356,3357.....)
 
-​						虽然可以使用shell脚本,循环刷新
+*						虽然可以使用shell脚本,循环刷新
 
-​		但是,可不可以使用广播,一次通知??
+*		但是,可不可以使用广播,一次通知??
 
-​					这些springconfig做不到,需要使用springcloud Bus消息总线
+*					这些springconfig做不到,需要使用springcloud Bus消息总线
 
 
 
@@ -2064,7 +2062,7 @@ GlobalFilter,全局过滤器:
 
 ## SpringCloud Bus:
 
-![](.\图片\springconfig的26.png)
+![](.\img\springconfig的26.png)
 
 
 
@@ -2072,15 +2070,15 @@ GlobalFilter,全局过滤器:
 
 
 
-![](.\图片\springconfig的27.png)
+![](.\img\springconfig的27.png)
 
-![](.\图片\springconfig的31.png)
+![](.\img\springconfig的31.png)
 
 注意,这里年张图片,就代表两种广播方式
 
-​			图1:		**它是Bus直接通知给其中一个客户端,由这个客户端开始蔓延,传播给其他所有客户端**
+*			图1:		**它是Bus直接通知给其中一个客户端,由这个客户端开始蔓延,传播给其他所有客户端**
 
-​			图2:		它**是通知给配置中心的服务端,有服务端广播给所有客户端**
+*			图2:		它**是通知给配置中心的服务端,有服务端广播给所有客户端**
 
 
 
@@ -2088,7 +2086,7 @@ GlobalFilter,全局过滤器:
 
 **为什么被称为总线?**
 
-![](.\图片\springconfig的28.png)
+![](.\img\springconfig的28.png)
 
 ```java
 就是通过消息队列达到广播的效果
@@ -2103,15 +2101,15 @@ GlobalFilter,全局过滤器:
 
 #### 1,配置rabbitmq环境:
 
-![](.\图片\springconfig的29.png)
+![](.\img\springconfig的29.png)
 
 
 
 #### **2,之前只有一个配置中心客户端,这里在创建一个**
 
-​		==**复制3355即可,创建为3366**==
+*		==**复制3355即可,创建为3366**==
 
-![](.\图片\springconfig的30.png)
+![](.\img\springconfig的30.png)
 
 全部复制3355的即可
 
@@ -2121,15 +2119,15 @@ GlobalFilter,全局过滤器:
 
 **Bus广播有两种方式:**
 
-​		==就是上面两个图片的两种方式==
+*		==就是上面两个图片的两种方式==
 
-![](.\图片\springconfig的32.png)
+![](.\img\springconfig的32.png)
 
 **这两种方式,第二种跟合适,因为:**
 
-​			==第一种的缺点:==
+*			==第一种的缺点:==
 
-![](.\图片\springconfig的33.png)
+![](.\img\springconfig的33.png)
 
 
 
@@ -2141,15 +2139,15 @@ GlobalFilter,全局过滤器:
 
 ###### 1,修改配置文件:
 
-![](.\图片\Bus的1.png)
+![](.\img\Bus的1.png)
 
 ###### 2,添加pom
 
 **springboot的监控组件,和消息总线**
 
-![](.\图片\Bus的3.png)
+![](.\img\Bus的3.png)
 
-![](.\图片\Bus的2.png)
+![](.\img\Bus的2.png)
 
 
 
@@ -2157,9 +2155,9 @@ GlobalFilter,全局过滤器:
 
 ###### 1,pom:
 
-![](.\图片\Bus的3.png)
+![](.\img\Bus的3.png)
 
-![Bus的2](.\图片\Bus的2.png)
+![Bus的2](.\img\Bus的2.png)
 
 
 
@@ -2167,9 +2165,9 @@ GlobalFilter,全局过滤器:
 
 ==注意配置文件的名字,要改为bootstrap.yml==
 
-![](.\图片\Bus的5.png)
+![](.\img\Bus的5.png)
 
-![image-20200415102708661](.\图片\Bus的4)
+![image-20200415102708661](.\img\Bus的4)
 
 
 
@@ -2177,7 +2175,7 @@ GlobalFilter,全局过滤器:
 
 ##### 3,修改3366(也是配置中心的客户端)
 
-​			修改与3355是一模一样的
+*			修改与3355是一模一样的
 
 
 
@@ -2193,13 +2191,13 @@ GlobalFilter,全局过滤器:
 
 ==此时只需要刷新3344,即可让3355,3366动态获取最新的配置文件==
 
-![](.\图片\Bus的6.png)
+![](.\img\Bus的6.png)
 
 
 
 其原理就是:
 
-![](.\图片\Bus的7.png)
+![](.\img\Bus的7.png)
 
 **所有客户端都监听了一个rabbitMq的topic,我们将信息放入这个topic,所有客户端都可以送到,从而实时更新**
 
@@ -2213,19 +2211,19 @@ GlobalFilter,全局过滤器:
 
 #### 配置定点通知
 
-​		就是只通知部分服务,比如只通知3355,不通知3366
+*		就是只通知部分服务,比如只通知3355,不通知3366
 
-![](.\图片\Bus的8.png)
+![](.\img\Bus的8.png)
 
-![Bus的8](.\图片\Bus的9.png)
+![Bus的8](.\img\Bus的9.png)
 
 
 
 **只通知3355**
 
-![](.\图片\Bus的11.png)
+![](.\img\Bus的11.png)
 
-![](.\图片\Bus的12.png)
+![](.\img\Bus的12.png)
 
 **可以看到,实际上就是通过==微服务的名称+端口号==进行指定**
 
@@ -2251,33 +2249,33 @@ GlobalFilter,全局过滤器:
 
 ## Spring Cloud Stream:
 
-```java
-现在一个很项目可能分为三部分:
-			前端--->后端---->大数据
-			而后端开发使用消息中间件,可能会使用RabbitMq
-			而大数据开发,一般都是使用Kafka,
-			那么一个项目中有多个消息中间件,对于程序员,因为人员都不友好
+```
+		现在一个很项目可能分为三部分:
+		前端--->后端---->大数据
+		而后端开发使用消息中间件,可能会使用RabbitMq
+		而大数据开发,一般都是使用Kafka,
+		那么一个项目中有多个消息中间件,对于程序员,因为人员都不友好
 ```
 
 而Spring Cloud Stream就类似jpa,屏蔽底层消息中间件的差异,程序员主要操作Spring Cloud Stream即可
 
-​			不需要管底层是kafka还是rabbitMq
+*			不需要管底层是kafka还是rabbitMq
 
-![](.\图片\SpringCloudStream的1.png)
+![](.\img\SpringCloudStream的1.png)
 
 ### ==什么是Spring Cloud Stream==
 
-![](.\图片\SpringCloudStream的2.png)
+![](.\img\SpringCloudStream的2.png)
 
 
 
 
 
-![](.\图片\SpringCloudStream的3.png)
+![](.\img\SpringCloudStream的3.png)
 
-![](.\图片\SpringCloudStream的4.png)
+![](.\img\SpringCloudStream的4.png)
 
-![](.\图片\SpringCloudStream的5.png)
+![](.\img\SpringCloudStream的5.png)
 
 
 
@@ -2285,7 +2283,7 @@ GlobalFilter,全局过滤器:
 
 ### ==**Spring Cloud Stream是怎么屏蔽底层差异的?**==
 
-![](.\图片\SpringCloudStream的6.png)
+![](.\img\SpringCloudStream的6.png)
 
 
 
@@ -2293,11 +2291,11 @@ GlobalFilter,全局过滤器:
 
 **绑定器:**
 
-![](.\图片\SpringCloudStream的7.png)
+![](.\img\SpringCloudStream的7.png)
 
-![](.\图片\SpringCloudStream的8.png)
+![](.\img\SpringCloudStream的8.png)
 
-![](.\图片\SpringCloudStream的9.png)
+![](.\img\SpringCloudStream的9.png)
 
 
 
@@ -2305,7 +2303,7 @@ GlobalFilter,全局过滤器:
 
 ### **Spring Cloud Streamd 通信模式:**
 
-![](.\图片\SpringCloudStream的10.png)![](.\图片\SpringCloudStream的11.png)
+![](.\img\SpringCloudStream的10.png)![](.\img\SpringCloudStream的11.png)
 
 
 
@@ -2313,11 +2311,11 @@ GlobalFilter,全局过滤器:
 
 ### Spring Cloud Stream的业务流程:
 
-![](.\图片\SpringCloudStream的12.png)
+![](.\img\SpringCloudStream的12.png)
 
-![](.\图片\SpringCloudStream的14.png)
+![](.\img\SpringCloudStream的14.png)
 
-![](.\图片\SpringCloudStream的13.png)
+![](.\img\SpringCloudStream的13.png)
 
 ```java
 类似flume中的channel,source,sink  估计是借鉴(抄袭)的
@@ -2333,7 +2331,7 @@ GlobalFilter,全局过滤器:
 
 ### 常用注解和api:
 
-![](.\图片\SpringCloudStream的15.png)
+![](.\img\SpringCloudStream的15.png)
 
 
 
@@ -2343,7 +2341,7 @@ GlobalFilter,全局过滤器:
 
 需要创建三个项目,一个生产者,两个消费者
 
-![](.\图片\SpringCloudStream的16.png)
+![](.\img\SpringCloudStream的16.png)
 
 ### 1,创建生产者
 
@@ -2351,29 +2349,29 @@ GlobalFilter,全局过滤器:
 
 #### 2,配置文件
 
-![image-20200415114816133](.\图片\SpringCloudStream的17)
+![image-20200415114816133](.\img\SpringCloudStream的17)
 
-![](.\图片\SpringCloudStream的18.png)
+![](.\img\SpringCloudStream的18.png)
 
 #### 3,主启动类
 
-![](.\图片\SpringCloudStream的19.png)
+![](.\img\SpringCloudStream的19.png)
 
 #### 4,service和实现类
 
 service定义发送消息
 
-![](.\图片\SpringCloudStream的20.png)
+![](.\img\SpringCloudStream的20.png)
 
-![](.\图片\SpringCloudStream的21.png)
+![](.\img\SpringCloudStream的21.png)
 
 **这里,就会调用send方法,将消息发送给channel,**
 
-​				**然后channel将消费发送给binder,然后发送到rabbitmq中**
+*				**然后channel将消费发送给binder,然后发送到rabbitmq中**
 
 #### 5,controller
 
-![](.\图片\SpringCloudStream的22.png)
+![](.\img\SpringCloudStream的22.png)
 
 #### 6,可以测试
 
@@ -2381,7 +2379,7 @@ service定义发送消息
 
 **启动7001,8801**
 
-​		确定8801后,会在rabbitmq中创建一个Exchange,就是我们配置文件中配置的exchange
+*		确定8801后,会在rabbitmq中创建一个Exchange,就是我们配置文件中配置的exchange
 
 **访问8801的/sendMessage**
 
@@ -2401,17 +2399,17 @@ service定义发送消息
 
 **==input==就表示,当前服务是一个消费者,需要消费消息,下面就是指定消费哪个Exchange中的消息**
 
-![](.\图片\SpringCloudStream的23.png)
+![](.\img\SpringCloudStream的23.png)
 
-![](.\图片\SpringCloudStream的24.png)
+![](.\img\SpringCloudStream的24.png)
 
 #### 3,主启动类
 
-![](.\图片\SpringCloudStream的25.png)
+![](.\img\SpringCloudStream的25.png)
 
 #### 4,业务类(消费数据)
 
-![](.\图片\SpringCloudStream的26.png)
+![](.\img\SpringCloudStream的26.png)
 
 **生产者发送消息时,使用send方法发送,send方法发送的是一个个Message,里面封装了数据**
 
@@ -2421,7 +2419,7 @@ service定义发送消息
 
 **此时使用生产者生产消息**
 
-![](.\图片\SpringCloudStream的27.png)
+![](.\img\SpringCloudStream的27.png)
 
 ==可以看到,消费者已经接收到消息了==
 
@@ -2455,29 +2453,28 @@ service定义发送消息
 
 但是此时查询消费者,发现8802,8803==都消费到了同一条数据==
 
-![](.\图片\SpringCloudStream的28.png)
+![](.\img\SpringCloudStream的28.png)
 
-![](.\图片\SpringCloudStream的29.png)
+![](.\img\SpringCloudStream的29.png)
 
 #### 1,自定义分组
 
 **修改8802,8803的配置文件**
 
-![](.\图片\SpringCloudStream的30.png)
+![](.\img\SpringCloudStream的30.png)
 
-![](.\图片\SpringCloudStream的31 - 副本.png)
+![](.\img\SpringCloudStream的31 - 副本.png)
 
 **现在将8802,8803都分到了A组**
-
 然后去重启02,03
 
 **然后此时生产者生产两条消息**
 
-![](.\图片\SpringCloudStream的33.png)
+![](.\img\SpringCloudStream的33.png)
 
-![](.\图片\SpringCloudStream的34.png)
+![](.\img\SpringCloudStream的34.png)
 
-![](.\图片\SpringCloudStream的35.png)
+![](.\img\SpringCloudStream的35.png)
 
 **可以看到,每人只消费了一条消息,并且没有重复消费**
 
@@ -2495,20 +2492,20 @@ service定义发送消息
 
 这里,先将8802移除A组,
 
-​		然后将02,03服务关闭
+*		然后将02,03服务关闭
 
 此时生产者开启,发送3条消息
 
-​		此时重启02,03
+*		此时重启02,03
 
-​		可以看到,当02退出A组后,它就获取不到在它宕机的时间段内的数据
+*		可以看到,当02退出A组后,它就获取不到在它宕机的时间段内的数据
 
-​		但是03重启后,直接获取到了宕机期间它没有消费的数据,并且消费了
+*		但是03重启后,直接获取到了宕机期间它没有消费的数据,并且消费了
 
 总结:
 		也就是,当我们没有配置分组时,会出现消息漏消费的问题
 
-​		而配置分组后,我们可以自动获取未消费的数据
+*		而配置分组后,我们可以自动获取未消费的数据
 
 
 
@@ -2530,11 +2527,11 @@ service定义发送消息
 
 **sleuth要解决的问题:**
 
-![](.\图片\sleuth的1.png)
+![](.\img\sleuth的1.png)
 
 **而来sleuth就是用于追踪每个请求的整体链路**
 
-![](.\图片\sleuth的2.png)
+![](.\img\sleuth的2.png)
 
 
 
@@ -2542,27 +2539,27 @@ service定义发送消息
 
 #### 1,安装zipkin:
 
-![](.\图片\sleuth的3.png)
+![](.\img\sleuth的3.png)
 
 **运行jar包**
 
-​			java -jar xxxx.jar
+*			java -jar xxxx.jar
 
 **然后就可以访问web界面,  默认zipkin监听的端口是9411**
 
-​			localhost:9411/zipkin/
+*			localhost:9411/zipkin/
 
-![](.\图片\sleuth的4.png)
+![](.\img\sleuth的4.png)
 
 
 
 **一条链路完整图片:**
 
-![](.\图片\sleuth的5.png)
+![](.\img\sleuth的5.png)
 
 **精简版:**
 
-![](.\图片\sleuth的6.png)
+![](.\img\sleuth的6.png)
 
 **可以看到,类似链表的形式**
 
@@ -2582,13 +2579,13 @@ service定义发送消息
 
 **引入pom:**
 
-![](.\图片\sleuth的7.png)
+![](.\img\sleuth的7.png)
 
 这个包虽然叫zipkin但是,里面包含了zpikin与sleuth
 
 **修改配置文件:**
 
-![](.\图片\sleuth的8.png)
+![](.\img\sleuth的8.png)
 
 
 
@@ -2614,7 +2611,7 @@ service定义发送消息
 
 启动7001.8001,80,9411
 
-![](.\图片\sleuth的9.png)
+![](.\img\sleuth的9.png)
 
 
 
@@ -2641,13 +2638,13 @@ service定义发送消息
 
 **之所以有Spring CloudAlibaba,是因为Spring Cloud Netflix项目进入维护模式**
 
-​		**也就是,就不是不更新了,不会开发新组件了**
+*		**也就是,就不是不更新了,不会开发新组件了**
 
-​		**所以,某些组件都有代替版了,比如Ribbon由Loadbalancer代替,等等**
+*		**所以,某些组件都有代替版了,比如Ribbon由Loadbalancer代替,等等**
 
 ==支持的功能==
 
-![](.\图片\Alibaba的1.png)
+![](.\img\Alibaba的1.png)
 
 几乎可以将之前的Spring Cloud代替
 
@@ -2658,7 +2655,7 @@ service定义发送消息
 
 
 ==具体组件==:
-![](.\图片\Alibaba的2.png)
+![](.\img\Alibaba的2.png)
 
 
 
@@ -2674,7 +2671,7 @@ service定义发送消息
 
 **服务注册和配置中心的组合**
 
-​			Nacos=erueka+config+bus
+*			Nacos=erueka+config+bus
 
 
 
@@ -2686,21 +2683,21 @@ service定义发送消息
 
 **1,到github上下载安装包**
 
-​		解压安装包
+*		解压安装包
 
 **2,启动Nacos**
 
-​		在bin下,进入cod
+*		在bin下,进入cod
 
-​		./startup.cmd
+*		./startup.cmd
 
 **3,访问Nacos**
 
-​		Nacos默认监听8848
+*		Nacos默认监听8848
 
-​		localhost:8848/nacos
+*		localhost:8848/nacos
 
-​		账号密码:默认都是nacos
+*		账号密码:默认都是nacos
 
 
 
@@ -2710,7 +2707,7 @@ service定义发送消息
 
 新建pay模块
 
-​		**现在不需要额外的服务注册模块了,Nacos单独启动了**
+*		**现在不需要额外的服务注册模块了,Nacos单独启动了**
 
 名字: cloudalibaba-pay-9001
 
@@ -2718,30 +2715,29 @@ service定义发送消息
 
 父项目管理alibaba的依赖:
 
-![](.\图片\Alibaba的4.png)
+![](.\img\Alibaba的4.png)
 
-![](.\图片\Alibaba的3.png)
+![](.\img\Alibaba的3.png)
 
 ==9001的pom==:
 
-​			另外一个文件.....
+*			另外一个文件.....
 
 #### 2,配置文件
 
-![](.\图片\Alibaba的5.png)
+![](.\img\Alibaba的5.png)
 
 #### 3,启动类
 
-![](.\图片\Alibaba的6.png)
+![](.\img\Alibaba的6.png)
 
 #### 4,controller:
 
-![](.\图片\Alibaba的7.png)
+![](.\img\Alibaba的7.png)
 
 #### 5,测试
 
 启动9001
-
 然后查看Nacos的web界面,可以看到9001已经注册成功
 
 
@@ -2754,9 +2750,9 @@ service定义发送消息
 
 ### 创建其他Pay模块
 
-​		额外在创建9002,9003
+*		额外在创建9002,9003
 
-​		直接复制上面的即可
+*		直接复制上面的即可
 
 ### 创建order模块
 
@@ -2766,31 +2762,31 @@ service定义发送消息
 
 **为什么Nacos支持负载均衡?**
 
-​				Nacos直接集成了Ribon,所以有负载均衡
+*				Nacos直接集成了Ribon,所以有负载均衡
 
 #### 2,配置文件
 
-![](.\图片\Alibaba的8.png)
+![](.\img\Alibaba的8.png)
 
 **这个server-url的作用是,我们在controller,需要使用RestTempalte远程调用9001,**
 
-​		**这里是指定9001的地址**
+*		**这里是指定9001的地址**
 
 
 
 #### 3,主启动类
 
-![](.\图片\Alibaba的9.png)
+![](.\img\Alibaba的9.png)
 
 #### 4,编写配置类
 
-​	==因为Naocs要使用Ribbon进行负载均衡,那么就需要使用RestTemplate==
+*	==因为Naocs要使用Ribbon进行负载均衡,那么就需要使用RestTemplate==
 
-![](.\图片\Alibaba的10.png)
+![](.\img\Alibaba的10.png)
 
 #### 5,controller:
 
-![](.\图片\Alibaba的11.png)
+![](.\img\Alibaba的11.png)
 
 
 
@@ -2806,9 +2802,9 @@ service定义发送消息
 
 Nacos它既可以支持CP,也可以支持AP,可以切换
 
-![](.\图片\Alibaba的12.png)
+![](.\img\Alibaba的12.png)
 
-![](.\图片\Alibaba的13.png)
+![](.\img\Alibaba的13.png)
 
 ==下面这个curl命令,就是切换模式==
 
@@ -2818,7 +2814,7 @@ Nacos它既可以支持CP,也可以支持AP,可以切换
 
 ### 使用Nacos作为配置中心:
 
-![](.\图片\Alibaba的14.png)
+![](.\img\Alibaba的14.png)
 
 **==需要创建配置中心的客户端模块==**
 
@@ -2830,25 +2826,25 @@ cloudalibaba-Nacos-config-client-3377
 
 这里需要配置两个配置文件,application.ymk和bootstarp.yml
 
-​			主要是为了可以与spring clodu config无缝迁移
+*			主要是为了可以与spring clodu config无缝迁移
 
-![](.\图片\Alibaba的15.png)
+![](.\img\Alibaba的15.png)
 
 ```java
 可以看到
 ```
 
-![](.\图片\Alibaba的16.png)
+![](.\img\Alibaba的16.png)
 
 
 
 #### 3,主启动类
 
-![](.\图片\Alibaba的18.png)
+![](.\img\Alibaba的18.png)
 
 #### 4,controller
 
-![](.\图片\Alibaba的17.png)
+![](.\img\Alibaba的17.png)
 
 ```java
 可以看到,这里也添加了@RefreshScope
@@ -2856,19 +2852,19 @@ cloudalibaba-Nacos-config-client-3377
   
 ```
 
-![](.\图片\Alibaba的19.png)
+![](.\img\Alibaba的19.png)
 
 #### 5,在Nacos添加配置信息:
 
 ==**Nacos的配置规则:**==
 
-![](.\图片\Alibaba的20.png)
+![](.\img\Alibaba的20.png)
 
 **配置规则,就是我们在客户端如何指定读取配置文件,配置文件的命名的规则**
 
 默认的命名方式:
 
-![](.\图片\Alibaba的21.png)
+![](.\img\Alibaba的21.png)
 
 ```java
 prefix:
@@ -2881,19 +2877,19 @@ file-extension
      就是当前文件的格式(后缀),目前只支持yml和properties
 ```
 
-![](.\图片\Alibaba的24.png)
+![](.\img\Alibaba的24.png)
 
-![](.\图片\Alibaba的25.png)
+![](.\img\Alibaba的25.png)
 
 ==在web UI上创建配置文件:==
 
-![](.\图片\Alibaba的22.png)
+![](.\img\Alibaba的22.png)
 
-![](.\图片\Alibaba的23.png)
+![](.\img\Alibaba的23.png)
 
 注意,DataId就是配置文件名字:
 
-​		名字一定要按照上面的==规则==命名,否则客户端会读取不到配置文件
+*		名字一定要按照上面的==规则==命名,否则客户端会读取不到配置文件
 
 #### 6,测试
 
@@ -2901,7 +2897,7 @@ file-extension
 
 访问3377
 
-![](.\图片\Alibaba的26.png)
+![](.\img\Alibaba的26.png)
 
 **拿到了配置文件中的值**
 
@@ -2913,7 +2909,7 @@ file-extension
 
 客户端是可以立即更新的
 
-​			因为Nacos支持Bus总线,会自动发送命令更新所有客户端
+*			因为Nacos支持Bus总线,会自动发送命令更新所有客户端
 
 
 
@@ -2921,25 +2917,25 @@ file-extension
 
 ### Nacos配置中心之分类配置:
 
-![](.\图片\Alibaba的27.png)
+![](.\img\Alibaba的27.png)
 
 
 
 
 
-![](.\图片\Alibaba的28.png)
+![](.\img\Alibaba的28.png)
 
-![](.\图片\Alibaba的29.png)
+![](.\img\Alibaba的29.png)
 
 NameSpace默认有一个:public名称空间
 
 这三个类似java的: 包名 + 类名 + 方法名
 
-![](.\图片\Alibaba的30.png)
+![](.\img\Alibaba的30.png)
 
 
 
-![](.\图片\Alibaba的31.png)
+![](.\img\Alibaba的31.png)
 
 
 
@@ -2947,15 +2943,15 @@ NameSpace默认有一个:public名称空间
 
 #### 1,配置不同DataId:
 
-![](.\图片\Alibaba的32.png)
+![](.\img\Alibaba的32.png)
 
-![](.\图片\Alibaba的33.png)
+![](.\img\Alibaba的33.png)
 
 
 
-​	==通过配置文件,实现多环境的读取:==
+*	==通过配置文件,实现多环境的读取:==
 
-![](.\图片\Alibaba的34.png)
+![](.\img\Alibaba的34.png)
 
 ```java
 此时,改为dev,就会读取dev的配置文件,改为test,就会读取test的配置文件
@@ -2969,21 +2965,21 @@ NameSpace默认有一个:public名称空间
 
 直接在新建配置文件时指定组
 
-![](.\图片\Alibaba的35.png)
+![](.\img\Alibaba的35.png)
 
-![](.\图片\Alibaba的36.png)
+![](.\img\Alibaba的36.png)
 
 
 
 ==在客户端配置,使用指定组的配置文件:==
 
-![](.\图片\Alibaba的37.png)
+![](.\img\Alibaba的37.png)
 
 **这两个配置文件都要修改**
 
-![](.\图片\Alibaba的38.png)
+![](.\img\Alibaba的38.png)
 
-​	
+*	
 
 重启服务,即可
 
@@ -2995,13 +2991,13 @@ NameSpace默认有一个:public名称空间
 
 #### 配置不同的namespace:
 
-![](.\图片\Alibaba的39.png)
+![](.\img\Alibaba的39.png)
 
-![](.\图片\Alibaba的42.png)
+![](.\img\Alibaba的42.png)
 
 ==客户端配置使用不同名称空间:==
 
-![](.\图片\Alibaba的41.png)
+![](.\img\Alibaba的41.png)
 
 **要通过命名空间id指定**
 
@@ -3017,27 +3013,27 @@ OK,测试
 
 ### Nacos集群和持久化配置:
 
-![](.\图片\Alibaba的45.png)
+![](.\img\Alibaba的45.png)
 
 Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,就不能使用自己的数据库
 
-​			不然每个节点一个数据库,那么数据就不统一了,需要使用外部的mysql
+*			不然每个节点一个数据库,那么数据就不统一了,需要使用外部的mysql
 
-![](.\图片\Alibaba的43.png)
+![](.\img\Alibaba的43.png)
 
 
 
 #### 1,单机版,切换mysql数据库:
 
-​					**将nacos切换到使用我们自己的mysql数据库:**
+*					**将nacos切换到使用我们自己的mysql数据库:**
 
 **1,nacos默认自带了一个sql文件,在nacos安装目录下**
 
-​			将它放到我们的mysql执行
+*			将它放到我们的mysql执行
 
 **2,修改Nacos安装目录下的安排application.properties,添加:**
 
-![](.\图片\Alibaba的46.png)
+![](.\img\Alibaba的46.png)
 
 
 
@@ -3055,7 +3051,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 ==官方架构图:==
 
-![](.\图片\Alibaba的45.png)
+![](.\img\Alibaba的45.png)
 
 **需要一个Nginx作为VIP**
 
@@ -3065,29 +3061,29 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 2,进入安装目录,现在执行自带的sql文件
 
-​			进入mysql,执行sql文件
+*			进入mysql,执行sql文件
 
 3.修改配置文件,切换为我们的mysql
 
-​			就是上面windos版要修改的几个属性
+*			就是上面windos版要修改的几个属性
 
 4,修改cluster.conf,指定哪几个节点是Nacos集群
 
-​			这里使用3333,4444,5555作为三个Nacos节点监听的端口
+*			这里使用3333,4444,5555作为三个Nacos节点监听的端口
 
-![](.\图片\Alibaba的47.png)
+![](.\img\Alibaba的47.png)
 
 5,我们这里就不配置在不同节点上了,就放在一个节点上
 
-​			既然要在一个节点上启动不同Nacos实例,就要修改startup.sh,使其根据不同端口启动不同Nacos实例
+*			既然要在一个节点上启动不同Nacos实例,就要修改startup.sh,使其根据不同端口启动不同Nacos实例
 
-![](.\图片\Alibaba的48.png)
+![](.\img\Alibaba的48.png)
 
-![](.\图片\Alibaba的49.png)
+![](.\img\Alibaba的49.png)
 
 可以看到,这个脚本就是通过jvm启动nacos
 
-​		所以我们最后修改的就是,nohup java -Dserver.port=3344
+*		所以我们最后修改的就是,nohup java -Dserver.port=3344
 
 
 
@@ -3095,35 +3091,35 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 6,配置Nginx:
 
-​			![](.\图片\Alibaba的50.png)
+*			![](.\img\Alibaba的50.png)
 
 7,启动Nacos:
 			./startup.sh -p 3333
 
-​			./startup.sh -p 4444
+*			./startup.sh -p 4444
 
-​			./startup.sh -p 5555
+*			./startup.sh -p 5555
 
 7,启动nginx
 
 8,测试:
 
-​		访问192.168.159.121:1111
+*		访问192.168.159.121:1111
 
-​		如果可以进入nacos的web界面,就证明安装成功了
+*		如果可以进入nacos的web界面,就证明安装成功了
 
 
 
 
 
 9,将微服务注册到Nacos集群:
-![](.\图片\Alibaba的51.png)
+![](.\img\Alibaba的51.png)
 
 10,进入Nacos的web界面
 
-​		可以看到,已经注册成功
+*		可以看到,已经注册成功
 
-![](.\图片\Alibaba的52.png)
+![](.\img\Alibaba的52.png)
 
 
 
@@ -3139,9 +3135,9 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 实现熔断与限流,就是Hystrix
 
-![](.\图片\Alibaba的53.png)
+![](.\img\Alibaba的53.png)
 
-![](.\图片\Alibaba的54.png)
+![](.\img\Alibaba的54.png)
 
 ### ==使用sentinel:==
 
@@ -3151,13 +3147,13 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 2,运行sentinel
 
-​		由于是一个jar包,所以可以直接java -jar运行	
+*		由于是一个jar包,所以可以直接java -jar运行	
 
-​		注意,默认sentinel占用8080端口
+*		注意,默认sentinel占用8080端口
 
 3,访问sentinel
 
-​		localhost:8080
+*		localhost:8080
 
 
 
@@ -3173,29 +3169,29 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 2.   配置文件
 
-  ![](.\图片\Alibaba的55.png)
+  ![](.\img\Alibaba的55.png)
 
 3.   主启动类
 
-  ![](.\图片\Alibaba的56.png)
+  ![](.\img\Alibaba的56.png)
 
 4.   controller\
 
-  ![](.\图片\sentinel的1.png)
+  ![](.\img\sentinel的1.png)
 
 5.   到这里就可以启动8401
 
-    ​	此时我们到sentinel中查看,发现并8401的任何信息
+    *	此时我们到sentinel中查看,发现并8401的任何信息
 
-    ​	是因为,sentinel是懒加载,需要我们执行一次访问,才会有信息
+    *	是因为,sentinel是懒加载,需要我们执行一次访问,才会有信息
 
-    ​	访问localhost/8401/testA
+    *	访问localhost/8401/testA
 
- ![](.\图片\sentinel的2.png)
+ ![](.\img\sentinel的2.png)
 
 6.   可以看到.已经开始监听了
 
-​    
+*    
 
 
 
@@ -3203,31 +3199,31 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 流量限制控制规则
 
-![](.\图片\sentinel的7.png)
+![](.\img\sentinel的7.png)
 
-![](.\图片\sentinel的3.png)
+![](.\img\sentinel的3.png)
 
 
 
-![](.\图片\sentinel的4.png)
+![](.\img\sentinel的4.png)
 
 ==流控模式==:
 
 1.   直接快速失败
 
-  ![](.\图片\sentinel的9.png)
+  ![](.\img\sentinel的9.png)
 
-  ![](.\图片\sentinel的5.png)
+  ![](.\img\sentinel的5.png)
 
        ==直接失败的效果:==
 
-  ![](.\图片\sentinel的6.png)
+  ![](.\img\sentinel的6.png)
 
 2.  线程数:
 
-  ![](.\图片\sentinel的8.png)
+  ![](.\img\sentinel的8.png)
 
-  ![](.\图片\sentinel的10.png)
+  ![](.\img\sentinel的10.png)
 
     ```
     比如a请求过来,处理很慢,在一直处理,此时b请求又过来了
@@ -3235,44 +3231,44 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
     		那么就会报错
     ```
 
- ![](.\图片\sentinel的11.png)
+ ![](.\img\sentinel的11.png)
 
     
 
 3.   关联:
 
-![](.\图片\sentinel的12.png)
+![](.\img\sentinel的12.png)
 
      ==应用场景:  比如**支付接口**达到阈值,就要限流下**订单的接口**,防止一直有订单==
 
-   ![](.\图片\sentinel的13.png)
+   ![](.\img\sentinel的13.png)
 
      **当testA达到阈值,qps大于1,就让testB之后的请求直接失败**
 
      可以使用postman压测
 
-​    
+*    
 
 4.   链路:
      多个请求调用同一个微服务
 
 5.   预热Warm up:
 
-![](.\图片\sentinel的14.png)
+![](.\img\sentinel的14.png)
 
-![](.\图片\sentinel的15.png)
+![](.\img\sentinel的15.png)
 
-![](.\图片\sentinel的16.png)
+![](.\img\sentinel的16.png)
 
      ==应用场景==
 
-![](.\图片\sentinel的17.png)
+![](.\img\sentinel的17.png)
 
 6.   排队等待:
 
-![](.\图片\sentinel的18.png)
+![](.\img\sentinel的18.png)
 
-![](.\图片\sentinel的19.png)
+![](.\img\sentinel的19.png)
 
 
 
@@ -3286,17 +3282,17 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 **就是熔断降级**
 
-![](.\图片\sentinel的21.png)
+![](.\img\sentinel的21.png)
 
-![](.\图片\sentinel的20.png)
-
-
+![](.\img\sentinel的20.png)
 
 
 
-![](.\图片\sentinel的22.png)
 
-![](.\图片\sentinel的23.png)
+
+![](.\img\sentinel的22.png)
+
+![](.\img\sentinel的23.png)
 
 
 
@@ -3304,23 +3300,23 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 新增一个请求方法用于测试
 
-![](.\图片\sentinel的24.png)
+![](.\img\sentinel的24.png)
 
 ==配置RT:==
 
-​				这里配置的PT,默认是秒级的平均响应时间
+*				这里配置的PT,默认是秒级的平均响应时间
 
-![](.\图片\sentinel的25.png)
+![](.\img\sentinel的25.png)
 
 默认计算平均时间是: 1秒类进入5个请求,并且响应的平均值超过阈值(这里的200ms),就报错]
 
-​			1秒5请求是Sentinel默认设置的
+*			1秒5请求是Sentinel默认设置的
 
 ==测试==
 
-![](.\图片\sentinel的27.png)
+![](.\img\sentinel的27.png)
 
-![](.\图片\sentinel的26.png)
+![](.\img\sentinel的26.png)
 
 **默认熔断后.就直接抛出异常**
 
@@ -3332,25 +3328,25 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 #### 2,异常比例:
 
-![](.\图片\sentinel的28.png)
+![](.\img\sentinel的28.png)
 
 修改请求方法
 
-![](.\图片\sentinel的29.png)
+![](.\img\sentinel的29.png)
 
 配置:
 
-![](.\图片\sentinel的31.png)
+![](.\img\sentinel的31.png)
 
 
 
 ==如果没触发熔断,这正常抛出异常==:
 
-![](.\图片\sentinel的32.png)
+![](.\img\sentinel的32.png)
 
 ==触发熔断==:
 
-![](.\图片\sentinel的33.png)
+![](.\img\sentinel的33.png)
 
 
 
@@ -3362,9 +3358,9 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 #### 3, 异常数:
 
-![](.\图片\sentinel的34.png)
+![](.\img\sentinel的34.png)
 
-![](.\图片\sentinel的35.png)
+![](.\img\sentinel的35.png)
 
 一分钟之内,有5个请求发送异常,进入熔断
 
@@ -3378,51 +3374,51 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 ### 热点规则:
 
-![](.\图片\sentinel的36.png)
+![](.\img\sentinel的36.png)
 
-![](.\图片\sentinel的37.png)
+![](.\img\sentinel的37.png)
 
 比如:
 
-​			localhost:8080/aa?name=aa
+*			localhost:8080/aa?name=aa
 
-​			localhost:8080/aa?name=b'b
+*			localhost:8080/aa?name=b'b
 
-​			加入两个请求中,带有参数aa的请求访问频次非常高,我们就现在name==aa的请求,但是bb的不限制
+*			加入两个请求中,带有参数aa的请求访问频次非常高,我们就现在name==aa的请求,但是bb的不限制
 
 
 
 ==如何自定义降级方法,而不是默认的抛出异常?==
 
-![](.\图片\sentinel的38.png)
+![](.\img\sentinel的38.png)
 
 **使用@SentinelResource直接实现降级方法,它等同Hystrix的@HystrixCommand**
 
-![](.\图片\sentinel的39.png)
+![](.\img\sentinel的39.png)
 
 
 
 ==定义热点规则:==
 
- ![](.\图片\sentinel的40.png)
+ ![](.\img\sentinel的40.png)
 
-![](.\图片\sentinel的42.png)
+![](.\img\sentinel的42.png)
 
 **此时我们访问/testHotkey并且带上才是p1**
 
-​			如果qps大于1,就会触发我们定义的降级方法
+*			如果qps大于1,就会触发我们定义的降级方法
 
-![](.\图片\sentinel的41.png)
+![](.\img\sentinel的41.png)
 
 **但是我们的参数是P2,就没有问题**
 
-![](.\图片\sentinel的44.png)
+![](.\img\sentinel的44.png)
 
 
 
 只有带了p1,才可能会触发热点限流
 
-![](.\图片\sentinel的43.png)
+![](.\img\sentinel的43.png)
 
 
 
@@ -3430,21 +3426,21 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 #### 2,设置热点规则中的其他选项:
 
-![](.\图片\sentinel的45.png)
+![](.\img\sentinel的45.png)
 
 **需求:**
 
-![](.\图片\sentinel的46.png)
+![](.\img\sentinel的46.png)
 
 
 
-![](.\图片\sentinel的47.png)
+![](.\img\sentinel的47.png)
 
 ==测试==
 
-![](.\图片\sentinel的48.png)
+![](.\img\sentinel的48.png)
 
-![](.\图片\sentinel的49.png)
+![](.\img\sentinel的49.png)
 
 
 
@@ -3464,7 +3460,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 只有触发热点规则才会降级
 
-![](.\图片\sentinel的50.png)
+![](.\img\sentinel的50.png)
 
 
 
@@ -3481,16 +3477,16 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 对整体限流,比如设置qps到达100,这里限流会限制整个系统不可以
 
-*![](.\图片\sentinel的51.png)*
+*![](.\img\sentinel的51.png)*
 
 
 
-![](.\图片\sentinel的52.png)
+![](.\img\sentinel的52.png)
 
 ==测试==:
-![](.\图片\sentinel的53.png)
+![](.\img\sentinel的53.png)
 
-![](.\图片\sentinel的54.png)
+![](.\img\sentinel的54.png)
 
 
 
@@ -3512,11 +3508,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     添加我们自己的commone包的依赖
 
-![](.\图片\sentinel的55.png)
+![](.\img\sentinel的55.png)
 
 2.   额外创建一个controller类
 
-![](.\图片\sentinel的56.png)
+![](.\img\sentinel的56.png)
 
      
 
@@ -3526,53 +3522,53 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     **这样也是可以的,也就是不一定要指定访问路径**
 
-![](.\图片\sentinel的57.png)
+![](.\img\sentinel的57.png)
 
 4.   测试.
 
     可以看到已经进入降级方法了
 
-![](.\图片\sentinel的58.png)
+![](.\img\sentinel的58.png)
 
 5.   ==此时我们关闭8401服务==
 
     可以看到,这些定义的规则是临时的,关闭服务,规则就没有了
 
-![](.\图片\sentinel的59.png)
+![](.\img\sentinel的59.png)
 
 
 
 **可以看到,上面配置的降级方法,又出现Hystrix遇到的问题了**
 
-​			降级方法与业务方法耦合
+*			降级方法与业务方法耦合
 
-​			每个业务方法都需要对应一个降级方法
+*			每个业务方法都需要对应一个降级方法
 
 #### 自定义限流处理逻辑:
 
 1.  ==单独创建一个类,用于处理限流==
 
-![](.\图片\sentinel的的1.png)
+![](.\img\sentinel的的1.png)
 
 2.  ==在controller中,指定使用自定义类中的方法作为降级方法==
 
-![](.\图片\sentinel的的2.png)
+![](.\img\sentinel的的2.png)
 
 3.   ==Sentinel中定义流控规则==:
 
      这里资源名,是以url指定,也可以使用@SentinelResource注解value的值指定
 
-![](.\图片\sentinel的的5.png)
+![](.\img\sentinel的的5.png)
 
      
 
 4.  ==测试==:
 
-![](.\图片\sentinel的的3.png)
+![](.\img\sentinel的的3.png)
 
 5.  ==整体==:
 
-![](.\图片\sentinel的的4.png)
+![](.\img\sentinel的的4.png)
 
 6.   
 
@@ -3584,9 +3580,9 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 
 
-![](.\图片\sentinel的的7.png)
+![](.\img\sentinel的的7.png)
 
-![](.\图片\sentinel的的6.png)
+![](.\img\sentinel的的6.png)
 
 
 
@@ -3610,7 +3606,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     2.   配置文件
 
-  ![](.\图片\sentinel的的8.png)*
+  ![](.\img\sentinel的的8.png)*
 
     3.   主启动类 
 
@@ -3629,7 +3625,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     4.   controller
 
-  ![](.\图片\sentinel的的9.png)
+  ![](.\img\sentinel的的9.png)
 
          **然后启动9003.9004**
 
@@ -3641,67 +3637,67 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     2.   配置文件
 
-  ![](.\图片\sentinel的的10.png)
+  ![](.\img\sentinel的的10.png)
 
     3.   主启动类
 
-  ![](.\图片\sentinel的的11.png)
+  ![](.\img\sentinel的的11.png)
 
     4.  配置类
 
-  ![](.\图片\sentinel的的12.png)
+  ![](.\img\sentinel的的12.png)
 
     5.   controller
 
-  ![](.\图片\sentinel的的13.png)
+  ![](.\img\sentinel的的13.png)
 
         
 
     6.   **==为业务方法添加fallback来指定降级方法==**:
 
-  ![](.\图片\sentinel的的14.png)
+  ![](.\img\sentinel的的14.png)
 
-        ​	==重启order==
+        *	==重启order==
 
         测试:
 
-  ![](.\图片\sentinel的的15.png)
+  ![](.\img\sentinel的的15.png)
 
          
 
          ==所以,fallback是用于管理异常的,当业务方法发生异常,可以降级到指定方法==
 
-        ​			注意,我们这里==并没有使用sentinel配置任何规则==,但是却降级成功,就是因为
+        *			注意,我们这里==并没有使用sentinel配置任何规则==,但是却降级成功,就是因为
 
-        ​			fallback是用于管理异常的,当业务方法发生异常,可以降级到指定方法==
+        *			fallback是用于管理异常的,当业务方法发生异常,可以降级到指定方法==
 
         
 
     7.   **==为业务方法添加blockHandler,看看是什么效果==**
 
-   ![](.\图片\sentinel的的16.png)
+   ![](.\img\sentinel的的16.png)
 
          **重启84,访问业务方法:**
 
-  ![](.\图片\sentinel的的17.png)
+  ![](.\img\sentinel的的17.png)
 
          可以看到.,直接报错了,并没有降级
 
-        ​				也就是说,blockHandler==只对sentienl定义的规则降级==
+        *				也就是说,blockHandler==只对sentienl定义的规则降级==
 
          
 
     8.   **==如果fallback和blockHandler都配置呢?==**]
 
-   ![](.\图片\sentinel的的18.png)
+   ![](.\img\sentinel的的18.png)
 
          **设置qps规则,阈值1**
 
-   ![](.\图片\sentinel的的19.png)
+   ![](.\img\sentinel的的19.png)
 
          ==测试:==
 
-  ![](.\图片\sentinel的的20.png)
+  ![](.\img\sentinel的的20.png)
 
          
 
@@ -3709,13 +3705,13 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     9.  **==@SentinelResource还有一个属性,exceptionsToIgnore==**
 
-   ![](.\图片\sentinel的的21.png)
+   ![](.\img\sentinel的的21.png)
 
          **exceptionsToIgnore指定一个异常类,**
 
-        ​					**表示如果当前方法抛出的是指定的异常,不降级,直接对用户抛出异常**
+        *					**表示如果当前方法抛出的是指定的异常,不降级,直接对用户抛出异常**
 
-   ![](.\图片\sentinel的的22.png)
+   ![](.\img\sentinel的的22.png)
 
          
 
@@ -3733,31 +3729,31 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     1.  pom
 
-  ![](.\图片\sentinel的的23.png)
+  ![](.\img\sentinel的的23.png)
 
     2.  配置文件
 
-  ![](.\图片\sentinel的的24.png)
+  ![](.\img\sentinel的的24.png)
 
     3.  主启动类,也要修改
 
-  ![](.\图片\sentinel的的25.png)
+  ![](.\img\sentinel的的25.png)
 
     4.  创建远程调用pay模块的接口
 
-  ![](.\图片\sentinel的的26.png)
+  ![](.\img\sentinel的的26.png)
 
     5.  创建这个接口的实现类,用于降级
 
-  ![](.\图片\sentinel的的27.png)
+  ![](.\img\sentinel的的27.png)
 
     6.   再次修改接口,指定降级类
 
-  ![](.\图片\sentinel的的28.png)
+  ![](.\img\sentinel的的28.png)
 
     7.   controller添加远程调用
 
-  ![](.\图片\sentinel的的29.png)
+  ![](.\img\sentinel的的29.png)
 
     8.  测试
 
@@ -3765,7 +3761,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     9.   测试,如果关闭9003.看看84会不会降级
 
-  ![](.\图片\sentinel的的30.png)
+  ![](.\img\sentinel的的30.png)
 
         **可以看到,正常降级了**
 
@@ -3773,7 +3769,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 **熔断框架比较**
 
-![](.\图片\sentinel的的31.png)
+![](.\img\sentinel的的31.png)
 
 
 
@@ -3787,7 +3783,7 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 默认规则是临时存储的,重启sentinel就会消失
 
-![](.\图片\sentinel的的32.png)
+![](.\img\sentinel的的32.png)
 
 **这里以之前的8401为案例进行修改:**
 
@@ -3809,21 +3805,21 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
     添加:
 
-![](.\图片\sentinel的的33.png)
+![](.\img\sentinel的的33.png)
 
      **实际上就是指定,我们的规则要保证在哪个名称空间的哪个分组下**
 
      			这里没有指定namespace, 但是是可以指定的
 
-    ​			**注意,这里的dataid要与8401的服务名一致**
+    *			**注意,这里的dataid要与8401的服务名一致**
 
 3.   **在nacos中创建一个配置文件,dataId就是上面配置文件中指定的**
 
-![](.\图片\sentinel的的34.png)
+![](.\img\sentinel的的34.png)
 
      ==json中,这些属性的含义:==
 
-    ![](.\图片\sentinel的的35.png)
+    ![](.\img\sentinel的的35.png)
 
      
 
@@ -3831,19 +3827,19 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 4.   启动8401:
 
-![](.\图片\sentinel的的36.png)
+![](.\img\sentinel的的36.png)
 
      可以看到,直接读取到了规则
 
 5.   关闭8401
 
-![](.\图片\sentinel的的37.png)
+![](.\img\sentinel的的37.png)
 
 6.   此时重启8401,如果sentinel又可以正常读取到规则,那么证明持久化成功
 
     可以看到,又重新出现了
 
-![](.\图片\sentinel的的38.png)
+![](.\img\sentinel的的38.png)
 
     
 
@@ -3875,11 +3871,11 @@ Nacos默认有自带嵌入式数据库,derby,但是如果做集群模式的话,�
 
 **分布式事务中的一些概念,也是seata中的概念:**
 
-​		![](.\图片\seala.png)
+*		![](.\img\seala.png)
 
-![](.\图片\seala的2.png)
+![](.\img\seala的2.png)
 
-![](.\图片\seala的3.png)
+![](.\img\seala的3.png)
 
 
 
@@ -3899,11 +3895,11 @@ docker run --name seata-server \
 
 2.  **修改file.conf**
 
-![](.\图片\seala的4.png)
+![](.\img\seala的4.png)
 
-![](.\图片\seala的5.png)
+![](.\img\seala的5.png)
 
-![](.\图片\seala的6.png)
+![](.\img\seala的6.png)
 
 3.   **mysql建库建表**
 
@@ -3915,7 +3911,7 @@ docker run --name seata-server \
 
     配置seata作为微服务,指定注册中心
 
-![](.\图片\seala的7.png)
+![](.\img\seala的7.png)
 
 5.   启动
 
@@ -3927,7 +3923,7 @@ docker run --name seata-server \
 
 **业务说明**
 
-![](.\图片\seala的8.png)
+![](.\img\seala的8.png)
 
 下单--->库存--->账号余额
 
@@ -3935,21 +3931,21 @@ docker run --name seata-server \
 
 1.  创建三个数据库
 
-![](.\图片\seala的9.png)
+![](.\img\seala的9.png)
 
 2.   创建对应的表
 
-![](.\图片\seala的10.png)
+![](.\img\seala的10.png)
 
 3.   创建回滚日志表,方便查看
 
-![](.\图片\seala的11.png)
+![](.\img\seala的11.png)
 
     **注意==每个库都要执行一次==这个sql,生成回滚日志表**
 
 4.   ==每个业务都创建一个微服务,也就是要有三个微服务,订单,库存,账号==
 
-    ​     ==订单==,seta-order-2001
+    *     ==订单==,seta-order-2001
 
     1.   pom
 
@@ -4441,7 +4437,7 @@ docker run --name seata-server \
          
         ```
 
-  ![](.\图片\seala的12.png)
+  ![](.\img\seala的12.png)
 
          
 
@@ -4540,17 +4536,17 @@ docker run --name seata-server \
 
 5.   **全局创建完成后,首先测试不加seata**
 
-![](.\图片\seala的14.png)
+![](.\img\seala的14.png)
 
      
 
-![](.\图片\seala的13.png)
+![](.\img\seala的13.png)
 
-​    
+*    
 
-​    
+*    
 
-​     
+*     
 
 6.   使用seata:
 
@@ -4600,25 +4596,25 @@ docker run --name seata-server \
 
 ### setat原理:
 
-![](.\图片\seala的15.png)
+![](.\img\seala的15.png)
 
-![](.\图片\seala的16.png)
+![](.\img\seala的16.png)
 
 
 
 **seata提供了四个模式:**
 
-![](.\图片\seala的17.png)
+![](.\img\seala的17.png)
 
 
 
-![](.\图片\seala的18.png)
+![](.\img\seala的18.png)
 
 ==第一阶段:==
 
-![](.\图片\seala的20.png)
+![](.\img\seala的20.png)
 
-![](.\图片\seala的19.png)
+![](.\img\seala的19.png)
 
 
 
@@ -4626,15 +4622,15 @@ docker run --name seata-server \
 
 ==二阶段之提交==:
 
-![](.\图片\seala的21.png)
+![](.\img\seala的21.png)
 
 
 
 ==二阶段之回滚:==
 
-![](.\图片\seala的22.png)
+![](.\img\seala的22.png)
 
-![](.\图片\seala的23.png)
+![](.\img\seala的23.png)
 
 
 
@@ -4644,7 +4640,7 @@ docker run --name seata-server \
 
 ==断点==:
 
-![](.\图片\seala的24.png)
+![](.\img\seala的24.png)
 
 **可以看到,他们的xid全局事务id是一样的,证明他们在一个事务下**
 
@@ -4652,11 +4648,11 @@ docker run --name seata-server \
 
 
 
-![](.\图片\seala的25.png)
+![](.\img\seala的25.png)
 
 **before 和 after的原理就是**
 
-![](.\图片\seala的26.png)
+![](.\img\seala的26.png)
 
 **在更新数据之前,先解析这个更新sql,然后查询要更新的数据,进行保存**
 
