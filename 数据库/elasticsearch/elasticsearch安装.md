@@ -18,13 +18,14 @@ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
 -v /data/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
 -v /data/elasticsearch/data:/usr/share/elasticsearch/data \
 -v /data/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+--restart=always --privileged=true \
 -d elasticsearch:8.1.1
 
 可能会出现 container init exited prematurely 是文件的问题 elasticsearch.yml需要先创建
 chmod -R 777 /mnt/docker-volumes/elasticsearch
 
 在elasticsearch.yml中写入 
-http.host : 0.0.0.0
+network.host: 0.0.0.0
 cluster.name : elasticsearch
 
 重启 访问 ： http://ip:9200/
