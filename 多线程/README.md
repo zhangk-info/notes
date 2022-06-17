@@ -64,13 +64,13 @@ ArrayList/Map/Set不安全： CopyOnWriteArrayList  ConcurrentHashMap CopyOnWrit
 
 
 ArrayList/Map/Set不安全：
-线程状态：
+线程状态：new runnable blocked waiting timed_waiting terminated
 实现线程的2种方式：
-锁：
-锁通信： 
-多线程辅助类：
+锁：synchronized reentrantlock 
+锁通信： wait notify await signal
+多线程辅助类：countdownlatch semphare cyclicbarrier
 线程池：
-线程池的7个属性：
+线程池的7个属性：corepoolsize maximumpoolsize keepalivetime timeunit workqueue 
 线程池拒绝策略（）: 
 四大函数式接口：
 

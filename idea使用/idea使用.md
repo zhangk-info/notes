@@ -18,5 +18,7 @@ alt + 鼠标右键淡化非大括号部分
 
 ### Octotree - GitHub code tree & GitCodeTree
 
+# writing classes build太慢
+![img.png](img.png)
 
 

@@ -28,6 +28,9 @@
 #### 双亲委派机制 是类的加载机制的重要体现
 * 自顶向下加载： 从最上层开始找 bootstrap -> extension -> app 
 * 沙箱安全机制:  保证java源代码不受污染，保证了使用不同的类加载器最终得到的都是同一个对象（包名类名相同的一定是同一个对象），不会拿到自定义的 java.lang.String
+#### 如何打破双亲委派机制
+* 继承ClassLoader，并重写loadClass
+* 使用Thread的ContextClassLoader
 
 ### Execution Engine：
     执行引擎负责解释命令，提交操作系统执行。
