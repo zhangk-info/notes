@@ -34,6 +34,9 @@ Filter(过滤器)：指的是Spring框架中的GatewayFilter的实力，使用�
 
 外部请求 -> 【[Netty Server]+[{路由规则1，断言1，拦截器1},{路由规则2，断言2，拦截器2}...]+[Netty Client]】->微服务
 
+## zuul和gateway的区别
+* zuul使用web servlet： 同步阻塞 ； gateway使用webflux,底层是netty : 异步非阻塞；
+* gateway线程开销少，支持各种长链接、websocket;
 
 使用：
 1.引入spring-cloud-starter-gateway且不能引入spring-boot-starter-web 
