@@ -1,3 +1,4 @@
+# gateway
 SpringCloud Gateway 是 Spring Cloud 的一个全新项目，基于 Spring5.0 + Spring Boot 2.0 和 Project Reactor 等技术开发的网关，它旨在为微服务架构提供一种简单有效的统一的API路由管理方式。
 
 SpringCloud GateWay 作为 Spring Cloud 生态系统中的网关，目标是替代Zuul,在Spring Cloud 2.0以上版本中,没有对新版本的Zuul 2.0以上最新高性能版本进行集成，仍然还是使用的Zuul1.x非Reactor模式的老版本。而为了提升网关的性能，SpringCloud Gateway是基于WebFlux框架实现的，而WebFlux框架底层则使用了高性能的Reactor模式通信框架Netty。
