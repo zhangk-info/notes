@@ -6,7 +6,7 @@
 
 ### put过程
 key = null --> hash(key) = 0;
-```java
+``` java
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
         Node<K,V>[] tab; Node<K,V> p; int n, i;

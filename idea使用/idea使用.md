@@ -8,3 +8,17 @@
 
 ### console中文乱码
 CMD support plugin插件造成的 禁用
+
+### rainbow bracket
+ctrl + 鼠标右键高亮大括号部分
+alt + 鼠标右键淡化非大括号部分
+
+### rainbow fart
+程序猿鼓励师。。。
+
+### Octotree - GitHub code tree & GitCodeTree
+
+# writing classes build太慢
+![img.png](img.png)
+
+
