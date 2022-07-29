@@ -1,0 +1,65 @@
+## minio分块上传
+
+1. https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/API/API_CreateMultipartUpload.html
+重点： 没有重点
+
+```
+public String putObjectMultiPartConfirmUrl(String bucketName, String objectName) throws Exception {
+        this.checkBucketName(bucketName);
+        this.createBucket(bucketName, false);
+        Map<String, String> queryMap = new HashMap();
+        queryMap.put("uploads", "");
+        GetPresignedObjectUrlArgs getPresignedObjectUrlArgs = (GetPresignedObjectUrlArgs)((GetPresignedObjectUrlArgs.Builder)((GetPresignedObjectUrlArgs.Builder)((GetPresignedObjectUrlArgs.Builder)GetPresignedObjectUrlArgs.builder().method(Method.POST).bucket(bucketName)).object(objectName)).expiry(18000).extraQueryParams(queryMap)).build();
+        return this.client.getPresignedObjectUrl(getPresignedObjectUrlArgs);
+    }
+
+String confirmUrl = putObjectMultiPartConfirmUrl(TEMP_BUCKET, objectName);
+String xmlResponse = HttpRequest.post(confirmUrl).header("content-type", "application/octet-stream").form(null).timeout(10000).execute().body();
+            Document document = XmlUtil.parseXml(xmlResponse);
+            // 从准备上传接口获取uploadId
+            XmlUtil.getNodeByXPath("//InitiateMultipartUploadResult/UploadId", document);
+            String uploadId = document.getDocumentElement().getLastChild().getTextContent();
+
+```
+
+2. https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/API/API_UploadPart.html#API_UploadPart_RequestSyntax
+* 重点： 每个分块上传地址都要签名
+
+```
+List<String> uploadUrls = new ArrayList<>();
+
+            for (int i = 0; i < partNumber; i++) {
+                uploadUrls.add(putObjectMultiPartUrl(TEMP_BUCKET, objectName, uploadId, String.valueOf(i+1)));
+            }
+
+
+public String putObjectMultiPartUrl(String bucketName, String objectName, String uploadId, String partNumber) throws Exception {
+        this.checkBucketName(bucketName);
+        this.createBucket(bucketName, false);
+        Map<String, String> queryParams = new HashMap();
+        queryParams.put("uploadId", uploadId);
+        queryParams.put("partNumber", partNumber);
+        GetPresignedObjectUrlArgs getPresignedObjectUrlArgs = (GetPresignedObjectUrlArgs)((GetPresignedObjectUrlArgs.Builder)((GetPresignedObjectUrlArgs.Builder)((GetPresignedObjectUrlArgs.Builder)GetPresignedObjectUrlArgs.builder().method(Method.PUT).bucket(bucketName)).object(objectName)).extraQueryParams(queryParams)).expiry(18000).build();
+        return this.client.getPresignedObjectUrl(getPresignedObjectUrlArgs);
+    }
+
+```
+
+3. https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/API/API_CompleteMultipartUpload.html#API_CompleteMultipartUpload_SeeAlso
+
+* 重点： 记录每个part上传后responseBody中的ETag
+* 重点： 不能使用 Content-Type: application/x-www-form-urlencoded
+<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+   <Part>
+      <ETag>"f1563f280cc33ccb57e7cd2cd02fec63"</ETag>
+      <PartNumber>1</PartNumber>
+   </Part>
+   <Part>
+      <ETag>"d0cbf1d6f636e7393047d096062b9d67"</ETag>
+      <PartNumber>2</PartNumber>
+   </Part>
+   <Part>
+      <ETag>"a11d887c7b0ab8fa9f76d72acd228c86"</ETag>
+      <PartNumber>3</PartNumber>
+   </Part>
+</CompleteMultipartUpload>
