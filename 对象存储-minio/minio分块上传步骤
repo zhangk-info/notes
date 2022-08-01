@@ -63,3 +63,36 @@ public String putObjectMultiPartUrl(String bucketName, String objectName, String
       <PartNumber>3</PartNumber>
    </Part>
 </CompleteMultipartUpload>
+
+4. 遍历获取文件信息以确认文件合并完成
+```
+client.statObject(statObjectArgs)
+```
+
+
+5. 临时文件夹和未完成合并文件存储优化：
+```
+LifecycleConfiguration configuration = client.getBucketLifecycle(GetBucketLifecycleArgs.builder().bucket(TEMP_BUCKET).build());
+// 如果没有临时bucket的生命周期配置，则设置
+if (Objects.isNull(configuration)) {
+    List<LifecycleRule> rules = new ArrayList<>();
+    // 设置临时文件有效期7天,未完成multiPartUpload的文件保留时间3天
+    rules.add(
+            new LifecycleRule(
+                    Status.ENABLED,
+                    new AbortIncompleteMultipartUpload(3),
+                    new Expiration((ZonedDateTime) null, 7, null),
+                    null,
+                    "TEMP_BUCKET_CLEAR",
+                    null,
+                    null,
+                    null)
+    );
+    LifecycleConfiguration lifecycleConfiguration = new LifecycleConfiguration(rules);
+    SetBucketLifecycleArgs setBucketLifecycleArgs = SetBucketLifecycleArgs.builder()
+            .bucket(TEMP_BUCKET).config(lifecycleConfiguration).build();
+    client.setBucketLifecycle(setBucketLifecycleArgs);
+}
+```
+对于上传部分未合并完成的文件，建议配置AbortIncompleteMultipartUpload
+https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/mpu-abort-incomplete-mpu-lifecycle-config.html
