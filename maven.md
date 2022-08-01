@@ -4,7 +4,7 @@
      <id>alwaysActiveProfile</id>
      <activation>
       <!-- 是否默认激活 -->
-      <activeByDefault>false</activeByDefault>
+      <activeByDefault>true</activeByDefault>
      </activation>
      <repositories>
         <repository>
