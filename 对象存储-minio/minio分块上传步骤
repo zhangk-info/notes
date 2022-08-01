@@ -82,7 +82,7 @@ if (Objects.isNull(configuration)) {
                     Status.ENABLED,
                     new AbortIncompleteMultipartUpload(3),
                     new Expiration((ZonedDateTime) null, 7, null),
-                    null,
+                    new RuleFilter(""),
                     "TEMP_BUCKET_CLEAR",
                     null,
                     null,
