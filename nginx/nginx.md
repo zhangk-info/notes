@@ -17,3 +17,11 @@ limit_req zone=perip2 burst=30 nodelay；
 # limit_conn zone number;
 limit_conn perip2 40;
 ```
+
+## nginx 实现短链
+
+```
+location ~^/s/(.*) {
+                rewrite ^/s/(.*) https://www.zhangkun.space/h5/redirectByCode?code=$1 permanent;
+        }
+```
