@@ -29,3 +29,6 @@ alt + 鼠标右键淡化非大括号部分
 * search everywhere api
 
 
+#### 显示usage数量
+![img_1.png](img_1.png)
+
