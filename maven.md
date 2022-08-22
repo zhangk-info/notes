@@ -16,7 +16,8 @@
             <updatePolicy>always</updatePolicy>
             <checksumPolicy>fail</checksumPolicy>
           </snapshots>
-          <url>http://192.168.10.31:8081/repository/public</url>
+          <url>http://ip:host/repository/public</url>
+          <url>http://username@password:ip:host/repository/public</url>
           <layout>default</layout>
         </repository>
       </repositories>
