@@ -1,4 +1,5 @@
 ## 自建v2ray:
+  * https://github.com/233boy/
   bash <(curl -s -L https://git.io/v2ray-setup.sh)
 ## v2rayN:A Windows GUI client for V2Ray.
 https://github.com/2dust/v2rayN (中文GUI）
