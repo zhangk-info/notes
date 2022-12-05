@@ -27,6 +27,7 @@ alt + 鼠标右键淡化非大括号部分
 * maven helper
 * mybatis x
 * search everywhere api
+* dark one
 
 
 #### 显示usage数量
