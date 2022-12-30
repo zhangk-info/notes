@@ -80,6 +80,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositorie
     php7-tokenizer \
     php7-pdo_mysql \
     php7-xml \
+    php7-xmlrpc \
+    php7-simplexml \
     php-dom \
     php7-fpm \
     php7-curl \   
