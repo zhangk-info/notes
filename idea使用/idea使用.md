@@ -28,6 +28,7 @@ alt + 鼠标右键淡化非大括号部分
 * mybatis x
 * search everywhere api
 * dark one
+* grep console
 
 
 #### 显示usage数量
