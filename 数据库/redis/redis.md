@@ -124,3 +124,6 @@ redis的lru不是真正的lru算法。通过随机采集法淘汰key，每次都
 
 LFU算法反映了一个key的热度情况（热度），不会因为LRU算法的偶尔一次被访问被认为是热点数据。
 
+
+#### 工具
+https://github.com/qishibo/AnotherRedisDesktopManager
