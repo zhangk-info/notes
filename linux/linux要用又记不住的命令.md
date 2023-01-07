@@ -20,7 +20,7 @@ docker run --name nginx -d -p 80:80 -p 443:443 --restart=always -v /data/nginx/l
 
 --docker 仓库修改 /etc/docer/daemon.json
 {
-  "registry-mirrors": ["https://8qwj47tn.mirror.aliyuncs.com"],
+  "registry-mirrors": ["http://hub-mirror.c.163.com"],
   "data-root":"/home/docker"
 }
 记得重启 systemctl restart docker

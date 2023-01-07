@@ -21,7 +21,7 @@
 
 修改 /etc/docker/daemon.json 文件
 {
-  "registry-mirrors": ["https://0nth4654.mirror.aliyuncs.com"],
+  "registry-mirrors": ["http://hub-mirror.c.163.com"],
   "insecure-registries": ["ip"]
 }
 systemctl daemon-reload
