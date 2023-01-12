@@ -1,5 +1,3 @@
-# mariadb-db安装
-docker run -p 3306:3306 --name mariadb-db -v /data/mysql/db/conf/:/etc/mysql/conf.d/ -v /data/mysql/db/logs:/var/log/mysql -v /data/mysql/db/data:/var/lib/mysql --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=mariadb-db -d mariadb:latest
 
 # docker compose 安装
 https://docs.docker.com/compose/install/
@@ -29,7 +27,7 @@ docker run --name nginx -d -p 80:80 -p 443:443 --restart=always -v /data/nginx/l
 scp /data/backup.zip developer@192.168.1.100:/data/
 
 # docker 镜像加速
-创建或修改 /etc/docker/daemon.json 文件
+创建或修改 /etc/docker/da  emon.json 文件
 {
   "registry-mirrors": [
     "https://registry.docker-cn.com",
@@ -43,3 +41,40 @@ systemctl restart docker
 
 # 升级系统软件
 yum upgrade -y
+
+# yum  rpmdb open failed
+mv /var/lib/rpm/__db* /tmp;
+rpm --rebuilddb;
+yum clean all
+
+# yum切换源
+cd /etc/yum.repos.d/
+mv CentOS-Base.repo CentOS-Base.repo.backup
+wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
+mv CentOS6-Base-163.repo CentOS-Base.repo
+yum makecache
+yum -y install update
+yum clean all
+
+
+# yum工具
+安装yum-utils
+yum install yum-utils
+清理未完成事务
+yum-complete-transaction --cleanup-only
+
+# yum重装
+uname -r
+
+rpm -qa | grep yum | xargs rpm -e --nodeps
+rpm -qa yum
+
+```
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/yum-3.4.3-168.el7.centos.noarch.rpm
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch.rpm
+```
+
+rpm -ivh yum-* 
+
+rpm -qa yum
