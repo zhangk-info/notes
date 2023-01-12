@@ -29,6 +29,7 @@ alt + 鼠标右键淡化非大括号部分
 * search everywhere api
 * dark one
 * grep console
+* spring boot assistant
 
 
 #### 显示usage数量
