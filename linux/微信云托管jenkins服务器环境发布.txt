@@ -1,0 +1,31 @@
+使用服务器环境的方式：
+
+1. nodejs安装
+yum update -y
+wget https://nodejs.org/download/release/latest-v17.x/node-v17.9.1-linux-x64.tar.gz
+tar -vxf node-v17.9.1-linux-x64.tar.gz
+mkdir -p /usr/local/nodejs
+mv node-v17.9.1-linux-x64/* /usr/local/nodejs/
+ln -s /usr/local/nodejs/bin/node /usr/local/bin
+ln -s /usr/local/nodejs/bin/npm /usr/local/bin
+npm config set registry https://registry.npm.taobao.org
+2. 微信云托管组件安装
+npm install @wxcloud/cli --location=global
+ln -s /usr/local/nodejs/bin/wxcloud /usr/local/bin
+3. 微信云托管发布（使用jenkins）提前在服务器环境clone代码
+pwd
+cd /data/zhubao/zhubao-admin-new
+pwd
+git checkout .
+git pull origin master
+wxcloud login -a 微信账号 -k 密码
+cd /data/zhubao/
+rm -rf .*.zip
+echo 0 | wxcloud run:deploy -s 名称 -e  环境 /data/demo --override --noConfirm --remark=jenkins发布 --envParamsJson='{"APP_ENV":"dev"}'
+rm -rf .*.zip
+
+
+jenkins设置：
+1. 安装插件 ：Publish Over SSH
+2. 系统配置：系统管理->系统配置： Publish over SSH 设置hostname&username&高级:password
+3. 任务配置：不使用源码管理；构建步骤：Send files or execute commands over SSH并在command中填入
