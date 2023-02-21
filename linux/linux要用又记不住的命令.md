@@ -27,7 +27,7 @@ docker run --name nginx -d -p 80:80 -p 443:443 --restart=always -v /data/nginx/l
 scp /data/backup.zip developer@192.168.1.100:/data/
 
 # docker 镜像加速
-创建或修改 /etc/docker/da  emon.json 文件
+创建或修改 /etc/docker/daemon.json 文件
 {
   "registry-mirrors": [
     "https://registry.docker-cn.com",
