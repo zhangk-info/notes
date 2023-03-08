@@ -12,5 +12,5 @@ docker run -d --name my_jenkins -u root -p 8085:8080 -p 50000:50000 -v /data/jen
 ## maven构建
 1. 插件安装
 2. maven安装
-3. jdk通过官网压缩包下载后放到/data/jenkins_home/java/ 并配置
+3. jdk通过官网压缩包下载后放到/data/jenkins_home/java/ 并配置  （建议使用系统的mvn setting并配置阿里云镜像）
 4. 建立maven任务并执行
