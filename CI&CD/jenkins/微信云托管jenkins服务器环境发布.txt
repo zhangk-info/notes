@@ -14,12 +14,12 @@ npm install @wxcloud/cli --location=global
 ln -s /usr/local/nodejs/bin/wxcloud /usr/local/bin
 3. 微信云托管发布（使用jenkins）提前在服务器环境clone代码
 pwd
-cd /data/zhubao/zhubao-admin-new
+cd /data/demo/demo-admin-new
 pwd
 git checkout .
 git pull origin master
 wxcloud login -a 微信账号 -k 密码
-cd /data/zhubao/
+cd /data/demo/
 rm -rf .*.zip
 echo 0 | wxcloud run:deploy -s 名称 -e  环境 /data/demo --override --noConfirm --remark=jenkins发布 --envParamsJson='{"APP_ENV":"dev"}'
 rm -rf .*.zip
