@@ -7,8 +7,8 @@ docker run -d --restart=always -p 3306:3306 -v /data/mysql/conf:/etc/mysql/conf.
 
 ## vi /data/mysql/conf/my.cnf
 ```
-# 连接断开时间ms
-connect_timeout=3600000
+# 连接断开时间 12小时
+connect_timeout=43200
 
 # 临时表大小 当查询sql出来的临时表过大时调整
 tmp_table_size=1G
