@@ -115,10 +115,10 @@ CMD ["sh", "run.sh"]
 ```
 
 ### 构建镜像
-* docker build -t demo:1.0 /data/demo/demo-admin-new
+* docker build -t demo:1.0 /data/demo/demo
 
 ### 启动容器并挂载
 * docker run -d --name php -p80:80 -p443:443 --restart=always --privileged=true demo:1.0
-* docker run -d --name php -p80:80 -p443:443 -v /data/demo/demo-admin-new:/app --restart=always --privileged=true demo:1.0
+* docker run -d --name php -p80:80 -p443:443 -v /data/demo/demo:/app --restart=always --privileged=true demo:1.0
 
 

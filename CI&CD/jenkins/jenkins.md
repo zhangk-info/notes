@@ -13,10 +13,11 @@ docker run -d --name my_jenkins -u root -p 8085:8080 -p 50000:50000 -v /data/jen
 1. 插件安装
 2. maven安装
 3. jdk通过官网压缩包下载后放到/data/jenkins_home/java/ 并配置  （建议配置的mvn setting并配置阿里云镜像）
-4. 建立maven任务并执行
+4. 建立maven任务并执行（不需要mvn开头）
 
 
 ### maven settings
 1. 安装插件Config File Provider Plugin
 2. 系统管理-》“Managed files”-》“Add a new Config” -》选择maven settings.xml  -》点击submit -》在Content中添加自己的settings.xml内容 -》点击提交。
 3. 配置全局工具配置中使用File Provider
+4. 配置任务中mvn-》高级-》
