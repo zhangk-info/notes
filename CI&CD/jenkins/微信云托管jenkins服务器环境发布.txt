@@ -17,6 +17,7 @@ pwd
 cd /data/demo/demo
 pwd
 git checkout .
+git checkout origin/master
 git pull origin master
 wxcloud login -a 微信账号 -k 密码
 cd /data/demo/
