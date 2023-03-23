@@ -39,3 +39,6 @@ thread_cache_size=200
 
 
 ```
+
+## rewriteBatchedStatements=true MySQL JDBC驱动在默认情况下会无视executeBatch()语句，把我们期望批量执行的一组sql语句拆散，一条一条地发给MySQL数据库，批量插入实际上是单条插入。 把rewriteBatchedStatements参数置为true, 驱动才会帮你批量执行SQL
+url: jdbc:mysql://ip:3306/silver?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&autoReconnect=true&failOverReadOnly=false&allowPublicKeyRetrieval=true
