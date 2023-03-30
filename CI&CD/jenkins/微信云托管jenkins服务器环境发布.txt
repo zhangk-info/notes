@@ -45,3 +45,7 @@ npm run build:stage
 3. wxcloud login -a 微信账号 -k 密码
 4. wxcloud storage:upload /data/xx/dist/ --envId=xx --mode=staticstorage --remotePath=/
 5. wxcloud storage:purge --envId=xx
+
+
+### 控制台输出日志
+高级-》Verbose output in console
