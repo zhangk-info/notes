@@ -21,3 +21,7 @@ docker run -d --name my_jenkins -u root -p 8085:8080 -p 50000:50000 -v /data/jen
 2. 系统管理-》“Managed files”-》“Add a new Config” -》选择maven settings.xml  -》点击submit -》在Content中添加自己的settings.xml内容 -》点击提交。
 3. 配置全局工具配置中使用File Provider
 4. 配置任务中mvn-》高级-》
+
+
+#### 超时设置
+1. 任务-》构建环境-》Abort the build if it's stuck
