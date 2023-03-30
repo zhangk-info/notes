@@ -44,4 +44,4 @@ npm install
 npm run build:stage
 3. wxcloud login -a 微信账号 -k 密码
 4. wxcloud storage:upload /data/xx/dist/ --envId=xx --mode=staticstorage --remotePath=/
-5. wxcloud storage:purge
+5. wxcloud storage:purge --envId=xx
