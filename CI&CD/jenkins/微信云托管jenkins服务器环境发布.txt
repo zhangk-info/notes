@@ -31,3 +31,17 @@ jenkins设置：
 1. 安装插件 ：Publish Over SSH
 2. 系统配置：系统管理->系统配置： Publish over SSH 设置hostname&username&高级:password
 3. 任务配置：不使用源码管理；构建步骤：Send files or execute commands over SSH并在command中填入
+
+
+# 静态存储发布
+1.
+git checkout .
+git fetch
+git checkout origin/master
+git pull origin master
+2.
+npm install
+npm run build:stage
+3. wxcloud login -a 微信账号 -k 密码
+4. wxcloud storage:upload /data/xx/dist/ --envId=xx --mode=staticstorage --remotePath=/
+5. wxcloud storage:purge

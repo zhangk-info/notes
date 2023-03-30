@@ -78,3 +78,10 @@ wget http://mirror.centos.org/centos/7/os/x86_64/Packages/yum-plugin-fastestmirr
 rpm -ivh yum-* 
 
 rpm -qa yum
+
+
+## npm 安装
+1. wget https://nodejs.org/dist/v16.9.1/node-v16.9.1-linux-x64.tar.gz
+2. tar -vxzf
+3. ln -s ~/node-v16.9.1-linux-x64/bin/npm /usr/local/bin/npm
+4. ln -s ~/node-v16.9.1-linux-x64/bin/node /usr/local/bin/node
