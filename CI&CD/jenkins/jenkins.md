@@ -25,3 +25,7 @@ docker run -d --name my_jenkins -u root -p 8085:8080 -p 50000:50000 -v /data/jen
 
 #### 超时设置
 1. 任务-》构建环境-》Abort the build if it's stuck
+
+## 备份插件
+* ThinBackup
+![img.png](img.png)* 
