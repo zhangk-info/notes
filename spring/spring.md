@@ -2,10 +2,13 @@
 ## ioc
 * 容器化 依赖注入 控制反转
 
-以往我们需要一个对象都是new出来的 ， ioc思想将所有对象实例化成bean放入容器中。spring就会自动的帮我们实例化并管理Bean。
+以往我们需要一个对象都是new出来的 ， ioc思想将所有对象实例化成bean放入容器中。spring就会自动的帮我们实例化并管理Bean。对象的创建管理的控制权都交给了Spring容器，所以这是一种控制权的反转。
 
 ## aop
-* 面向切面变成 
+* 面向切面编程
+
+### aop的通知类型
+before（执行前） around（执行前后） after（执行后）  AfterThrowing（执行异常后） AfterReturning（执行正常后）
 
 ### 动态代理
 
@@ -36,6 +39,16 @@ CGLib生成的代理类，和我们自己编写并编译的类没有太大区别
 由于CGLib的代理类使用的是继承，这也就意味着如果需要被代理的类是一个final类，则无法使用CGLib代理；
 由于CGLib实现代理方法的方式是重写父类的方法，所以无法对final方法，或者private方法进行代理，因为子类无法重写这些方法；
 CGLib生成代理类的方式是通过操作字节码，这种方式生成代理类的速度要比JDK通过反射生成代理类的速度更慢；
+
+
+# filter 和 interceptor
+
+filter： 有一堆东西的时候，只选择符合要求的东西通过
+interceptor： 是aop的一种实现是通过反射实现的。过滤前---拦截前---Action处理---拦截后---过滤后
+
+1. filter是servlet规定的过滤器，只能用于 web 程序中。interceptor是spring框架支持即可用于web程序，也可用于application、Swing中。
+2. filter通过dochain放行。interceptor通过prehandler放行。
+3. filter只在方法前后执行。interceptor粒度更细，可以深入到方法前后，异常抛出前后。
 
 # Bean的创建过程
 * 推断构造函数
