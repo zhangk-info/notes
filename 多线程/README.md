@@ -55,6 +55,16 @@ new Thread(() -> {
 * ThreadWaitNotifyDemo 生产消费模式
 
 
+#### 线程池
+线程池：ThreadPoolExecutor Runtime.getRuntime().availableProcessors() workQueue(LinkedBlockQueue)
+线程池的7个属性： corePoolSize maximumPoolSize keepAliveTime TimeUnit workQueue threadFactory rejectedExecutionHandler
+线程池拒绝策略（RejectedExecutionHandler/Policy）: Abort/CallerRuns/DiscardOld/Discard
+线程池的状态： running stop shutdown tidying terminated
+* running：运行中
+* stop：不接收并中断；阻塞队列一个不管
+* shutdown： 不接收但会接续执行直到完成。阻塞队列也会执行完成
+* tidying：中间状态
+* terminated：终结
 #### 关键字
 
 ArrayList/Map/Set不安全： CopyOnWriteArrayList  ConcurrentHashMap CopyOnWriteArraySet
@@ -66,6 +76,7 @@ ArrayList/Map/Set不安全： CopyOnWriteArrayList  ConcurrentHashMap CopyOnWrit
 线程池：ThreadPoolExecutor Runtime.getRuntime().availableProcessors() workQueue(LinkedBlockQueue)
 线程池的7个属性： corePoolSize maximumPoolSize keepAliveTime TimeUnit workQueue threadFactory rejectedExecutionHandler
 线程池拒绝策略（RejectedExecutionHandler/Policy）: Abort/CallerRuns/DiscardOld/Discard
+线程池的状态： running stop shutdown tidying terminated
 四大函数式接口： Consumer<T> t->{} Supplier<T> t->{return t} Function<T,R> t->{return R} Predicate<T> t->{return flag}
 
 

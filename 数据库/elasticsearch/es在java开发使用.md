@@ -38,12 +38,5 @@ fielddata  默认为false，当对文本字段进行排序，聚合操作时会�
     * Text fields are not optimised for operations that require per-document field data like aggregations and sorting, so these operations are disabled by default. Please use a keyword field instead. Alternatively, set fielddata=true on [***] in order to load field data by uninverting the inverted index. Note that this can use significant memory.
 ```
 
-```
-作者：zhaoyunxing
-链接：https://www.jianshu.com/p/7019d93219f5
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-```
-
 ### @TypeAlias
 可以隐藏类名称，设置生成的index，对应_source里面的_class属性
