@@ -70,7 +70,7 @@ interceptor： 是aop的一种实现是通过反射实现的。过滤前---拦�
 * CreatingSet设置对象构建中
 * 推断构造函数
 * 普通对象 -> singletonFactories放入当前对象和对象工厂ObjectFactory<>
-* 属性注入 -> 多级缓存中取找，找到了返回，没找到继续向下
+* 属性注入 -> 多级缓存中取找，找到了返回，没找到继续向下d
     * 单例池singletonObjects中找
         * CreatingSet中 -> 出现了循环依赖
         * earlySingletonObjects中去找
@@ -87,6 +87,14 @@ interceptor： 是aop的一种实现是通过反射实现的。过滤前---拦�
 ## 使用@lazy解决循环依赖
 * 只有在真正使用的时候才会对对象进行初始化
 
+## SpringBoot自动装配原理
+1. @EnableAutoConfiguration(开启了自动装配功能)
+2. @EnableAutoConfiguration引入了@import
+3. Spring加载ioc容器时会解析@import注解。读取所有jar包下的spring.factories文件
+4. 过滤出AutoConfigurationClass类型的类（AutoConfiguration结尾命名的类）
+5. 通过condition排除无效的自动装配类
+
+6. SpringBoot3.0后spring.factories已经被移除，只能通过imports文件来注册自动配置类
 
 ### @Valid与@Validated
 ```

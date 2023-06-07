@@ -15,3 +15,18 @@
   * HashTable  线程安全
   * TreeMap
   * LinkedHashMap HashTable实现
+
+### adk -1 0 1
+### 副本数>=2 retry 回调
+### 指定index 幂等
+### 手动offset  重平衡 允许重复或重复不消费
+
+### kafka为什么快
+1. 磁盘顺序读写
+2. 零拷贝
+3. 分区分段+索引 1G一个段并且每个段有index文件
+4. 批量压缩
+5. 批量读写
+  1. 写可以批量写
+  2. 读是一批消息发出去，处理了之后更改offset
+6. 直接操作page cache而不是jvm，避免对象创建和GC，读写速度更高，进程重启缓存也不会丢失；log 刷盘;

@@ -1,5 +1,6 @@
 ## 自建v2ray:
   * https://github.com/233boy/
+  bash <(curl -s -L https://git.io/v2ray-install.sh)
   bash <(curl -s -L https://git.io/v2ray-setup.sh)
   * https://github.com/Alvin9999/new-pac
   * https://tr3.freeair888.club
