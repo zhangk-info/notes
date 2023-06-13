@@ -2059,7 +2059,7 @@ GlobalFilter,全局过滤器:
 
 
 # 7.消息总线:
-
+动态刷新配置  目前 Spring Cloud Bus 支持两种消息代理：RabbitMQ 和 Kafka
 ## SpringCloud Bus:
 
 ![](.\img\springconfig的26.png)
