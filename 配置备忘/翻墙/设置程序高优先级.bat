@@ -1,0 +1,1 @@
+wmic process where "name='v2rayN.exe'" call setpriority "Realtime"
