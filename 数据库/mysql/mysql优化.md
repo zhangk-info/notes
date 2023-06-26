@@ -32,5 +32,9 @@ thread_cache_size=200
 # 当我们调整innodb_buffer_pool_size大小时，innodb_log_buffer_size和innodb_log_file_size也应该做出相应的调整。
 innodb_log_buffer_size
 
+
+# 大小写不敏感
+lower_case_table_names=1
+
 # 其他优化参考 https://www.cnblogs.com/wangsongbai/p/11382536.html
 
