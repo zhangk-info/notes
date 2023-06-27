@@ -3,7 +3,7 @@ docker run -p 3306:3306 --name mariadb-db -v /data/mysql/conf/:/etc/mysql/conf.d
 
 # mysql安装
 docker run -d --restart=always -p 3306:3306 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/data:/var/lib/mysql -v /data/mysql/log:/var/log -v /etc/localtime:/etc/localtime -e MYSQL_ROOT_PASSWORD=Qcd@2022 --name mysql5.7 mysql:5.7
-docker run -d --restart=always -p 3306:3306 -v /data/mysql/conf:/etc/mysql/conf.d/ -v /data/mysql/data:/var/lib/mysql -v /data/mysql/log:/var/log -v /data/mysql/mysql-files:/var/lib/mysql-files -v /etc/localtime:/etc/localtime  -e MYSQL_ROOT_PASSWORD='RlcGFy36' --name mysql8.0 mysql:8.0
+docker run -d --restart=always -p 3306:3306 -v /data/mysql/conf:/etc/mysql/conf.d/ -v /data/mysql/data:/var/lib/mysql -v /data/mysql/log:/var/log -v /data/mysql/mysql-files:/var/lib/mysql-files -v /etc/localtime:/etc/localtime  -e MYSQL_ROOT_PASSWORD=RlcGFy36 --name mysql8.0 mysql:8.0
 
 ## vi /data/mysql/conf/my.cnf
 ```
@@ -42,3 +42,9 @@ thread_cache_size=200
 
 ## rewriteBatchedStatements=true MySQL JDBC驱动在默认情况下会无视executeBatch()语句，把我们期望批量执行的一组sql语句拆散，一条一条地发给MySQL数据库，批量插入实际上是单条插入。 把rewriteBatchedStatements参数置为true, 驱动才会帮你批量执行SQL
 url: jdbc:mysql://ip:3306/silver?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&autoReconnect=true&failOverReadOnly=false&allowPublicKeyRetrieval=true
+
+
+
+docker run -p 3306:3306 --name mariadb -v mariadb-conf:/etc/mysql/conf.d/ -v mariadb-log:/var/log/mysql -v mariadb-data:/var/lib/mysql --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=root -d mariadb:latest
+
+docker run -d --restart=always -p 3306:3306 -v D:\mysql\conf:/etc/mysql/conf.d -v D:\mysql\data:/var/lib/mysql -v D:\mysql\log:/var/log -v /etc/localtime:/etc/localtime  -e MYSQL_ROOT_PASSWORD=root..123 --name mysql mysql:latest
