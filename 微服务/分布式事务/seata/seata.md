@@ -16,7 +16,7 @@ registry {
     username = "nacos"
     password = "zhangk..123"
   }
-}
+}   
 
 config {
   # file、nacos 、apollo、zk、consul、etcd3、springCloudConfig

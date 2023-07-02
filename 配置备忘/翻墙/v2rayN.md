@@ -44,4 +44,7 @@ tiktokv.com,
 category-ads-all: 包含了常见的广告域名，以及广告提供商的域名。
 
 
+## 设置高优先级和开机自动设置高优先级
+* shell:startup
+打开开机启动文件位置并放入bat文件
 
