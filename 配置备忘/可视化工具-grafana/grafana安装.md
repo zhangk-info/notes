@@ -15,7 +15,14 @@ admin_user=admin
 admin_password=123456
 ```
 
-3. docker启动
+3. 配置用户默认语言为中文
+
+```
+[users]
+default_language=zh-CN
+```
+
+4. docker启动
    docker run -d --restart=always -p 3000:3000 --name=grafana -v E:\grafana:/var/lib/grafana -v E:\grafana\grafana.ini:
    /etc/grafana/grafana.ini -v E:\grafana\log:/var/log/grafana grafana/grafana-enterprise
 
