@@ -36,6 +36,8 @@ max_connections=2000
 # 线程缓存数 防止线程频繁销毁创建造成的消耗增大
 thread_cache_size=200
 
+# 大小写不敏感
+lower_case_table_names=1
 
 
 ```
