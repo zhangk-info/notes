@@ -47,6 +47,9 @@ management:
     web:
       exposure:
         include: '*'
+  metrics:
+    tags:      
+      application: ${spring.application.name}
   endpoint:
     metrics:
       enabled: true
