@@ -80,6 +80,8 @@ xpack.reporting.encryptionKey: encryptionKeyreporting12345678909876543210
 docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.200.30:9200/ -p 5602:5602 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
 -d kibana:7.13.4
+
+docker run --name -p 5602:5602 -v D:\docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml -d kibana:8.8.1
 ```
 
 #安装中文分词器

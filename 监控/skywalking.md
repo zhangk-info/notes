@@ -2,7 +2,7 @@
 
 ## 安装（启动一个standalone使用 ElasticSearch 7 作为存储的容器，其地址为elasticsearch:9200）
 
-docker run --name oap --restart always -d -p 11800:11800 -p 12800:12800 -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -e SW_ES_USER=elastic -e SW_ES_PASSWORD=rgW4rvClLke_7pKpnncc apache/skywalking-oap-server:9.5.0
+docker run --name oap --restart always -d -p 11800:11800 -p 12800:12800 -e SW_AUTHENTICATION=agent-password -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -e SW_ES_USER=elastic -e SW_ES_PASSWORD=rgW4rvClLke_7pKpnncc apache/skywalking-oap-server:9.5.0
 
 ui: 
 docker run --name oap-ui --restart always -d -p 13800:8080 -e SW_OAP_ADDRESS=http://192.168.51.26:12800 apache/skywalking-ui:9.5.0
@@ -40,7 +40,7 @@ https://skywalking.apache.org/zh/2018-12-18-apache-skywalking-5-0-userguide/
 
 agent.service_name=group::service
 
--javaagent:D:\skywalking-agent\skywalking-agent.jar=agent.service_name=zk-local::gateway
+-javaagent:D:\skywalking-agent\skywalking-agent.jar=agent.service_name=zk-local::gateway,agent.authentication=agent-password
 
 ### 配置覆盖
 
@@ -78,11 +78,6 @@ logback:
     </encoder>
 </appender>
 ```
-"C:\Program Files\Java\jdk-1.8\bin\java.exe" -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:61350,suspend=y,server=n
--javaagent:C:\Users\13628\AppData\Local\JetBrains\IdeaIC2023.1\captureAgent\debugger-agent.jar=file:/C:/Users/13628/AppData/Local/Temp/capture.props
--Dfile.encoding=UTF-8 
--classpath org.jeecg.JeecgSystemApplication -javaagent:D:\skywalking-agent\skywalking-agent.jar=agent.service_name=jeecg::system
-
 
 example: https://github.com/apache/skywalking/blob/727a722c735d7823cb3109c676086df99ab6b180/test/e2e-v2/java-test-service/e2e-service-provider/src/main/resources/logback.xml
 ```
