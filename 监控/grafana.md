@@ -23,8 +23,9 @@ default_language=zh-CN
 ```
 
 4. docker启动
-   docker run -d --restart=always -p 3000:3000 --name=grafana -v E:\grafana:/var/lib/grafana -v E:\grafana\grafana.ini:
-   /etc/grafana/grafana.ini -v E:\grafana\log:/var/log/grafana grafana/grafana-enterprise
+   docker run -d --restart=always -p 3000:3000 --name=grafana -v E:\grafana:/var/lib/grafana -v E:\grafana\grafana.ini:/etc/grafana/grafana.ini -v E:\grafana\log:/var/log/grafana grafana/grafana-enterprise
+
+docker run -d --restart=always -p 3000:3000 --name=grafana -v E:\docker\grafana:/var/lib/grafana -v E:\docker\grafana\grafana.ini:/etc/grafana/grafana.ini -v E:\grafana\log:/var/log/grafana grafana/grafana-enterprise
 
 #### 默认文件路径
 
