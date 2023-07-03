@@ -45,11 +45,11 @@ rgW4rvClLke_7pKpnncc
 * -v 挂载命令，将虚拟机中的路径和docker中的路径进行关联
 * -d 后台启动服务
 
-#安装可视化界面
+# 安装可视化界面
 
 ```
 
-docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.200.30:9200/ -p 5601:5601 \
+docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.51.26:9200/ -p 5601:5601 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
 -d kibana:7.13.4
 
@@ -64,27 +64,40 @@ docker run --name kibana --link elasticsearch:elasticsearch -p 5601:5601 \
 
 http://ip:5601/
 
-
 server.port: 5602
 server.host: "0.0.0.0" # !important
 server.name: "kibana" # !important
-elasticsearch.url: ["http://192.168.200.30:9200"] # !important
-kibana.index: ".kibana"
-elasticsearch.username: "elastic"
-elasticsearch.password: "paic1234A"
+elasticsearch.hosts: ["http://192.168.51.26:9200"] # !important
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "7pPCu_qxSYYylqvZemJF"
+# 可选
 xpack.security.enabled: true
 xpack.security.encryptionKey: "something_at_least_32_characters"
 xpack.encryptedSavedObjects.encryptionKey: encryptedSavedObjects12345678909876543210
 xpack.reporting.encryptionKey: encryptionKeyreporting12345678909876543210
 
-docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.200.30:9200/ -p 5602:5602 \
+docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.51.26:9200/ -p 5602:5602 \
 -v /mnt/docker-volumes/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
 -d kibana:7.13.4
 
-docker run --name -p 5602:5602 -v D:\docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml -d kibana:8.8.1
+docker run -d --name kibana -p 5602:5602 -v D:\docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml kibana:8.8.1
+
+docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password auto -u kibana_system
+账号：kibana_system
+7pPCu_qxSYYylqvZemJF
+
+访问后使用 elstic账号登录
+
 ```
 
-#安装中文分词器
+* 注意 8.0之后kibana不可以使用elastic账号登录
+
+https://www.elastic.co/guide/en/elasticsearch/reference/8.0/service-accounts.html
+
+https://www.elastic.co/guide/en/elasticsearch/reference/8.0/built-in-roles.html
+
+
+# 安装中文分词器
 在plugins目录下创建目录ik 下载插件并解压授权
 wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.13.4/elasticsearch-analysis-ik-7.13.4.zip
 
