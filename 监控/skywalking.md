@@ -1,15 +1,27 @@
-# docker
+# skywalking
 
 ## 安装（启动一个standalone使用 ElasticSearch 7 作为存储的容器，其地址为elasticsearch:9200）
 
-docker run --name oap --restart always -d -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -e SW_ES_USER=elastic -e SW_ES_PASSWORD=rgW4rvClLke_7pKpnncc -v D:\docker\skywalking\config apache/skywalking-oap-server:9.0.0
+docker run --name oap --restart always -d -p 11800:11800 -p 12800:12800 -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -e SW_ES_USER=elastic -e SW_ES_PASSWORD=rgW4rvClLke_7pKpnncc apache/skywalking-oap-server:9.5.0
 
-### 如果您打算覆盖或添加配置文件/skywalking/config，/skywalking/ext-config则可以在其中放置额外文件。同名文件将被覆盖；否则，它们将被添加到/skywalking/config.
+ui: 
+docker run --name oap-ui --restart always -d -p 13800:8080 -e SW_OAP_ADDRESS=http://192.168.51.26:12800 apache/skywalking-ui:9.5.0
+
+注意事项：
+* 端口
+  Backend listens on 0.0.0.0/11800 for gRPC APIs and 0.0.0.0/12800 for HTTP REST APIs.
+  UI listens on 8080 port and request 127.0.0.1/12800 to run a GraphQL query.
+* Before 8.8.0(<= 8.7.0), *-es6 image can only connect to Elasticsearch 6 when set SW_STORAGE=elasticsearch. You need to use *-es7 image when set SW_STORAGE=elasticsearch7.
+* 如果您打算覆盖或添加配置文件/skywalking/config，/skywalking/ext-config则可以在其中放置额外文件。同名文件将被覆盖；否则，它们将被添加到/skywalking/config.
 
 ## 参考文档
 * 官网
 
 https://skywalking.apache.org/
+
+* 中文文档
+
+https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/README.md
 
 * 所有配置项
 
@@ -23,35 +35,90 @@ https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/
 
 https://skywalking.apache.org/zh/2018-12-18-apache-skywalking-5-0-userguide/
 
-## 常见问题
 
-1. SkyWalking 依赖 elasticsearch 集群，如果 elasticsearch 安装有 x-pack 插件的话，那么就会存在一个 Basic 认证，导致
-   skywalking 无法调用 elasticsearch。
+## agent使用
+
+agent.service_name=group::service
+
+-javaagent:D:\skywalking-agent\skywalking-agent.jar=agent.service_name=zk-local::gateway
+
+### 配置覆盖
+
+https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/service-agent/java-agent/Setting-override.md
+
+### 所有配置
+https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/service-agent/java-agent/README.md
+
+agent.namespace	命名空间，用于隔离跨进程传播的header。如果进行了配置，header将为HeaderName:Namespace.	未设置
+agent.service_name	在SkyWalking UI中展示的服务名。5.x版本对应Application，6.x版本对应Service。 建议：为每个服务设置个唯一的名字，服务的多个服务实例为同样的服务名	Your_ApplicationName
+
+## 日志收集
 
 ```
-解决方法是使用 nginx 做代理，让 nginx 来做这个 Basic 认证，那么这个问题就自然解决了。
+<dependency>
+    <groupId>org.apache.skywalking</groupId>
+    <artifactId>apm-toolkit-trace</artifactId>
+    <version>8.16.0</version>
+</dependency>
+<!--  根据日志类型选择  -->
+<dependency>
+    <groupId>org.apache.skywalking</groupId>
+    <artifactId>apm-toolkit-logback-1.x</artifactId>
+    <version>8.16.0</version>
+</dependency>
 
-方法如下:
 
-安装 nginx
-yum install -y nginx
+logback:
+<!--  skywalking采集日志  -->
+<appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+        <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+            <pattern>- [%tid] -%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%level){blue} %clr(${PID}){magenta} %clr([%thread]){orange} %clr(%logger){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+        </layout>
+    </encoder>
+</appender>
+```
+"C:\Program Files\Java\jdk-1.8\bin\java.exe" -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:61350,suspend=y,server=n
+-javaagent:C:\Users\13628\AppData\Local\JetBrains\IdeaIC2023.1\captureAgent\debugger-agent.jar=file:/C:/Users/13628/AppData/Local/Temp/capture.props
+-Dfile.encoding=UTF-8 
+-classpath org.jeecg.JeecgSystemApplication -javaagent:D:\skywalking-agent\skywalking-agent.jar=agent.service_name=jeecg::system
 
-配置 nginx
-server {
-listen 9200 default_server;
-server_name  _;
 
-        location / {
-                 proxy_set_header Host $host;
-                 proxy_set_header X-Real-IP $remote_addr;
-                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                 proxy_pass http://localhost:9200;
-                 #Basic字符串就是使用你的用户名(admin),密码(12345)编码后的值
-                 #注意:在进行Basic加密的时候要使用如下格式如:admin:123456 注意中间有个冒号
-                 proxy_set_header Authorization "Basic YWRtaW4gMTIzNDU2";
-        }
-    }
+example: https://github.com/apache/skywalking/blob/727a722c735d7823cb3109c676086df99ab6b180/test/e2e-v2/java-test-service/e2e-service-provider/src/main/resources/logback.xml
+```
+<configuration scan="true" scanPeriod=" 5 seconds">
 
-验证
-curl localhost:9200
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>/tmp/skywalking-logs/logback/e2e-service-provider.log</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <Pattern>[%sw_ctx] [%level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger:%line - %msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="grpc-log"/>
+        <appender-ref ref="stdout"/>
+    </root>
+    <logger name="fileLogger" level="INFO">
+        <appender-ref ref="fileAppender"/>
+    </logger>
+</configuration>
 ```
