@@ -2,17 +2,26 @@
 
 ## 安装（启动一个standalone使用 ElasticSearch 7 作为存储的容器，其地址为elasticsearch:9200）
 
-docker run --name oap --restart always -d -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -v D:\docker\skywalking\config apache/skywalking-oap-server:9.0.0
+docker run --name oap --restart always -d -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -e SW_ES_USER=elastic -e SW_ES_PASSWORD=rgW4rvClLke_7pKpnncc -v D:\docker\skywalking\config apache/skywalking-oap-server:9.0.0
 
 ### 如果您打算覆盖或添加配置文件/skywalking/config，/skywalking/ext-config则可以在其中放置额外文件。同名文件将被覆盖；否则，它们将被添加到/skywalking/config.
 
 ## 参考文档
+* 官网
+
+https://skywalking.apache.org/
+
+* 所有配置项
+
+https://skywalking.apache.org/docs/main/v9.5.0/en/setup/backend/configuration-vocabulary/
 
 * skywalking极简入门
 
 https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/
 
-*
+* 使用入门
+
+https://skywalking.apache.org/zh/2018-12-18-apache-skywalking-5-0-userguide/
 
 ## 常见问题
 

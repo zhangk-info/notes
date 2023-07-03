@@ -21,7 +21,7 @@ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
 --restart=always --privileged=true \
 -d docker.elastic.co/elasticsearch/elasticsearch:8.1.1
 
-docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v D:\docker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v D:\docker/elasticsearch/data:/usr/share/elasticsearch/data -v D:\docker/elasticsearch/plugins:/usr/share/elasticsearch/plugins --restart=always --privileged=true -d docker.elastic.co/elasticsearch/elasticsearch:8.8.2
+docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v D:/docker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v D:\docker/elasticsearch/data:/usr/share/elasticsearch/data -v D:\docker/elasticsearch/plugins:/usr/share/elasticsearch/plugins --restart=always --privileged=true -d docker.elastic.co/elasticsearch/elasticsearch:8.8.1
 
 可能会出现 container init exited prematurely 是文件的问题 elasticsearch.yml需要先创建
 chmod -R 777 /mnt/docker-volumes/elasticsearch
@@ -32,6 +32,9 @@ cluster.name : elasticsearch
 
 重启 访问 ： http://ip:9200/
 
+设置密码：docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password auto -u elastic
+账号：elastic
+rgW4rvClLke_7pKpnncc
 ```
 
 * docker run --name elasticsearch 创建一个es容器并起一个名字；
@@ -84,5 +87,7 @@ docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.200.30:9200/ -p 5
 wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.13.4/elasticsearch-analysis-ik-7.13.4.zip
 
 # elasticsearch设置密码
+
+docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password auto -u elastic
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls-docker.html
