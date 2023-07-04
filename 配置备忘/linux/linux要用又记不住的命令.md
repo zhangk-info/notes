@@ -39,6 +39,11 @@ scp /data/backup.zip developer@192.168.1.100:/data/
 systemctl daemon-reload
 systemctl restart docker 
 
+# docker挂载目录 Permission denied
+原因 centos7 selinux把权限禁用了
+1. docker exec 加上  --user=root
+2. docker run 加上   --privileged=true
+
 # 升级系统软件
 yum upgrade -y
 

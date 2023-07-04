@@ -2,37 +2,24 @@
 官网 https://www.elastic.co/guide/en/elasticsearch/reference/7.13/docker.html#docker-cli-run-dev-mode
 
 ```
-docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
--e "discovery.type=single-node" \
--e ES_JAVA_OPTS="-Xms512m -Xmx512m" \
--v /mnt/docker-volumes/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
--v /mnt/docker-volumes/elasticsearch/data:/usr/share/elasticsearch/data \
--v /mnt/docker-volumes/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
--d docker.elastic.co/elasticsearch/elasticsearch:7.13.4
 
-这里不建议用docker.elastic.co/elasticsearch/elasticsearch:7.13.4外网的
-
-docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
--e "discovery.type=single-node" \
--e ES_JAVA_OPTS="-Xms512m -Xmx512m" \
--v /data/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
--v /data/elasticsearch/data:/usr/share/elasticsearch/data \
--v /data/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
---restart=always --privileged=true \
--d docker.elastic.co/elasticsearch/elasticsearch:8.1.1
-
-docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v D:/docker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v D:\docker/elasticsearch/data:/usr/share/elasticsearch/data -v D:\docker/elasticsearch/plugins:/usr/share/elasticsearch/plugins --restart=always --privileged=true -d docker.elastic.co/elasticsearch/elasticsearch:8.8.1
-
-可能会出现 container init exited prematurely 是文件的问题 elasticsearch.yml需要先创建
 chmod -R 777 /mnt/docker-volumes/elasticsearch
 
 在elasticsearch.yml中写入 
 network.host: 0.0.0.0
-cluster.name : elasticsearch
+cluster.name: elasticsearch
+
+需要先生成密码文件再挂载方式(并需要输入秘钥)启动，否则：device_or_resource_busy:
+https://www.elastic.co/guide/en/elasticsearch/reference/8.8/docker.html#_elasticsearch_keystore_device_or_resource_busy
+
+docker run -it --rm --user=root --privileged=true -v /home/frame/Public/docker_data/es/config:/usr/share/elasticsearch/config docker.elastic.co/elasticsearch/elasticsearch:8.8.1 bin/elasticsearch-keystore create -p
+上一步生成的密码用于修改配置登信息时需要，如下面的设置密码
+docker run -d --name es --privileged=true -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v /home/frame/Public/docker_data/es/data:/usr/share/elasticsearch/data -v /home/frame/Public/docker_data/es/plugins:/usr/share/elasticsearch/plugins -v /home/frame/Public/docker_data/es/config/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore -e KEYSTORE_PASSWORD=ft..123 --restart=always docker.elastic.co/elasticsearch/elasticsearch:8.8.1 
 
 重启 访问 ： http://ip:9200/
 
 设置密码：docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password auto -u elastic
+docker exec --user=root -it es /usr/share/elasticsearch/bin/elasticsearch-reset-password auto -u elastic
 账号：elastic
 rgW4rvClLke_7pKpnncc
 ```
@@ -96,8 +83,8 @@ https://www.elastic.co/guide/en/elasticsearch/reference/8.0/service-accounts.htm
 
 https://www.elastic.co/guide/en/elasticsearch/reference/8.0/built-in-roles.html
 
-
 # 安装中文分词器
+
 在plugins目录下创建目录ik 下载插件并解压授权
 wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.13.4/elasticsearch-analysis-ik-7.13.4.zip
 

@@ -5,7 +5,7 @@
 docker run --name oap --restart always -d -p 11800:11800 -p 12800:12800 -e SW_AUTHENTICATION=agent-password -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=192.168.51.26:9200 -e SW_ES_USER=elastic -e SW_ES_PASSWORD=rgW4rvClLke_7pKpnncc apache/skywalking-oap-server:9.5.0
 
 ui: 
-docker run --name oap-ui --restart always -d -p 13800:8080 -e SW_OAP_ADDRESS=http://192.168.51.26:12800 apache/skywalking-ui:9.5.0
+docker run --name oap-ui --restart always -d -p 13800:8080 -e SW_OAP_ADDRESS=http://192.168.51.26:12800 --security.user.admin.password=admin apache/skywalking-ui:9.5.0
 
 注意事项：
 * 端口
