@@ -14,7 +14,7 @@ https://www.elastic.co/guide/en/elasticsearch/reference/8.8/docker.html#_elastic
 
 docker run -it --rm --user=root --privileged=true -v /home/frame/Public/docker_data/es/config:/usr/share/elasticsearch/config docker.elastic.co/elasticsearch/elasticsearch:8.8.1 bin/elasticsearch-keystore create -p
 上一步生成的密码用于修改配置登信息时需要，如下面的设置密码
-docker run -d --name es --privileged=true -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v /home/frame/Public/docker_data/es/data:/usr/share/elasticsearch/data -v /home/frame/Public/docker_data/es/plugins:/usr/share/elasticsearch/plugins -v /home/frame/Public/docker_data/es/config/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore -e KEYSTORE_PASSWORD=ft..123 --restart=always docker.elastic.co/elasticsearch/elasticsearch:8.8.1 
+docker run -d --name es --privileged=true -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v /home/frame/Public/docker_data/es/data:/usr/share/elasticsearch/data -v /home/frame/Public/docker_data/es/plugins:/usr/share/elasticsearch/plugins -v /home/frame/Public/docker_data/es/config/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore -e KEYSTORE_PASSWORD=password --restart=always docker.elastic.co/elasticsearch/elasticsearch:8.8.1 
 
 重启 访问 ： http://ip:9200/
 

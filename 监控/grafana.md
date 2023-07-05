@@ -119,3 +119,14 @@ https://grafana.com/docs/grafana/latest/developers/plugins/
 * panel开发文档
 
 https://grafana.com/tutorials/build-a-panel-plugin/
+
+
+#### 自定义插件不加载
+```
+[plugins]
+allow_loading_unsigned_plugins = 插件ID
+
+```
+
+#### 全屏查看方式
+链接后加： &kiosk
