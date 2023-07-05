@@ -58,7 +58,7 @@ allow_loading_unsigned_plugins = skywalking-datasource
 ## agent使用
 下载 解压
 
-注意：对网关进行跟踪需要复制${skywalkingPath}/agent/optional-plugins到${skywalkingPath}/agent/plugins
+注意：对网关进行跟踪需要根据版本选择apm-spring-cloud-gateway-plugin复制${skywalkingPath}/agent/optional-plugins到${skywalkingPath}/agent/plugins
 
 agent.service_name=group::service
 
