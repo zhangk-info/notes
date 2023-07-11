@@ -23,7 +23,7 @@ alt + 鼠标右键淡化非大括号部分
 
 ### 工具
 * alibaba java coding guidelines(不更新了)
-* Alibaba Java Coding Guidelines(XenoAmess TPM)
+* Alibaba Java Coding Guidelines(XenoAmess TPM) 又名 p3c
 * arthas idea
 * maven helper
 * mybatis x
