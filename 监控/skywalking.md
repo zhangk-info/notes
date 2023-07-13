@@ -16,6 +16,15 @@ docker run --name oap-ui --restart always -d -p 13800:8080 -e SW_OAP_ADDRESS=htt
   use *-es7 image when set SW_STORAGE=elasticsearch7.
 * 如果您打算覆盖或添加配置文件/skywalking/config，/skywalking/ext-config则可以在其中放置额外文件。同名文件将被覆盖；否则，它们将被添加到/skywalking/config.
 
+docker run --name nginx-oap-ui -d -p 13801:80 --restart=always -v /home/frame/Public/docker_data/oap-ui/log:/var/log/nginx  -v /home/frame/Public/docker_data/oap-ui/conf.d:/etc/nginx/conf.d -v /home/frame/Public/docker_data/oap-ui/html:/usr/share/nginx/html  nginx
+
+更改了路由  
+base: '/skywalking/',
+
+1. 将static放入skywalking
+2. 将index.html复制一份放入skywalking
+
+
 ## 参考文档
 
 * 官网
@@ -55,7 +64,9 @@ allow_loading_unsigned_plugins = skywalking-datasource
 ## agent使用
 下载 解压
 
-注意：对网关进行跟踪需要根据版本选择apm-spring-cloud-gateway-plugin复制${skywalkingPath}/agent/optional-plugins到${skywalkingPath}/agent/plugins
+注意：对网关进行跟踪需要根据版本
+选择apm-spring-cloud-gateway-plugin复制${skywalkingPath}/agent/optional-plugins到${skywalkingPath}/agent/plugins
+选择apm-spring-webflux复制到${skywalkingPath}/agent/optional-plugins到${skywalkingPath}/agent/plugins
 
 agent.service_name=group::service
 
