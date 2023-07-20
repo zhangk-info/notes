@@ -105,7 +105,7 @@ logback:
 <!-- skywalking在console上 -->
 <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
     <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sw_ctx}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
     </layout>
 </encoder>
 
@@ -113,7 +113,7 @@ logback:
 <appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
     <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
         <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sw_ctx}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
         </layout>
     </encoder>
 </appender>
@@ -135,7 +135,7 @@ example: https://github.com/apache/skywalking/blob/727a722c735d7823cb3109c676086
     <appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sw_ctx}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
             </layout>
         </encoder>
     </appender>
