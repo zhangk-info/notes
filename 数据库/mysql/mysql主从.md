@@ -30,6 +30,8 @@
 5. 找到mysqldump中的语句change master to语句并改成我们正常需要的账号密码ip
 
 ```
+stop slave;
+reset slave; # 慎用，会清除所有信息
 CHANGE MASTER TO MASTER_LOG_FILE='binlog.000046', MASTER_LOG_POS=147606812, master_host='192.168.10.149', master_user='slave', master_password='j:/?Nf_ha5::', master_port=3306;
 ```
 
