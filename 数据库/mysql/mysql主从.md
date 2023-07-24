@@ -14,13 +14,13 @@
     flush privileges;
     ```
 
-3. mysqldump主库数据 --source-data
+3. mysqldump主库数据 --source-data 最好是冷备，，，热备的话数据会超前一部分
 
    --source-data如果选项赋值为2，那么CHANGE MASTER TO 语句会被写成一个SQL comment（注释），从而只提供信息;
    --source-data如果选项赋值为1，那么语句不会被写成注释并且在dump被载入时生效。
    --source-data如果没有指定，默认值为1。
 
-* mysqldump -uroot -p --all-databases --source-data=2 > alldb.sql
+* mysqldump -uroot -p --all-databases --source-data=2 --single-transaction --flush-logs  > alldb.sql
 * tail -n 1 alldb.sql 显示 -- Dump completed on 2023-07-20 15:35:08
 
 4. 从库导入数据
