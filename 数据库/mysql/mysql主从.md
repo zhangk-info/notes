@@ -44,6 +44,29 @@ CHANGE MASTER TO MASTER_LOG_FILE='binlog.000046', MASTER_LOG_POS=147606812, mast
 * SHOW SLAVE STATUS \G;
 
 8. 如果两台Slave_IO_Running和Slave_SQL_Running都是Yes状态，代表配置成功
+9. 从库无法启动 主键重复等错误处理
+```
+1. 从库操作
+
+show variables like '%slave_exec_mode%';
+-- 从严格模式修改到幂等模式
+set global slave_exec_mode='IDEMPOTENT';
+
+stop slave;
+
+start slave;
+
+show slave status;
+2. 确认主从无延迟及确认数据一致 操作完后，修改回去-------可以了，改回去（存在数据不一致的风险）
+set global slave_exec_mode='STRICT';
+
+stop slave;
+
+start slave;
+
+show slave status;
+```
+10. 
 
 # 互为主从，需要没有新数据进入的情况下才能进行，否则无法指定准确的偏移量
 
