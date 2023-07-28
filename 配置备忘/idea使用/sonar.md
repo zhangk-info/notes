@@ -51,9 +51,8 @@ jacoco配置
 1. 
 <!-- 多模块在根目录加这个，单体的话不需要这个配置。作用：更改报告路径，需更改report-aggregate为你自建的module的名字 -->
 <properties>
-    <sonar.coverage.jacoco.xmlReportPaths>
-        ${project.basedir}/report-aggregate/target/site/jacoco-aggregate/jacoco.xml
-    </sonar.coverage.jacoco.xmlReportPaths>
+    <!-- 如果拾取路径不对 将${project.basedir}/ 改成 ./ 或者 ../app-it/ -->
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 </properties>
 
 2. 
