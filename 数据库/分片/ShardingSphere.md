@@ -22,9 +22,6 @@ spring.shardingsphere.datasource.slave2.driver-class-name=${spring.datasource.dr
 spring.shardingsphere.datasource.slave2.jdbc-url=jdbc:mysql://192.168.10.149:3308/ft-fast-basic-v2?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
 spring.shardingsphere.datasource.slave2.username=${spring.datasource.username}
 spring.shardingsphere.datasource.slave2.password=${spring.datasource.password}
-spring.shardingsphere.masterslave.name=master_slave1_slave2_datasource
-spring.shardingsphere.masterslave.master-data-source-name=master
-spring.shardingsphere.masterslave.slave-data-source-names=slave1,slave2
 
 # 读写分离类型，如: Static，Dynamic
 spring.shardingsphere.rules.readwrite-splitting.data-sources.customize-name-mss.type=Static
