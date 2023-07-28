@@ -18,11 +18,8 @@ mvn clean verify -D sonar.projectKey=ft-fast-datax -D sonar.projectName='ft-fast
 jacoco配置
 
 ```
-<sonar.coverage.jacoco.xmlReportPaths>
-    ${project.basedir}/ft-fast-report-aggregate/target/site/jacoco-aggregate/jacoco.xml
-</sonar.coverage.jacoco.xmlReportPaths>
 
-<!-- 在根目录加这个 单体的话只需要这个不需要上面的配置更改报告路径-->
+<!-- 单体直接用这个plugin配置，多模块在根目录加这个plugin配置-->
 <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
@@ -49,7 +46,21 @@ jacoco配置
     </executions>
 </plugin>
 
-<!-- 在新增的聚合用的module里面增加聚合 module名字叫ft-fast-report-aggregate和配置在根里面的路径要一直 -->
+多模块还需要做以下操作：
+
+1. 
+<!-- 多模块在根目录加这个，单体的话不需要这个配置。作用：更改报告路径，需改更改report-aggregate为你自建的module的名字 -->
+<properties>
+    <sonar.coverage.jacoco.xmlReportPaths>
+        ${project.basedir}/report-aggregate/target/site/jacoco-aggregate/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+</properties>
+
+2. 
+新增一个module并引入你的所有其他module
+
+3. 
+<!-- 在新增的聚合用的module里面增加聚合 module名字叫report-aggregate和配置在根里面的路径要一直 -->
 <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
