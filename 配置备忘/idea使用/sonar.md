@@ -19,7 +19,7 @@ jacoco配置
 
 ```
 
-<!-- 单体直接用这个plugin配置，多模块在根目录加这个plugin配置-->
+<!-- 在根目录加这个plugin配置，研发云不管多模块还是单模块都只加这个，研发云会自动收集所有的target/site/jacoco/jacoco.xml-->
 <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
@@ -33,13 +33,13 @@ jacoco配置
         </execution>
         <execution>
             <id>report</id>
-            <phase>test</phase>
             <goals>
                 <goal>report</goal>
             </goals>
             <configuration>
                 <formats>
                     <format>XML</format>
+                    <format>HTML</format>
                 </formats>
             </configuration>
         </execution>
