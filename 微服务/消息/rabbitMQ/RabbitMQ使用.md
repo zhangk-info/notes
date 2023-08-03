@@ -4,8 +4,9 @@ class Test {
         log.debug("缓存变更时通知其他节点清理本地缓存,{}", JSONUtil.toJsonStr(message));
         if (amqpTemplate instanceof RabbitTemplate) {
             RabbitTemplate rabbitTemplate = (RabbitTemplate) amqpTemplate;
+            Channel channel = null;
             try {
-                Channel channel = rabbitTemplate.getConnectionFactory().createConnection().createChannel(false);
+                channel = rabbitTemplate.getConnectionFactory().createConnection().createChannel(false);
                 // 开启发布确认
                 channel.confirmSelect();
                 channel.addConfirmListener(new ConfirmListener() {
@@ -31,6 +32,14 @@ class Test {
                 } catch (Exception ex) {
                     log.error("发送缓存更新消息失败: ", ex);
                     throw new RuntimeException("发送缓存更新消息失败");
+                }
+            } finally {
+                try {
+                    if (Objects.nonNull(channel) && channel.isOpen()) {
+                        channel.close();
+                    }
+                } catch (IOException | TimeoutException e) {
+                    log.error("channel关闭失败");
                 }
             }
         } else {
