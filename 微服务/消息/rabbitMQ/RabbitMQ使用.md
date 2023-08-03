@@ -99,5 +99,48 @@ class Test {
         }
     }
 }
+```
+
+
+
+## 断网重连后找不到queue
+
+```java
+
+
+@Configuration
+@ConditionalOnClass(ListenerContainerConsumerFailedEvent.class)
+@Slf4j
+public class AmqpConfig {
+
+    @Autowired
+    private AmqpAdmin amqpAdmin;
+
+    /**
+     * 监听消费者失败事件
+     * 如：断网
+     *
+     * @param containerConsumerFailedEvent 消费者失败事件
+     */
+    @EventListener
+    public void containerConsumerFailedEvent(ListenerContainerConsumerFailedEvent containerConsumerFailedEvent) {
+        SimpleMessageListenerContainer container = (SimpleMessageListenerContainer) containerConsumerFailedEvent.getSource();
+        try {
+            log.debug("listener queue failed !!! failed source：{}, reason：{}", containerConsumerFailedEvent.getSource(), containerConsumerFailedEvent.getReason(), containerConsumerFailedEvent.getThrowable());
+            for (String queueName : container.getQueueNames()) {
+                // queue在掉线后可能会被删除，在这里重建
+                log.debug("--------------------------------------------------------------------------------------------------");
+                log.info("-----  自动重新建立队列 {} 不存在 进行重建", queueName);
+                log.debug("--------------------------------------------------------------------------------------------------");
+                if (Objects.isNull(this.amqpAdmin.getQueueProperties(queueName))) {
+                    this.amqpAdmin.declareQueue(new Queue(queueName, false, true, true, null));
+                }
+            }
+            log.info("自动重新建立队列成功");
+        } catch (Exception e) {
+            log.debug("自动重新建立队列失败：{}", e.getMessage());
+        }
+    }
 }
+
 ```
