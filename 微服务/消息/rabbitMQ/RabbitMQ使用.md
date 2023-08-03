@@ -6,7 +6,10 @@ class Test {
             RabbitTemplate rabbitTemplate = (RabbitTemplate) amqpTemplate;
             Channel channel = null;
             try {
-                channel = rabbitTemplate.getConnectionFactory().createConnection().createChannel(false);
+                // 重置connection以便创建新的connection，因为在cachingConnectionFactory中createConnection获取到的是同一个connection，会造成绑定多个ConfirmListener在同一个上
+                rabbitTemplate.getConnectionFactory().resetConnection();
+                Connection connection = rabbitTemplate.getConnectionFactory().createConnection();
+                channel = connection.createChannel(false);
                 // 开启发布确认
                 channel.confirmSelect();
                 channel.addConfirmListener(new ConfirmListener() {
