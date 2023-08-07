@@ -21,6 +21,10 @@ docker run --name nginx-oap-ui -d -p 13801:80 --restart=always -v /home/frame/Pu
 更改了路由  
 base: '/skywalking/',
 
+更改了提示和代码
+endpointTips: "这里最多展示20条endpoints。", -> endpointTips: "这里最多展示10条endpoints。",
+async getEndpoints(params : limit: params.limit, -> limit: params.limit || 10,
+
 1. 将static放入skywalking
 2. 将index.html复制一份放入skywalking
 
