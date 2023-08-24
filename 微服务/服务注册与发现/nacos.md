@@ -1,0 +1,15 @@
+```
+
+SPRING_DATASOURCE_PLATFORM	单机模式下支持MYSQL数据库	mysql / 空 默认:空
+MYSQL_SERVICE_HOST	数据库 连接地址	
+MYSQL_SERVICE_PORT	数据库端口	默认 : 3306
+MYSQL_SERVICE_DB_NAME	数据库库名	
+MYSQL_SERVICE_USER	数据库用户名	
+MYSQL_SERVICE_PASSWORD	数据库用户密码	
+MYSQL_SERVICE_DB_PARAM	数据库连接参数 默认 : characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+
+
+docker run --name nacos -e MODE=standalone -e SPRING_DATASOURCE_PLATFORM=mysql -e MYSQL_SERVICE_HOST=192.168.50.252 -e MYSQL_SERVICE_PORT=3306 -e MYSQL_SERVICE_DB_NAME=nacos -e MYSQL_SERVICE_USER=root -e "MYSQL_SERVICE_PASSWORD=root..123" -e "MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true" -p 8848:8848 -p 9848:9848 -d --restart=always nacos/nacos-server:v2.2.0
+
+
+```
