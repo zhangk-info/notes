@@ -1,6 +1,5 @@
 # node
 
-## ensuring that file exists: C:\Python27\python.exe
-
-    npm install --global --production windows-build-tools
-    npm config set python "C:\Program Files\Python27\python.exe"
+## node-sass安装不上  https://www.npmjs.com/package/node-sass 查看版本对照
+1. npm install -g cnpm
+2. cnpm install node-sass@4.14.1
