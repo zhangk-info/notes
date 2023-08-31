@@ -33,6 +33,7 @@ jacoco配置
         </execution>
         <execution>
             <id>report</id>
+            <phase>test</phase>
             <goals>
                 <goal>report</goal>
             </goals>
