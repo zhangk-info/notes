@@ -65,7 +65,22 @@ stop slave;
 start slave;
 
 show slave status;
+
+restartSlave.sh:
+
+mysql -uroot -h192.168.10.149 -P3307 -p xxxxx -e '
+set global slave_exec_mode='STRICT';
+stop slave;
+start slave;
+'
+
+mysql -uroot -h192.168.10.149 -P3308 -p xxxxx -e '
+set global slave_exec_mode='STRICT';
+stop slave;
+start slave;
+'
 ```
+
 10. 
 
 # 互为主从，需要没有新数据进入的情况下才能进行，否则无法指定准确的偏移量
