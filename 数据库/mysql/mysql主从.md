@@ -45,6 +45,7 @@ CHANGE MASTER TO MASTER_LOG_FILE='binlog.000046', MASTER_LOG_POS=147606812, mast
 
 8. 如果两台Slave_IO_Running和Slave_SQL_Running都是Yes状态，代表配置成功
 9. 从库无法启动 主键重复等错误处理
+
 ```
 1. 从库操作
 
@@ -69,19 +70,30 @@ show slave status;
 restartSlave.sh:
 
 mysql -uroot -h192.168.10.149 -P3307 -p xxxxx -e '
-set global slave_exec_mode='STRICT';
+set global slave_exec_mode='IDEMPOTENT';
 stop slave;
 start slave;
 '
 
 mysql -uroot -h192.168.10.149 -P3308 -p xxxxx -e '
-set global slave_exec_mode='STRICT';
+set global slave_exec_mode='IDEMPOTENT';
 stop slave;
 start slave;
 '
+
+解决错误：the master's binary log is corrupted 
+show slave status;
+1. 找到并记录
+Relay_Master_Log_File  binlog.000067
+Exec_Master_Log_Pos  50531548
+2. 重新设置并启动
+stop slave;
+change master to master_log_file='binlog.000067',master_log_pos=50531548;
+start slave;
+show slave status;
 ```
 
-10. 
+10.
 
 # 互为主从，需要没有新数据进入的情况下才能进行，否则无法指定准确的偏移量
 
