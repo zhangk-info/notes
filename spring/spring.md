@@ -151,6 +151,7 @@ interceptor： 是aop的一种实现是通过反射实现的。过滤前---拦�
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(ValidPassword.List.class)
 @Constraint(validatedBy = ValidPassword.PasswordValidator.class)
+@Inherited
 public @interface ValidPassword {
 
     String message() default "密码要求同时包含大小写字母、数字、和特殊符号,长度为8到18位";
@@ -165,6 +166,7 @@ public @interface ValidPassword {
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
     @Retention(RUNTIME)
     @Documented
+    @Inherited
     @interface List {
         ValidPassword[] value();
     }
@@ -182,4 +184,11 @@ public @interface ValidPassword {
     }
 }
 
+@Inherited 继承 如A extend B  B上有这个annotion 那么A也会继承
+@Repeatable(ValidPassword.List.class)  可重复写
+
 ```
+
+## 常用的类
+
+* HandlerInterceptor mvc处理前后拦截器
