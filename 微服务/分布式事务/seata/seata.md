@@ -37,6 +37,7 @@ config {
   }
 }
 ```
+
 2. 创建配置文件 用于指定store.model
    1. 如果config.type是file,需要将registry.conf的config.file.name的值改为类似file:/root/file.conf
    2. 如果配置到其他地方，如nacos，在nacos中配置指定的文件
@@ -81,7 +82,7 @@ metrics.exporterPrometheusPort=9898
 
    https://github.com/seata/seata/blob/2.x/script/server/db/mysql.sql
 
-4. 启动
+4. 启动 7091是ui可以不开 默认账号密码是 seata seata
    docker run -d --name seata-server \
    -p 8091:8091 \
    -p 7091:7091 \
