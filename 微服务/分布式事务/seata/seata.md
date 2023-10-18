@@ -3,9 +3,11 @@
 
 ### docker安装seata - 文件模式
 
-1. 创建registry.conf
+1. 创建registry.conf 注：新版使用yml文件进行管理 创建application.yml 
 为了指定seata的配置模式是nacos : config.type
 ```
+registry.conf
+
 registry {
   # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
   type = "nacos"
@@ -14,7 +16,7 @@ registry {
 
   nacos {
     application = "seata-server"
-    serverAddr = "139.155.72.177:8848"
+    serverAddr = "ip:8848"
     group = "SEATA_GROUP"
     namespace = ""
     cluster = "default_cluster"
@@ -28,7 +30,7 @@ config {
   type = "nacos"
 
   nacos {
-    serverAddr = "139.155.72.177:8848"
+    serverAddr = "ip:8848"
     namespace = ""
     group = "SEATA_GROUP"
     username = "nacos"
@@ -36,6 +38,62 @@ config {
     # 可选，不选默认是 配置的服务名.yml data-id: seataServer.properties
   }
 }
+
+或 application.yml
+
+server:
+  port: 7091
+spring:
+  application:
+    name: seata-server-ui
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: ${log.home:${user.home}/logs/seata}
+  #extend:
+  #  logstash-appender:
+  #    destination: ip:4560
+  #  kafka-appender:
+  #    bootstrap-servers: ip:9092
+  #    topic: logback_to_logstash
+console:
+  user:
+    username: seata
+    password: seata
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: ip:8848
+      namespace: 5bf02feb-0ad4-4c3e-b6ff-154faa0e09ef
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      context-path:
+      ##if use MSE Nacos with auth, mutex with username/password attribute
+      #access-key:
+      #secret-key:
+      data-id: seataServer.properties
+  registry:
+    # support: nacos, eureka, redis, zk, consul, etcd3, sofa
+    type: nacos
+    nacos:
+      application: server-seata-tc
+      server-addr: ip:8848
+      group: SEATA_GROUP
+      namespace: 5bf02feb-0ad4-4c3e-b6ff-154faa0e09ef
+      cluster: default_cluster
+      username: nacos
+      password: nacos
+      context-path:
+  #  server:
+  #    service-port: 8091 #If not configured, the default is '${server.port} + 1000'
+  security:
+    secretKey: SeataSecretKey0c382ef121d778043159209298fd40bf3850a017
+    tokenValidityInMilliseconds: 1800000
+    ignore:
+      urls: /,/**/*.css,/**/*.js,/**/*.html,/**/*.map,/**/*.svg,/**/*.png,/**/*.jpeg,/**/*.ico,/api/v1/auth/login
+      
 ```
 
 2. 创建配置文件 用于指定store.model
@@ -48,7 +106,7 @@ store.mode=db
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://localhost:3306/seata?useUnicode=true&rewriteBatchedStatements=true
+store.db.url=jdbc:mysql://ip:3306/seata?useUnicode=true&rewriteBatchedStatements=true
 store.db.user=root
 store.db.password=root
 store.db.minConn=5
@@ -82,13 +140,29 @@ metrics.exporterPrometheusPort=9898
 
    https://github.com/seata/seata/blob/2.x/script/server/db/mysql.sql
 
-4. 启动 7091是ui可以不开 默认账号密码是 seata seata
-   docker run -d --name seata-server \
-   -p 8091:8091 \
-   -p 7091:7091 \
-   -e SEATA_CONFIG_NAME=file:/root/seata-config/registry \
-   -v /data/seata/config:/root/seata-config  \
-   seataio/seata-server
+4. 启动
+
+```
+docker run -d --name seata-server \
+-p 8091:8091 \
+-e SEATA_CONFIG_NAME=file:/root/seata-config/registry \
+-v /data/seata/config:/root/seata-config  \
+seataio/seata-server
+
+注意：新版yml管理 挂载目录不一样
+ 7091是ui可以不开 默认账号密码是 seata seata 配置在yml中
+
+docker run -d --name seata-server \
+-p 8091:8091 \
+-p 7091:7091 \
+-v /data/seata/config/application.yml:/seata-server/resources/application.yml  \
+seataio/seata-server
+
+也可以复制出来挂载所有
+docker cp seata-serve:/seata-server/resources /data/seata/config
+-v /data/seata/config:/seata-server/resources  \
+```
+   
 
 5. 使用 https://seata.io/zh-cn/docs/ops/deploy-guide-beginner
    1. 添加undo_log到业务库
