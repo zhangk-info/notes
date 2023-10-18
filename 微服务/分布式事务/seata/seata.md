@@ -77,6 +77,8 @@ seata:
   registry:
     # support: nacos, eureka, redis, zk, consul, etcd3, sofa
     type: nacos
+    # 网卡选择，指定注册到nacos上的服务的ip地址，docker下如果不生效使用 -e SEATA_IP=c.youlai.tech
+    preferred-networks: 192.168.*
     nacos:
       application: server-seata-tc
       server-addr: ip:8848
