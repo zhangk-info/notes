@@ -48,6 +48,10 @@ relay_log=/var/lib/mysql/relay-bin-log
 ## rewriteBatchedStatements=true MySQL JDBC驱动在默认情况下会无视executeBatch()语句，把我们期望批量执行的一组sql语句拆散，一条一条地发给MySQL数据库，批量插入实际上是单条插入。 把rewriteBatchedStatements参数置为true, 驱动才会帮你批量执行SQL
 url: jdbc:mysql://ip:3306/silver?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&autoReconnect=true&failOverReadOnly=false&allowPublicKeyRetrieval=true
 
+rewriteBatchedStatements 批量插入会优化
+allowMultiQueries 允许多语句一起执行 inert a; insert b;
+allowPublicKeyRetrieval 8.0以上设置为true 使用公钥验证的方式来建立加密连接
+
 ### 备忘：
 
 docker run -p 3306:3306 --name mariadb -v mariadb-conf:/etc/mysql/conf.d/ -v mariadb-log:/var/log/mysql -v mariadb-data:/var/lib/mysql --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=root -d mariadb:latest
