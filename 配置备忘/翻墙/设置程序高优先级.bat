@@ -16,7 +16,7 @@ echo .
 echo .
 echo .
 echo .
-wmic process where "name='v2rayN.exe'" call setpriority "Realtime"
+wmic process where "name='v2rayN.exe'" call setpriority "high priority"
 echo .
 echo .
 echo .

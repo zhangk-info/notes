@@ -48,3 +48,13 @@ category-ads-all: 包含了常见的广告域名，以及广告提供商的域�
 * shell:startup
 打开开机启动文件位置并放入bat文件
 
+
+### 优先级
+
+wmic process where name="process name" CALL setpriority "value"
+wmic process where name="CtxSvcHost.exe" CALL setpriority "realtime"
+wmic process where name="CtxSvcHost.exe" CALL setpriority "high priority"
+wmic process where name="CtxSvcHost.exe" CALL setpriority "above normal"
+wmic process where name="CtxSvcHost.exe" CALL setpriority "normal"
+wmic process where name="CtxSvcHost.exe" CALL setpriority "below normal"
+wmic process where name="CtxSvcHost.exe" CALL setpriority "idle"
