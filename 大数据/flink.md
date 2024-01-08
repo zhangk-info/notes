@@ -5,13 +5,34 @@ https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/deployment/resou
 ## docker 安装
 
 ```
-
+// 配置solt数量、集群高可用选举地址、文件默认存储地址、状态后端增加存储、checkpoints存储地址
 $ FLINK_PROPERTIES="jobmanager.rpc.address: jobmanager
 taskmanager.numberOfTaskSlots: 10
+high-availability.type: zookeeper
+high-availability.zookeeper.quorum: 192.168.10.149:2181
+high-availability.zookeeper.path.root: /flink
+high-availability.cluster-id: /cluster_one
+fs.default-scheme: hdfs://hadoop:9000/
+high-availability.storageDir: /flink
+execution.checkpointing.interval: 3min
+state.backend: rocksdb
+state.backend.incremental: true
+state.checkpoints.dir: hdfs://hadoop:9000/checkpoints
 "
 
 $ docker network create flink-network
 
+$ docker run \
+    -d --restart=always \
+    --name=hadoop \
+    --network flink-network \
+    -p 9870:9870 -p 50070:50070 -p 9000:9000 -v /data/hadoop/data:/tmp/hadoop-root/dfs/name \
+    sequenceiq/hadoop-docker
+    
+-v 挂载启动失败了?  
+进入hadoop创建两个文件夹 /user/local/hadoop/bin
+ hadoop fs -mkdir flink
+ hadoop fs -mkdir checkpoints
 
 $ docker run \
     -d --restart=always \
