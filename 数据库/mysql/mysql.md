@@ -59,8 +59,10 @@ docker run -p 3306:3306 --name mariadb -v mariadb-conf:/etc/mysql/conf.d/ -v mar
 docker run -d --restart=always -p 3306:3306 -v D:\mysql\conf:/etc/mysql/conf.d -v D:\mysql\data:/var/lib/mysql -v D:\mysql\log:/var/log -v /etc/localtime:/etc/localtime  -e MYSQL_ROOT_PASSWORD=root..123 --name mysql mysql:latest
 
 
-docker run -d --restart=always -p 3307:3306 -v /home/frame/Public/docker_data/mysql/slave1/conf:/etc/mysql/conf.d/ -v /home/frame/Public/docker_data/mysql/slave1/data:/var/lib/mysql -v /home/frame/Public/docker_data/mysql/slave1/log:/var/log -v /etc/localtime:/etc/localtime -e MYSQL_ROOT_PASSWORD='j:/?Nf_ha5::' --name mysql-slave1 mysql:8.0
-docker run -d --restart=always -p 3308:3306 -v /home/frame/Public/docker_data/mysql/slave2/conf:/etc/mysql/conf.d/ -v /home/frame/Public/docker_data/mysql/slave2/data:/var/lib/mysql -v /home/frame/Public/docker_data/mysql/slave2/log:/var/log -v /etc/localtime:/etc/localtime -e MYSQL_ROOT_PASSWORD='j:/?Nf_ha5::' --name mysql-slave2 mysql:8.0
+docker run -d --restart=always -p 3307:3306 -v /data2/mysql/slave1/conf:/etc/mysql/conf.d/ -v /data2/mysql/slave1/data:/var/lib/mysql -v /data2/mysql/slave1/log:/var/log -v /etc/localtime:/etc/localtime -e MYSQL_ROOT_PASSWORD='j:/?Nf_ha5::' --name mysql-slave1 mysql:8.0
+docker run -d --restart=always -p 3308:3306 -v /data2/mysql/slave2/conf:/etc/mysql/conf.d/ -v /data2/mysql/slave2/data:/var/lib/mysql -v /data2/mysql/slave2/log:/var/log -v /etc/localtime:/etc/localtime -e MYSQL_ROOT_PASSWORD='j:/?Nf_ha5::' --name mysql-slave2 mysql:8.0
 
+docker run -d --restart=always -p 3307:3306 -v /data2/mysql/slave1/conf:/etc/mysql/conf.d/ -v /data2/mysql/slave1/data:/var/lib/mysql -v /data2/mysql/slave1/log:/var/log -v /etc/localtime:/etc/localtime --name mysql-slave1 mysql:8.0
+docker run -d --restart=always -p 3308:3306 -v /data2/mysql/slave2/conf:/etc/mysql/conf.d/ -v /data2/mysql/slave2/data:/var/lib/mysql -v /data2/mysql/slave2/log:/var/log -v /etc/localtime:/etc/localtime --name mysql-slave2 mysql:8.0
 
 /usr/libexec/mysqld --defaults-file=/etc/my.cnf.d/mysql-server.cnf --user=root &
