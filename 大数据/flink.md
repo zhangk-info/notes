@@ -20,6 +20,26 @@ state.backend.incremental: true
 state.checkpoints.dir: hdfs://hadoop:9000/checkpoints
 "
 
+// s3支持
+$ FLINK_PROPERTIES="jobmanager.rpc.address: jobmanager
+taskmanager.numberOfTaskSlots: 20
+high-availability.type: zookeeper
+high-availability.zookeeper.quorum: 192.168.10.149:2181
+high-availability.zookeeper.path.root: /flink
+high-availability.cluster-id: /cluster_one1
+high-availability.storageDir: /flink
+state.backend: rocksdb
+fs.allowed-fallback-filesystems: s3
+state.checkpoints.dir: s3://flink/checkpoints 
+state.savepoints.dir: s3://flink/savepoints
+state.backend.incremental: true
+s3.access-key: Ig7TOshcmcgkqG4U
+s3.secret-key: tB4x0rmuaW42qobIGq4eRjA39BS0VVbq
+s3.ssl.enabled: false
+s3.path.style.access: true
+s3.endpoint: http://192.168.10.150:9000
+"
+
 $ docker network create flink-network
 
 $ docker run \
