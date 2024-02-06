@@ -63,7 +63,7 @@ $ docker run \
     -v /data/flink/log:/opt/flink/log \
     -v /data/flink/jdbc-jars:/opt/flink/lib/jdbc-jars \
     -v /data/flink/checkpoints:/checkpoints \
-    flink:1.16.2-scala_2.12 jobmanager
+    registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.3-2 jobmanager
     
 $ docker run \
     -d --restart=always \
@@ -73,7 +73,7 @@ $ docker run \
     -v /data/flink/log:/opt/flink/log \
     -v /data/flink/jdbc-jars:/opt/flink/lib/jdbc-jars \
     -v /data/flink/checkpoints:/checkpoints \
-    flink:1.16.2-scala_2.12 taskmanager
+    flink:1.16.3-scala_2.12-java8 taskmanager
     
 -- 记得chomod -R 777
 
