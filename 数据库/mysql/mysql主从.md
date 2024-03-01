@@ -67,6 +67,8 @@ start slave;
 
 show slave status;
 
+
+-----------------
 restartSlave.sh:
 
 mysql -uroot -h192.168.10.149 -P3307 -p xxxxx -e '
