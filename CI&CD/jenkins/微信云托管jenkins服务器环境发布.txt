@@ -9,6 +9,29 @@ mv node-v17.9.1-linux-x64/* /usr/local/nodejs/
 ln -s /usr/local/nodejs/bin/node /usr/local/bin
 ln -s /usr/local/nodejs/bin/npm /usr/local/bin
 npm config set registry https://registry.npm.taobao.org
+
+或者 yum安装
+
+更新nodejs源
+这里18就是版本，可修改指定版本
+curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -
+执行安装nodjs
+yum install nodejs
+
+node版本控制插件n
+1.安装
+npm install n -g
+2.安装指定版本的node
+sduo n v14.15.0
+卸载指定的node版本
+n rm v14.15.0
+安装最新版本
+n latest
+安装最新稳定版本
+n stable
+
+
+
 2. 微信云托管组件安装
 npm install @wxcloud/cli --location=global
 ln -s /usr/local/nodejs/bin/wxcloud /usr/local/bin
