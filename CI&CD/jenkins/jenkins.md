@@ -39,3 +39,9 @@ docker run -d --name jenkins -u root -p 8083:8080 -p 50000:50000 -v /opt/jenkins
 * ThinBackup
 ![img.png](img.png)* 
 
+
+##### jenkins 2.282+Publish over ssh 1.22版本发布日志不能实时显示
+问题解决了。作个记录，最新的 [Publish Over SSH]插件1.22版本，jenkins 282版本。
+1. ssh server 的Verbose output in console要开启
+2. Transfers 的Exec in pty要开启
+   然后就是久违的实时日志显示了。
