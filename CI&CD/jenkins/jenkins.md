@@ -3,7 +3,9 @@ docker run -d --name my_jenkins -u root -p 8085:8080 -p 50000:50000 -v /data/jen
 
 
 
-docker run -d --name jenkins -u root -p 8083:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai --restart=always docker.io/jenkins/jenkins:2.346.2
+docker run -d --name jenkins -u root -p 8083:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai --restart=always --privileged docker.io/jenkins/jenkins:2.346.2
+
+docker run -d --name jenkins -u root -p 8083:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai --restart=always --privileged docker.io/jenkins/jenkins
 
 
 ## jenkins权限设置

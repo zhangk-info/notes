@@ -84,3 +84,16 @@ rpm -qa yum
 2. tar -vxzf
 3. ln -s ~/node-v16.9.1-linux-x64/bin/npm /usr/local/bin/npm
 4. ln -s ~/node-v16.9.1-linux-x64/bin/node /usr/local/bin/node
+
+
+# 切换yum源 All mirrors were tried
+
+cd /etc/yum.repos.d/
+
+rm *.repo
+
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
+
+yum makecache
+
+yum clean all

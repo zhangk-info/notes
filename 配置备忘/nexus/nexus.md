@@ -67,4 +67,7 @@ Tasks:系统任务
 #### group 组类型，能够组合多个仓库为一个地址提供服务
 * 将私有仓库和public组合起来
 
-docker run -d --name nexus3 -p 6000:6000 -p 8081:8081 -v /opt/nexus/nexus-3.30.1-01:/nexus-data -v /opt/nexus/sonatype-work:/opt/sonatype/sonatype-work --restart=always --privileged=true sonatype/nexus3:3.30.1
+
+docker run -d --name nexus3 -u root -p 6000:6000 -p 8081:8081 -p 8090:8090 -v /opt/nexus/nexus-3.30.1-01:/nexus-data -v /opt/nexus/sonatype-work:/opt/sonatype/sonatype-work --restart=always --privileged=true sonatype/nexus3:3.30.1
+
+

@@ -17,8 +17,9 @@
 6. 打包
    npm run build:stage
 7. 打包镜像 ${BUILD_NUMBER}是jenkins流水线号码
-   docker build -f ./Dockerfile -t 192.168.10.94:8090/njjs/nginx-client:${BUILD_NUMBER} .
+   docker build -f ./Dockerfile -t 192.168.10.150:8090/njjs/nginx-client:${BUILD_NUMBER} .
 8. 登录镜像仓库
-   docker login -u developer -p dev2021@FT 192.168.10.94:8090
+   docker login -u developer -p dev2021@FT 192.168.10.150:8090
 9. 上传镜像
-   docker push 192.168.10.94:8090/njjs/nginx-client:${BUILD_NUMBER}
+   docker push 192.168.10.150:8090/njjs/nginx-client:${BUILD_NUMBER}
+
