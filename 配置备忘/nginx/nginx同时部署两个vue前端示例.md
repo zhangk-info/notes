@@ -3,17 +3,18 @@
 ## nginx配置
 ```
 location / {
-        # 前端根路径，记得最后加 /
+        # 根路径 root 
         root /home/project1/dist;
         index index.html index.htm;
         try_files $uri $uri/ /test/index.html;
 }
 
 location /project2/ {
-        # 前端根路径，记得最后加 /
+        # 前端根路径，alias 记得最后加 /
         alias /home/project2/dist/;
         index index.html index.htm;
-        try_files $uri $uri/ /test/index.html;
+        # index.html需要配置前缀路径
+        try_files $uri $uri/ /project2/index.html;
 }
 
 ```
