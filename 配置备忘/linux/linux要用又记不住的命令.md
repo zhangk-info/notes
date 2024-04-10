@@ -97,3 +97,17 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos
 yum makecache
 
 yum clean all
+
+
+## 修改文件数（连接数）
+* 方法1：ulimit -n 65535
+* 方法2：
+```
+vim /etc/security/limits.conf
+
+* hard nofile 20000
+* soft nofile 15000
+* soft nproc 65535
+* hard nproc 65535
+
+```

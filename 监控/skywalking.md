@@ -28,6 +28,17 @@ async getEndpoints(params : limit: params.limit, -> limit: params.limit || 10,
 1. 将static放入skywalking
 2. 将index.html复制一份放入skywalking
 
+### helm安装 
+https://github.com/apache/skywalking-helm/tree/v4.5.0
+ghcr.io Helm repository
+
+helm -n istio-system install skywalking \
+oci://ghcr.io/apache/skywalking-kubernetes/skywalking-helm \
+--version "0.0.0-b670c41d94a82ddefcf466d54bab5c492d88d772" \
+-n njjs \
+--set oap.image.tag=9.2.0 \
+--set oap.storageType=elasticsearch \
+--set ui.image.tag=9.2.0
 
 ## 参考文档
 

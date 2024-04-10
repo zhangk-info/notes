@@ -3,15 +3,12 @@
 
 ```
 
-chmod -R 777 /mnt/docker-volumes/elasticsearch
-
-在elasticsearch.yml中写入 
-network.host: 0.0.0.0
-cluster.name: elasticsearch
+chmod -R 777 /home/frame/Public/docker_data/es
 
 需要先生成密码文件再挂载方式(并需要输入秘钥)启动，否则：device_or_resource_busy:
 https://www.elastic.co/guide/en/elasticsearch/reference/8.8/docker.html#_elasticsearch_keystore_device_or_resource_busy
 
+-- 生成最高级密码文件 后续创建用户和更改密码都需要先输入这个文件的密码
 docker run -it --rm --user=root --privileged=true -v /home/frame/Public/docker_data/es/config:/usr/share/elasticsearch/config docker.elastic.co/elasticsearch/elasticsearch:8.8.1 bin/elasticsearch-keystore create -p
 上一步生成的密码用于修改配置登信息时需要，如下面的设置密码
 docker run -d --name es --privileged=true -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v /home/frame/Public/docker_data/es/data:/usr/share/elasticsearch/data -v /home/frame/Public/docker_data/es/plugins:/usr/share/elasticsearch/plugins -v /home/frame/Public/docker_data/es/config/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore -e KEYSTORE_PASSWORD=password --restart=always docker.elastic.co/elasticsearch/elasticsearch:8.8.1 

@@ -22,4 +22,5 @@
    docker login -u developer -p dev2021@FT 192.168.10.150:8090
 9. 上传镜像
    docker push 192.168.10.150:8090/njjs/nginx-client:${BUILD_NUMBER}
-
+10. 清除无用镜像
+    echo y | docker image prune -a
