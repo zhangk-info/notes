@@ -9,7 +9,7 @@ https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/deployment/resou
 $ FLINK_PROPERTIES="jobmanager.rpc.address: jobmanager
 taskmanager.numberOfTaskSlots: 10
 high-availability.type: zookeeper
-high-availability.zookeeper.quorum: 192.168.10.149:2181
+high-availability.zookeeper.quorum: 192.168.1.149:2181
 high-availability.zookeeper.path.root: /flink
 high-availability.cluster-id: /cluster_one
 fs.default-scheme: hdfs://hadoop:9000/
@@ -24,7 +24,7 @@ state.checkpoints.dir: hdfs://hadoop:9000/checkpoints
 $ FLINK_PROPERTIES="jobmanager.rpc.address: jobmanager
 taskmanager.numberOfTaskSlots: 20
 high-availability.type: zookeeper
-high-availability.zookeeper.quorum: 192.168.10.149:2181
+high-availability.zookeeper.quorum: 192.168.1.149:2181
 high-availability.zookeeper.path.root: /flink
 high-availability.cluster-id: /cluster_one1
 high-availability.storageDir: /flink
@@ -37,7 +37,7 @@ s3.access-key: Ig7TOshcmcgkqG4U
 s3.secret-key: tB4x0rmuaW42qobIGq4eRjA39BS0VVbq
 s3.ssl.enabled: false
 s3.path.style.access: true
-s3.endpoint: http://192.168.10.150:9000
+s3.endpoint: http://192.168.1.150:9000
 "
 
 $ docker network create flink-network

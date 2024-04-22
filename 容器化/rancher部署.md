@@ -56,7 +56,7 @@ rancher/rancher:stable
 12. 获取rancher密码
 docker logs rancher 2>&1 | grep "Bootstrap Password:"
 jpfbtv8zwllwt2xrglr8vgwzb4w8wppb4gbqprh7vh4q2wwzt2ck59
-访问地址：https://192.168.10.160:8443/
+访问地址：https://192.168.1.160:8443/
 账号密码：admin / yWvqigR3A3A8dZPb	jsyq / HTLQaM1KL3WBtmmg
 13. 部署k3s集群(没有https证书，跳过了tls验证)
 版本：v.126.8+rke2r1
@@ -105,13 +105,13 @@ journalctl -u k3s-agent -f
     解释：以上需要的参数大多都在ETCD的配置文件中可以找到，若不指定则使用默认配置恢复，可能会导致全体leader状态。
     /var/lib/rancher/rke2/agent/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/4/fs/usr/local/bin/etcdctl snapshot \
     restore snapshots/on-demand-161-1706256411 --data-dir ./etcd \
-    --endpoints=https://192.168.10.161:2379 \
-    --initial-cluster="default=https://192.168.10.161:2380" \
-    --initial-advertise-peer-urls="https://192.168.10.161:2380"
+    --endpoints=https://192.168.1.161:2379 \
+    --initial-cluster="default=https://192.168.1.161:2380" \
+    --initial-advertise-peer-urls="https://192.168.1.161:2380"
 
     4. 启动或重启k8s
 3. 可能遇到的问题
    * a.crt newer than datastore and could cause a cluster outage
    删除tls文件 tls会从snapshot重新生成
-   * b.his server is a not a member of the etcd cluster. Found [161-55d03930=http://localhost:2380], expect: 161-55d03930=https://192.168.10.161:2380"
+   * b.his server is a not a member of the etcd cluster. Found [161-55d03930=http://localhost:2380], expect: 161-55d03930=https://192.168.1.161:2380"
    在config中增加
