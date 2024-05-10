@@ -82,6 +82,4 @@ docker run --name nginx -p80:80 -d -v /data/nginx/conf:/etc/nginx -v /data/nginx
 docker run --name nginx -p30500:80 -d -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/log:/var/log/nginx nginx
 
 
-docker run --name nginx -d -p 80:80 -p 443:443 --restart=always -v /data/nginx/log:/var/log/nginx -v
-/data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf/conf.d:/etc/nginx/conf.d -v /data/nginx/html:
-/usr/share/nginx/html -v /data/ssl:/data/ssl nginx
+docker run --name nginx -d -p 80:80 -p 443:443 --restart=always -v /data/nginx/log:/var/log/nginx -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/conf/conf.d:/etc/nginx/conf.d -v /data/nginx/html:/usr/share/nginx/html -v /data/ssl:/data/ssl nginx

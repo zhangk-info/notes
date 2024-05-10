@@ -87,16 +87,21 @@ rpm -qa yum
 
 
 # 切换yum源 All mirrors were tried
-
+1. x
 cd /etc/yum.repos.d/
-
+2. x
 rm *.repo
+3. 选择版本 cat /etc/centos-release 查看版本
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-8.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+4. 重建缓存
+   yum clean all
+   yum makecache
 
-wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
-
-yum makecache
-
-yum clean all
+5. 升级所有包
+   yum upgrade -y
+   yum -y update：升级所有包同时，也升级软件和系统内核；（时间比较久）
+   yum -y upgrade：只升级所有包，不升级软件和系统内核，软件和内核保持原样
 
 
 ## 修改文件数（连接数）
@@ -111,3 +116,17 @@ vim /etc/security/limits.conf
 * hard nproc 65535
 
 ```
+
+
+## kernel升级 先切换源
+1. 查看当前系统内核版本，可升级的内核版本
+  yum info kernel -q 
+2. 升级当前版本支持的内核版本信息
+  yum update kernel
+3. 查看当前已经安装的内核版本情况
+  yum list kernel
+4. 系统重启后默认选择最高版本kernel
+  reboot
+5. 查看当前系统内核
+  uname -a
+  uname -sr
