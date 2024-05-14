@@ -5,6 +5,9 @@ docker run -p 3306:3306 --name mariadb-db -v /data/mysql/conf/:/etc/mysql/conf.d
 docker run -d --restart=always -p 3306:3306 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/data:/var/lib/mysql -v /data/mysql/log:/var/log -v /etc/localtime:/etc/localtime -e MYSQL_ROOT_PASSWORD=Qcd@2022 --name mysql5.7 mysql:5.7
 docker run -d --restart=always -p 3306:3306 -v /data/mysql/conf:/etc/mysql/conf.d/ -v /data/mysql/data:/var/lib/mysql -v /data/mysql/log:/var/log -v /etc/localtime:/etc/localtime  -e MYSQL_ROOT_PASSWORD=RlcGFy36 --name mysql8.0 mysql:8.0 --lower-case-table-names=1
 
+
+docker run -d --restart=always -p 3308:3306 -v /home/docker/mysql/conf:/etc/mysql/conf.d/ -v /home/docker/mysql/data:/var/lib/mysql -v /home/docker/mysql/log:/var/log -v /etc/localtime:/etc/localtime  -e MYSQL_ROOT_PASSWORD=MypassD@143! --name mysql_yr2 mysql:8.0 --lower-case-table-names=1
+
 ## vi /data/mysql/conf/my.cnf
 ```
 [mysqld]

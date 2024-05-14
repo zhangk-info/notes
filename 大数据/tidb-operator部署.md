@@ -20,4 +20,6 @@
     * kubectl create secret generic tidb-secret --from-literal=root=root..123 --namespace=default
     * https://raw.githubusercontent.com/pingcap/tidb-operator/v1.5.2/examples/initialize/tidb-initializer.yaml
     * kubectl apply -f ./tidb-initializer.yaml --namespace=default
-7. 
+
+
+SET PASSWORD FOR 'root'@'%' = 'xxx';
