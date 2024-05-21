@@ -23,3 +23,7 @@
 
 
 SET PASSWORD FOR 'root'@'%' = 'xxx';
+
+-- 如果物理机时区不是中国 更改时区
+
+set  time_zone="Asia/Shanghai";

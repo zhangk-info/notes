@@ -68,6 +68,10 @@ Tasks:系统任务
 * 将私有仓库和public组合起来
 
 
+### nexus定期整理任务
+
+tasks -> new Task -> 类型：Admin - Compact blob store
+
 docker run -d --name nexus3 -u root -p 6000:6000 -p 8081:8081 -p 8090:8090 -v /nexus/nexus/nexus-3.30.1-01:/nexus-data -v /nexus/nexus/sonatype-work:/opt/sonatype/sonatype-work --restart=always --privileged=true sonatype/nexus3:3.30.1
 
 
