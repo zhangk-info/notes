@@ -24,3 +24,8 @@
    docker push 192.168.1.150:8090/njjs/nginx-client:${BUILD_NUMBER}
 10. 清除无用镜像
     echo y | docker image prune -a
+
+
+## yarn 
+
+yarn config set registry http://registry.npm.taobao.org/
