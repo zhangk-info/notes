@@ -115,3 +115,48 @@ journalctl -u k3s-agent -f
    删除tls文件 tls会从snapshot重新生成
    * b.his server is a not a member of the etcd cluster. Found [161-55d03930=http://localhost:2380], expect: 161-55d03930=https://192.168.1.161:2380"
    在config中增加
+
+
+## 集群连接：
+
+```
+kubectl 选项
+
+      --alsologtostderr[=false]: 同时输出日志到标准错误控制台和文件。
+      --api-version="": 和服务端交互使用的API版本。
+      --certificate-authority="": 用以进行认证授权的.cert文件路径。
+      --client-certificate="": TLS使用的客户端证书路径。
+      --client-key="": TLS使用的客户端密钥路径。
+      --cluster="": 指定使用的kubeconfig配置文件中的集群名。
+      --context="": 指定使用的kubeconfig配置文件中的环境名。
+      --insecure-skip-tls-verify[=false]: 如果为true，将不会检查服务器凭证的有效性，这会导致你的HTTPS链接变得不安全。
+      --kubeconfig="": 命令行请求使用的配置文件路径。
+      --log-backtrace-at=:0: 当日志长度超过定义的行数时，忽略堆栈信息。
+      --log-dir="": 如果不为空，将日志文件写入此目录。
+      --log-flush-frequency=5s: 刷新日志的最大时间间隔。
+      --logtostderr[=true]: 输出日志到标准错误控制台，不输出到文件。
+      --match-server-version[=false]: 要求服务端和客户端版本匹配。
+      --namespace="": 如果不为空，命令将使用此namespace。
+      --password="": API Server进行简单认证使用的密码。
+  -s, --server="": Kubernetes API Server的地址和端口号。
+      --stderrthreshold=2: 高于此级别的日志将被输出到错误控制台。
+      --token="": 认证到API Server使用的令牌。
+      --user="": 指定使用的kubeconfig配置文件中的用户名。
+      --username="": API Server进行简单认证使用的用户名。
+      --v=0: 指定输出日志的级别。
+      --vmodule=: 指定输出日志的模块，格式如下：pattern=N，使用逗号分隔。
+      
+      --all-namespaces 所有命名空间
+```
+
+kubectl --client-certificate=/var/lib/rancher/rke2/agent/client-kubelet.crt --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --client-key=/var/lib/rancher/rke2/agent/client-kubelet.key --insecure-skip-tls-verify=true  get pods
+
+
+kubectl --client-certificate=/var/lib/rancher/rke2/agent/client-kubelet.crt --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --client-key=/var/lib/rancher/rke2/agent/client-kubelet.key --insecure-skip-tls-verify=true  get pods --all-namespaces
+
+-- 切换到管理人员的client-certificate并获取deployments
+kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true  get deployments --namespace=njjs
+
+### 更改资源节点数量 
+kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true --namespace=njjs scale --replicas=0 deployment/park-server-access
+
