@@ -63,8 +63,7 @@ git fetch
 git checkout origin/master
 git pull origin master
 2.
-# 或者  --registry=https://registry.npmmirror.com
-npm install --registry=http://registry.npm.taobao.org
+npm install  --registry=https://registry.npmmirror.com
 npm run build:stage
 3. wxcloud login -a 微信账号 -k 密码
 4. wxcloud storage:upload /data/xx/dist/ --envId=xx --mode=staticstorage --remotePath=/

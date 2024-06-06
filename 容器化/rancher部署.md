@@ -117,6 +117,9 @@ journalctl -u k3s-agent -f
    在config中增加
 
 
+### 更改charts为国内
+https://gitee.com/rancher/
+
 ## 集群连接：
 
 ```
