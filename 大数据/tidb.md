@@ -63,7 +63,7 @@ binlog-format = "ROW"
 -- 配置并 启动
 docker run -d --name tidb -p 4000:4000 -p 10080:10080 -v /data2/tidb/conf/tidb.toml:/tidb.toml:ro pingcap/tidb:v7.5.0 --store=tikv --path="192.168.1.149:2379" --config="/tidb.toml"
 ```
-
+uhub.service.ucloud.cn/
 ```
 # 如果binlog-format没生效
 set binlog_format = "ROW";

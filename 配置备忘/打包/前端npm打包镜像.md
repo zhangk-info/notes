@@ -29,3 +29,10 @@
 ## yarn 
 
 yarn config set registry http://registry.npm.taobao.org/
+
+
+## 示例
+
+docker tag nginx:latest 192.168.10.150:8090/base/nginx:latest
+docker login -u developer -p dev2021@FT 192.168.10.150:8090
+docker push 192.168.10.150:8090/base/nginx:latest

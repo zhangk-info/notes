@@ -102,12 +102,44 @@ journalctl -u k3s-agent -f
     --initial-cluster-token=<etcd的token>  \
     --initial-advertise-peer-urls=<https://当前主机IP:2380>  \
     --initial-cluster=<etcd集群>  \
-    解释：以上需要的参数大多都在ETCD的配置文件中可以找到，若不指定则使用默认配置恢复，可能会导致全体leader状态。
+    解释：以上需要的参数大多都在ETCD的配置文件中可以找到，若不指定则使用默认配置恢复，可能会导致全体leader状态。 一定要保留config和name文件
     /var/lib/rancher/rke2/agent/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/4/fs/usr/local/bin/etcdctl snapshot \
     restore snapshots/on-demand-161-1706256411 --data-dir ./etcd \
     --endpoints=https://192.168.1.161:2379 \
     --initial-cluster="default=https://192.168.1.161:2380" \
     --initial-advertise-peer-urls="https://192.168.1.161:2380"
+
+rancher-local:
+/var/lib/docker/overlay2/5ef7d5c21b9db89e07540555ef05bd107f7cbdd8f9727cb054461c3af34deb41/diff/usr/bin/etcdctl snapshot \
+restore snapshots/etcd-snapshot-local-node-1718971202 --data-dir ./etcd
+
+一定要保留config和name文件
+
+集群etcd异常后恢复尽量使用rancher自带的快照恢复，kube-apiserver连上就可以恢复，不一定所有服务都连上
+161：
+/var/lib/rancher/rke2/agent/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/4/fs/usr/local/bin/etcdctl snapshot \
+restore snapshots/etcd-snapshot-161-1718744401 --data-dir ./etcd \
+--initial-cluster="162-173593c8=https://192.168.10.162:2380,default=https://192.168.10.161:2380" \
+--initial-advertise-peer-urls="https://192.168.10.161:2380"
+
+162：
+/var/lib/rancher/rke2/agent/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/4/fs/usr/local/bin/etcdctl snapshot \
+restore snapshots/etcd-snapshot-162-1718762401 --data-dir ./etcd \
+--initial-cluster="default=https://192.168.10.162:2380,161-8fed7818=https://192.168.10.161:2380" \
+--initial-advertise-peer-urls="https://192.168.10.162:2380"  
+
+
+恢复集群方式2：
+1. 在1个etcd节点执行
+rke2 server --cluster-reset --cluster-reset-restore-path=/var/lib/rancher/rke2/server/db/snapshots/etcd-snapshot-161-1719039602
+
+启动rke2-server
+2. 其他etcd节点
+停止rke2-server 
+删除 /var/lib/rancher/rke2/server/db/
+启动rke2-server
+3. 启动集群中其他节点
+
 
     4. 启动或重启k8s
 3. 可能遇到的问题
@@ -152,14 +184,18 @@ kubectl 选项
       --all-namespaces 所有命名空间
 ```
 
-kubectl --client-certificate=/var/lib/rancher/rke2/agent/client-kubelet.crt --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --client-key=/var/lib/rancher/rke2/agent/client-kubelet.key --insecure-skip-tls-verify=true  get pods
 
-
+-- 获取所有命名空间下的所有pods
 kubectl --client-certificate=/var/lib/rancher/rke2/agent/client-kubelet.crt --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --client-key=/var/lib/rancher/rke2/agent/client-kubelet.key --insecure-skip-tls-verify=true  get pods --all-namespaces
 
--- 切换到管理人员的client-certificate并获取deployments
+kubectl --client-certificate=/var/lib/rancher/rke2/agent/client-kubelet.crt --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --client-key=/var/lib/rancher/rke2/agent/client-kubelet.key --insecure-skip-tls-verify=true  get pods -n njjs -A -o wide | grep 160
+以下只能在管理节点操作 切换到管理人员的client-certificate
+-- 获取deployments
 kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true  get deployments --namespace=njjs
-
+-- 查看集群节点
+kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true  get nodes
+--查看app日志
+kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true -n cattle-system logs -l app=cattle-cluster-agent 
 ### 更改资源节点数量 
 kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true --namespace=njjs scale --replicas=0 deployment/park-server-access
 
