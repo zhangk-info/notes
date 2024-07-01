@@ -39,3 +39,7 @@ alt + 鼠标右键淡化非大括号部分
 #### 不搜索log文件内容 
 Idea系列：全局搜索(Find in Path)不搜索指定文件夹（如排除log文件）
 File - Project Structure - Modules - 选择文件夹 - 右键Excluded
+
+
+#### legalArgumentException: Malformed \uxxxx encoding.
+删除mvn仓库中的依赖包，一般是项目自己打的依赖包出问题了
