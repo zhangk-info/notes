@@ -42,4 +42,5 @@ File - Project Structure - Modules - 选择文件夹 - 右键Excluded
 
 
 #### legalArgumentException: Malformed \uxxxx encoding.
+https://blog.csdn.net/u012489412/article/details/132599950
 删除mvn仓库中的依赖包，一般是项目自己打的依赖包出问题了
