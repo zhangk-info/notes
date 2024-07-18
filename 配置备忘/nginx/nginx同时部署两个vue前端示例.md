@@ -6,7 +6,7 @@ location / {
         # 根路径 root 
         root /home/project1/dist;
         index index.html index.htm;
-        try_files $uri $uri/ /test/index.html;
+        try_files $uri $uri/ /index.html;
 }
 
 location /project2/ {
