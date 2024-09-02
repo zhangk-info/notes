@@ -32,7 +32,7 @@
 ```
 stop slave;
 reset slave; # 慎用，会清除所有信息
-CHANGE MASTER TO MASTER_LOG_FILE='binlog.000046', MASTER_LOG_POS=147606812, master_host='192.168.1.149', master_user='slave', master_password='j:/?Nf_ha5::', master_port=3306;
+CHANGE MASTER TO MASTER_LOG_FILE='binlog.000046', MASTER_LOG_POS=147606812, master_host='192.168.10.149', master_user='slave', master_password='j:/?Nf_ha5::', master_port=3306;
 ```
 
 6. # 启动从节点
@@ -71,13 +71,13 @@ show slave status;
 -----------------
 restartSlave.sh:
 
-mysql -uroot -h192.168.1.149 -P3307 -p xxxxx -e '
+mysql -uroot -h192.168.10.149 -P3307 -p xxxxx -e '
 set global slave_exec_mode='IDEMPOTENT';
 stop slave;
 start slave;
 '
 
-mysql -uroot -h192.168.1.149 -P3308 -p xxxxx -e '
+mysql -uroot -h192.168.10.149 -P3308 -p xxxxx -e '
 set global slave_exec_mode='IDEMPOTENT';
 stop slave;
 start slave;

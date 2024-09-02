@@ -14,12 +14,12 @@ spring.shardingsphere.datasource.master.username=${spring.datasource.username}
 spring.shardingsphere.datasource.master.password=${spring.datasource.password}
 spring.shardingsphere.datasource.slave1.type=${spring.datasource.type}
 spring.shardingsphere.datasource.slave1.driver-class-name=${spring.datasource.driver-class-name}
-spring.shardingsphere.datasource.slave1.jdbc-url=jdbc:mysql://192.168.1.149:3307/basic-v2?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+spring.shardingsphere.datasource.slave1.jdbc-url=jdbc:mysql://192.168.10.149:3307/basic-v2?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
 spring.shardingsphere.datasource.slave1.username=${spring.datasource.username}
 spring.shardingsphere.datasource.slave1.password=${spring.datasource.password}
 spring.shardingsphere.datasource.slave2.type=${spring.datasource.type}
 spring.shardingsphere.datasource.slave2.driver-class-name=${spring.datasource.driver-class-name}
-spring.shardingsphere.datasource.slave2.jdbc-url=jdbc:mysql://192.168.1.149:3308/basic-v2?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+spring.shardingsphere.datasource.slave2.jdbc-url=jdbc:mysql://192.168.10.149:3308/basic-v2?useSSL=false&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
 spring.shardingsphere.datasource.slave2.username=${spring.datasource.username}
 spring.shardingsphere.datasource.slave2.password=${spring.datasource.password}
 
@@ -58,7 +58,7 @@ spring.shardingsphere.mode.repository.type=ZooKeeper
 # 注册中心命名空间
 spring.shardingsphere.mode.repository.props.namespace=dev-sharding-jdbc
 # 注册中心连接地址
-spring.shardingsphere.mode.repository.props.server-lists=192.168.1.149:2181
+spring.shardingsphere.mode.repository.props.server-lists=192.168.10.149:2181
 # 持久化仓库所需属性
 spring.shardingsphere.mode.repository.props.retryIntervalMilliseconds=500
 spring.shardingsphere.mode.repository.props.timeToLiveSeconds=60
