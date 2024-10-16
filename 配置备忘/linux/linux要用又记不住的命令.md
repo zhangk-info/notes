@@ -47,14 +47,16 @@ rpm --rebuilddb;
 yum clean all
 
 # yum切换源
-cd /etc/yum.repos.d/
-mv CentOS-Base.repo CentOS-Base.repo.backup
-wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
-mv CentOS6-Base-163.repo CentOS-Base.repo
-yum makecache
-yum -y install update
-yum clean all
 
+第1步：备份原有yum源：
+mv /etc/yum.repos.d /etc/yum.repos.d.bak
+第2步：创建yum源目录
+mkdir /etc/yum.repos.d
+第3步：下载阿里云yum源配置
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+第4步：重建yum缓存
+yum clean all
+yum makecache
 
 # yum工具
 安装yum-utils
@@ -150,3 +152,14 @@ vim /etc/security/limits.conf
 20 2 * * * echo y | docker image prune -a
 
 ```
+
+
+## 磁盘分区操作
+
+在线扩容使用 resize2fs或xfs_growfs 对挂载目录在线扩容
+resize2fs 针对文件系统ext2 ext3 ext4
+* resize2fs /dev/sda4 80G -p 更改分区大小到80G 去掉80G表示更改到最大
+xfs_growfs 针对文件系统xfs
+* xfs_growfs /dev/sda3
+parted
+* resizepart 3 380G
