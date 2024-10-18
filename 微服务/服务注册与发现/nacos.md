@@ -19,3 +19,12 @@ https://nacos.io/en-us/docs/auth.html 开启注册认证
 -e NACOS_AUTH_ENABLE=true
 
 ```
+```
+spring:
+    cloud:
+        config:     # 测试环境nacos不覆盖本地配置
+            allow-override: false     # true 允许nacos被本地文件和和系统属性覆盖
+            override-none: false     # true nacos不覆盖任何本地文件和系统属性
+            override-system-properties: false   # true nacos 覆盖系统属性。注意本地文件不是系统属性。设置为false之后才能通过-D参数配置且不会被本地文件覆盖。
+
+```
