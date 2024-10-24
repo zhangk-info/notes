@@ -66,6 +66,11 @@ nginx收到不属于 GET HEAD POST 的请求后，不给任何答复，也不处
 参考https://segmentfault.com/a/1190000012714372
 ```
 
+```
+allow 183.223.252.58;
+deny all;
+```
+
 ## nginx 实现短链
 
 ```
