@@ -8,7 +8,7 @@ location / {
         index index.html index.htm;
         try_files $uri $uri/ /index.html;
 }
-
+# 注意：有前缀路径的必须使用alias 否则会出现请求js页面跳转到首页问题
 location /project2/ {
         # 前端根路径，alias 记得最后加 /
         alias /home/project2/dist/;
