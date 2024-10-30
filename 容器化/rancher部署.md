@@ -111,7 +111,7 @@ journalctl -u k3s-agent -f
 
 rancher-local:
 /var/lib/docker/overlay2/5ef7d5c21b9db89e07540555ef05bd107f7cbdd8f9727cb054461c3af34deb41/diff/usr/bin/etcdctl snapshot \
-restore snapshots/etcd-snapshot-local-node-1725364800 --data-dir ./etcd
+restore snapshots/etcd-snapshot-local-node-1730203202 --data-dir ./etcd
 
 一定要保留config和name文件
 
@@ -131,7 +131,7 @@ restore snapshots/etcd-snapshot-162-1718762401 --data-dir ./etcd \
 
 恢复集群方式2：
 1. 在1个etcd节点执行
-rke2 server --cluster-reset --cluster-reset-restore-path=/var/lib/rancher/rke2/server/db/snapshots/etcd-snapshot-161-1725379205
+rke2 server --cluster-reset --cluster-reset-restore-path=/var/lib/rancher/rke2/server/db/snapshots/etcd-snapshot-161-1730217604
 
 启动rke2-server
 2. 其他etcd节点
@@ -199,3 +199,24 @@ kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt -
 ### 更改资源节点数量 
 kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true --namespace=njjs scale --replicas=0 deployment/park-server-access
 
+
+
+1. 查看rancher状态 docker logs -n10 -f rancher
+2. 恢复 rancher etcd
+    * docker stop rancher
+    * cd /data/rancher/k3s/server/db
+    * 找到snapshots下最新的文件
+    * etcd恢复：/var/lib/docker/overlay2/5ef7d5c21b9db89e07540555ef05bd107f7cbdd8f9727cb054461c3af34deb41/diff/usr/bin/etcdctl snapshot \
+   restore snapshots/etcd-snapshot-xx --data-dir ./etcd
+    * docker start rancher
+3. 查看rke2-server状态 systemctl status rke2-server  /  journalctl -u rke2-server -f
+4. 恢复rke2-server etcd
+    * systemctl stop rke2-server
+    * 找到snapshots下最新的文件 /var/lib/rancher/rke2/server/db/snapshots
+    * etcd恢复：rke2 server --cluster-reset --cluster-reset-restore-path=/var/lib/rancher/rke2/server/db/snapshots/etcd-snapshot-161-xxx
+    * 查看状态，如果没启动再启动一下 systemctl start rke2-server
+5. 查看rke2-agent状态 systemctl status rke2-agent 
+6. 查看k8s集群状态
+   * 160执行：kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true  get nodes
+   * 所有节点active
+7. 查看rancher等待集群中的pod恢复
