@@ -21,12 +21,28 @@ https://docs.docker.com/compose/install/
 scp /data/backup.zip developer@192.168.1.100:/data/
 
 # docker 镜像加速
+
+https://docker.m.daocloud.io
+
+增加前缀 (推荐方式): 
+docker.io/library/busybox
+        |
+        V
+m.daocloud.io/docker.io/library/busybox
+
 创建或修改 /etc/docker/daemon.json 文件
 {
   "registry-mirrors": [
     "https://registry.docker-cn.com",
     "http://hub-mirror.c.163.com",
-    "https://docker.mirrors.ustc.edu.cn"
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://dockerhub.icu",
+    "https://docker.chenby.cn",
+    "https://docker.1panel.live",
+    "https://docker.awsl9527.cn",
+    "https://docker.anyhub.us.kg",
+    "https://dhub.kubesre.xyz",
+    "https://docker.13140521.xyz"
   ]
 }
 
