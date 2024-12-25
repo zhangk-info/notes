@@ -33,16 +33,20 @@ m.daocloud.io/docker.io/library/busybox
 创建或修改 /etc/docker/daemon.json 文件
 {
   "registry-mirrors": [
-    "https://registry.docker-cn.com",
-    "http://hub-mirror.c.163.com",
-    "https://docker.mirrors.ustc.edu.cn",
-    "https://dockerhub.icu",
-    "https://docker.chenby.cn",
+    "https://docker.m.daocloud.io",
+    "https://noohub.ru",
+    "https://huecker.io",
+    "https://dockerhub.timeweb.cloud",
+    "https://0c105db5188026850f80c001def654a0.mirror.swr.myhuaweicloud.com",
+    "https://5tqw56kt.mirror.aliyuncs.com",
     "https://docker.1panel.live",
-    "https://docker.awsl9527.cn",
-    "https://docker.anyhub.us.kg",
-    "https://dhub.kubesre.xyz",
-    "https://docker.13140521.xyz"
+    "http://mirrors.ustc.edu.cn/",
+    "http://mirror.azure.cn/",
+    "https://hub.rat.dev/",
+    "https://docker.ckyl.me/",
+    "https://docker.chenby.cn",
+    "https://docker.hpcloud.cloud",
+    "https://docker.m.daocloud.io"
   ]
 }
 

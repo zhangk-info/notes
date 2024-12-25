@@ -63,7 +63,7 @@ $ docker run \
     -v /data/flink/log:/opt/flink/log \
     -v /data/flink/jdbc-jars:/opt/flink/lib/jdbc-jars \
     -v /data/flink/checkpoints:/checkpoints \
-    registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.3-2 jobmanager
+    192.168.10.150:8090/base/dinky:flink1.16.3-2 jobmanager
     
 $ docker run \
     -d --restart=always \
@@ -131,7 +131,7 @@ $ docker run \
 ```
 ARG FLINK_VERSION=1.16.2
 
-FROM flink:${FLINK_VERSION}-scala_2.12-java8
+FROM m.daocloud.io/flink:${FLINK_VERSION}-scala_2.12-java8
 
 COPY . /opt/flink/lib/extends
 
@@ -142,12 +142,12 @@ RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar
     docker build -t dinky-flink:1.0.0-1.16.2-2 . -f Dockerfile
 
 5.推送镜像到私有仓库
-    docker tag dinky-flink:1.0.0-1.16.2-2 registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.2-2
-    docker push registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.2-2
+    docker tag dinky-flink:1.0.0-1.16.2-2 192.168.10.150:8090/base/dinky:flink1.16.2-2
+    docker push 192.168.10.150:8090/base/dinky:flink1.16.2-2
 
 
 6.拉取镜像文件
-    docker pull registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.3
+    docker pull 192.168.10.150:8090/base/dinky:flink1.16.3
 
 七、k8s与flink集成
     1.权限
