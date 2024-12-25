@@ -18,6 +18,8 @@
    npm run build:stage
 7. 打包镜像 ${BUILD_NUMBER}是jenkins流水线号码
    docker build -f ./Dockerfile -t 192.168.1.150:8090/njjs/nginx-client:${BUILD_NUMBER} .
+
+   docker build -f ./deploy/docker/Dockerfile -t 192.168.10.150:8090/base/dinky:1.1.0 --build-arg FLINK_VERSION=1.18 .
 8. 登录镜像仓库
    docker login -u developer -p xxx 192.168.1.150:8090
 9. 上传镜像
@@ -29,7 +31,7 @@
 ## yarn 
 
 yarn config set registry http://registry.npm.taobao.org/
-
+npm
 
 ## 示例
 

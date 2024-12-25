@@ -98,3 +98,92 @@ $ docker run \
     针对每个输入行，计算相邻行范围内的聚合
 
 #### over 根据当前流数据的上下界进行开窗
+
+
+
+
+
+五、Dinky
+部署命令：
+    dinkydocker/dinky-standalone-server:1.0.0-rc3
+端口：
+    dinky：8888
+配置：
+    DB_ACTIVE mysql
+    MYSQL_ADDR 192.168.10.149:3306
+    MYSQL_DATABASE dinky
+    MYSQL_USERNAME root
+    MYSQL_PASSWORD Ftwj@2022
+挂载：
+    挂载点为： /opt/dinky/customJar  挂在到主机的 /data/dinky
+开放网络：clusterip增加ip 或者使用nodeport
+访问地址：
+    192.168.10.160:8888
+
+六、Flink镜像构建
+    1.jar包准备
+    2.在当前extends目录下准备以下几个jar包
+        ●commons-cli-1.3.1.jar
+        ●dinky-app-1.15-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+        ●flink-table-planner_2.12-1.15.4.jar
+    放入flink运行需要的自定义连接器等相关包到extends目录下
+    3.编写Dockerfile，在extends中运行
+```
+ARG FLINK_VERSION=1.16.2
+
+FROM flink:${FLINK_VERSION}-scala_2.12-java8
+
+COPY . /opt/flink/lib/extends
+
+RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar    
+```
+
+4.执行构建命令
+    docker build -t dinky-flink:1.0.0-1.16.2-2 . -f Dockerfile
+
+5.推送镜像到私有仓库
+    docker tag dinky-flink:1.0.0-1.16.2-2 registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.2-2
+    docker push registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.2-2
+
+
+6.拉取镜像文件
+    docker pull registry.cn-hangzhou.aliyuncs.com/data_big/dinky:flink1.16.3
+
+七、k8s与flink集成
+    1.权限
+    kubectl delete clusterrolebinding flink-role-binding-default
+    kubectl create clusterrolebinding flink-role-binding-default --clusterrole=cluster-admin --serviceaccount=bigdata:default
+    2.定义k8s自定义资源组 使用应用商店安装不需要这一步
+    将https://github.com/apache/flink-kubernetes-operator/tree/main/helm/flink-kubernetes-operator
+    crd中的两个配置文件导入到自定义资源组CRD中
+    
+    3.安装flink-kubernetes-operator
+        a.添加helm charts仓库
+    
+        b.配置应用商店从应用商店安装:flink-kubernetes-operator
+        https://downloads.apache.org/flink/flink-kubernetes-operator-1.xx/
+        注意：从应用商店安装同样需要第一步或者--set webhook.create=false
+    
+c.或者参考官方文档安装flink-kubernetes-operator
+https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/docs/try-flink-kubernetes-operator/quick-start/
+第一步的cert-manager可以不用配置
+第二步install时增加参数--set webhook.create=false 同时指定namespace  --namespace=bigdata
+helm install flink-kubernetes-operator flink-operator-repo/flink-kubernetes-operator --set webhook.create=false  --namespace=bigdata
+查看运行情况：
+kubectl get pods
+
+
+八、AQS
+1.访问不到或者不能访问其他主机
+关闭防火墙
+或正确配置出入端口
+sudo ufw allow 22/tcp
+sudo ufw reload
+https://ranchermanager.docs.rancher.com/zh/getting-started/installation-and-upgrade/installation-requirements/port-requirements
+https://docs.rancher.cn/docs/rancher2.5/installation/resources/advanced/firewall/_index
+2.iptables: No chain/target/match by that name
+防火墙关闭了，同时关闭了iptables服务，docker启动不能映射端口了
+3.同一节点安装rancher和rancher-agent端口冲突问题
+更改rancher映射端口：将 -p 80:80 -p 443:443 替换为 -p 8080:80 -p 8443:443
+
+

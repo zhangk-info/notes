@@ -199,7 +199,7 @@ kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt -
 ### 更改资源节点数量 
 kubectl --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true --namespace=njjs scale --replicas=0 deployment/park-server-access
 
-
+kubectl apply -f https://192.168.10.160:8443/v3/import/zb7c6qvvz4kbpvhmckmlclkj4vpfmfcpzf8gl5bz2tmclpnrgnrhd8_c-m-g9xj445l.yaml --client-certificate=/var/lib/rancher/rke2/server/tls/client-admin.crt --client-key=/var/lib/rancher/rke2/server/tls/client-admin.key --kubeconfig=/var/lib/rancher/rke2/agent/kubelet.kubeconfig --insecure-skip-tls-verify=true
 
 1. 查看rancher状态 docker logs -n10 -f rancher
 2. 恢复 rancher etcd
