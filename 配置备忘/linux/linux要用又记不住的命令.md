@@ -182,3 +182,9 @@ xfs_growfs 针对文件系统xfs
 * xfs_growfs /dev/sda3
 parted
 * resizepart 3 380G
+
+
+
+# 文件导入
+apt install lrzsz
+rz-be

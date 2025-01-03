@@ -126,24 +126,30 @@ $ docker run \
         ●commons-cli-1.3.1.jar
         ●dinky-app-1.15-1.0.0-SNAPSHOT-jar-with-dependencies.jar
         ●flink-table-planner_2.12-1.15.4.jar
-    放入flink运行需要的自定义连接器等相关包到extends目录下
+    放入其他flink运行需要的自定义连接器等相关包
     3.编写Dockerfile，在extends中运行
+
 ```
 ARG FLINK_VERSION=1.16.2
 
 FROM m.daocloud.io/flink:${FLINK_VERSION}-scala_2.12-java8
 
-COPY . /opt/flink/lib/extends
+COPY . /opt/flink/lib
+
+# https://nightlies.apache.org/flink/flink-docs-master/zh/docs/deployment/filesystems/s3/
+# https://nightlies.apache.org/flink/flink-docs-release-1.18/zh/docs/deployment/filesystems/plugins/
+# The s3 file systems (flink-s3-fs-presto and flink-s3-fs-hadoop) can only be used as plugins as we already removed the relocations. Placing them in libs/ will result in system failures.
+RUN mkdir /opt/flink/plugins/s3-fs-presto & mv /opt/flink/lib/flink-s3-fs-presto-1.18.1.jar /opt/flink/plugins/s3-fs-presto
 
 RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar    
 ```
 
 4.执行构建命令
-    docker build -t dinky-flink:1.0.0-1.16.2-2 . -f Dockerfile
+    docker build -t dinky-flink:1.2.0-1.18 . -f ./deploy/docker/Dockerfile --build-arg DINKY_VERSION=1.2.0 --build-arg FLINK_VERSION=1.18
 
 5.推送镜像到私有仓库
-    docker tag dinky-flink:1.0.0-1.16.2-2 192.168.10.150:8090/base/dinky:flink1.16.2-2
-    docker push 192.168.10.150:8090/base/dinky:flink1.16.2-2
+    docker tag dinky-flink:1.2.0-1.18 192.168.10.150:8090/datacenter/dinky-flink:1.2.0-1.18
+    docker push 192.168.10.150:8090/datacenter/dinky-flink:1.2.0-1.18
 
 
 6.拉取镜像文件
@@ -152,7 +158,7 @@ RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar
 七、k8s与flink集成
     1.权限
     kubectl delete clusterrolebinding flink-role-binding-default
-    kubectl create clusterrolebinding flink-role-binding-default --clusterrole=cluster-admin --serviceaccount=bigdata:default
+    kubectl create clusterrolebinding flink-role-binding-default --clusterrole=cluster-admin --serviceaccount=datacenter:default
     2.定义k8s自定义资源组 使用应用商店安装不需要这一步
     将https://github.com/apache/flink-kubernetes-operator/tree/main/helm/flink-kubernetes-operator
     crd中的两个配置文件导入到自定义资源组CRD中
