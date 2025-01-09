@@ -130,30 +130,36 @@ $ docker run \
     3.编写Dockerfile，在extends中运行
 
 ```
-ARG FLINK_VERSION=1.16.2
+# flink 版本号
+ARG FLINK_VERSION=1.18
 
-FROM m.daocloud.io/flink:${FLINK_VERSION}-scala_2.12-java8
+# flink官方镜像tag
+FROM flink:${FLINK_VERSION}-scala_2.12
 
-COPY . /opt/flink/lib
+# 把当前extends目录下的jar添加进依赖目录
+ADD . /opt/flink/lib
 
-# https://nightlies.apache.org/flink/flink-docs-master/zh/docs/deployment/filesystems/s3/
-# https://nightlies.apache.org/flink/flink-docs-release-1.18/zh/docs/deployment/filesystems/plugins/
 # The s3 file systems (flink-s3-fs-presto and flink-s3-fs-hadoop) can only be used as plugins as we already removed the relocations. Placing them in libs/ will result in system failures.
 RUN mkdir /opt/flink/plugins/s3-fs-presto & mv /opt/flink/lib/flink-s3-fs-presto-1.18.1.jar /opt/flink/plugins/s3-fs-presto
+# paimon的包放到plugins下
+RUN mkdir /opt/flink/plugins/paimon & mv /opt/flink/lib/paimon* /opt/flink/plugins/paimon
 
-RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar    
+# 删除loader包，替换为不带loader的
+RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar
+
+  
 ```
 
 4.执行构建命令
-    docker build -t dinky-flink:1.2.0-1.18 . -f ./deploy/docker/Dockerfile --build-arg DINKY_VERSION=1.2.0 --build-arg FLINK_VERSION=1.18
+docker build -t 192.168.10.150:8090/datacenter/dinky-flink:1.18 . -f ./Dockerfile
+
 
 5.推送镜像到私有仓库
-    docker tag dinky-flink:1.2.0-1.18 192.168.10.150:8090/datacenter/dinky-flink:1.2.0-1.18
-    docker push 192.168.10.150:8090/datacenter/dinky-flink:1.2.0-1.18
+docker push 192.168.10.150:8090/datacenter/dinky-flink:1.18
 
 
 6.拉取镜像文件
-    docker pull 192.168.10.150:8090/base/dinky:flink1.16.3
+docker pull 192.168.10.150:8090/datacenter/dinky-flink:1.18
 
 七、k8s与flink集成
     1.权限
