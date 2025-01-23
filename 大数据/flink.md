@@ -142,7 +142,9 @@ ADD . /opt/flink/lib
 # The s3 file systems (flink-s3-fs-presto and flink-s3-fs-hadoop) can only be used as plugins as we already removed the relocations. Placing them in libs/ will result in system failures.
 RUN mkdir /opt/flink/plugins/s3-fs-presto & mv /opt/flink/lib/flink-s3-fs-presto-1.18.1.jar /opt/flink/plugins/s3-fs-presto
 # paimon的包放到plugins下
-RUN mkdir /opt/flink/plugins/paimon & mv /opt/flink/lib/paimon* /opt/flink/plugins/paimon
+RUN mkdir /opt/flink/plugins/paimon \
+& mv /opt/flink/lib/paimon-flink-1.18-1.0.0.jar /opt/flink/plugins/paimon \
+& mv /opt/flink/lib/paimon-s3-1.0.0.jar /opt/flink/plugins/paimon
 
 # 删除loader包，替换为不带loader的
 RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar
