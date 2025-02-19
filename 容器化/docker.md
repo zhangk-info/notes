@@ -12,3 +12,10 @@ dckr_pat_40c4IlGSwT_QR-dqwuRA_tBw3sY
 4. docker tag dinkydocker/dinky:1.1.0-flink1.18 192.168.10.150:8090/base/dinkydocker/dinky:1.1.0-flink1.18
 5. docker login -u developer -p dev2021@FT 192.168.10.150:8090
 6. docker push 192.168.10.150:8090/base/dinkydocker/dinky:1.1.0-flink1.18
+
+
+docker tag pgvector/pgvector:pg17 192.168.10.150:8090/base/pgvector/pgvector:pg17
+docker push 192.168.10.150:8090/base/pgvector/pgvector:pg17
+
+
+docker run -d -p 3000:3000 --name flowise -e DATABASE_TYPE=postgresdb  -e DATABASE_PORT=5432  -e DATABASE_HOST=192.168.10.162  -e DATABASE_NAME=flowise  -e DATABASE_USER=root  -e DATABASE_PASSWORD=root..123 -e APIKEY_STORAGE_TYPE=db -e FLOWISE_USERNAME=root -e FLOWISE_PASSWORD=root..123 -e BLOB_STORAGE_PATH=/.flowise/storage -v /data/flowise/storage:/.flowise/storage 192.168.10.150:8090/base/flowiseai/flowise
