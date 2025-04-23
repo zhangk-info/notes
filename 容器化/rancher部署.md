@@ -15,6 +15,8 @@ ufw reload
 5. docker安装
 apt install curl
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
+或者
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 6. 修改linux的内核参数，添加网桥过滤和地址转发功能
 echo "net.bridge.bridge-nf-call-iptables=1" >> /etc/sysctl.conf
 echo "net.bridge.bridge-nf-call-ip6tables=1" >> /etc/sysctl.conf

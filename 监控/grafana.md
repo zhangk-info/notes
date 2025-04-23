@@ -1,6 +1,6 @@
 # Grafana
 
-## docker安装
+## docker方式安装
 
 Grafana的推荐和默认版本是Grafana Enterprise。它是免费的，包含了OSS版本的所有功能。此外，您还可以选择升级到完整的企业功能集，其中包括对企业插件的支持。
 

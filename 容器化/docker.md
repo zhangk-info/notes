@@ -7,7 +7,7 @@ dckr_pat_40c4IlGSwT_QR-dqwuRA_tBw3sY
 ## 从外部保存镜像到私有仓库方法
 
 1. docker pull openjdk:8
-2. docker save openjdk:8 > openjdk.tar
+2. docker save openjdk:8 > openjdk.tar   或者  docker save -o openjdk.tar openjdk:8
 3. docker load -i openjdk.tar
 4. docker tag dinkydocker/dinky:1.1.0-flink1.18 192.168.10.150:8090/base/dinkydocker/dinky:1.1.0-flink1.18
 5. docker login -u developer -p dev2021@FT 192.168.10.150:8090

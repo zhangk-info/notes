@@ -24,7 +24,8 @@ scp /data/backup.zip developer@192.168.1.100:/data/
 
 https://docker.m.daocloud.io
 
-增加前缀 (推荐方式): 
+增加前缀 (推荐方式):
+busybox = docker.io/library/busybox
 docker.io/library/busybox
         |
         V
@@ -128,6 +129,8 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
    yum -y update：升级所有包同时，也升级软件和系统内核；（时间比较久）
    yum -y upgrade：只升级所有包，不升级软件和系统内核，软件和内核保持原样
 
+## docker 安装
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 
 ## 修改文件数（连接数）
 * 方法1：ulimit -n 65535
@@ -155,6 +158,55 @@ vim /etc/security/limits.conf
 5. 查看当前系统内核
   uname -a
   uname -sr
+
+## 指定源安装
+* 删除旧配置（可选）
+sudo rpm -e elrepo-release
+* 安装 ElRepo 仓库
+sudo rpm -Uvh https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+* 启用 kernel 仓库
+sudo sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/elrepo.repo
+* 清理缓存并重新搜索：
+sudo yum clean all
+sudo yum --disablerepo=* --enablerepo=elrepo-kernel list kernel-lt*
+* 安装
+yum --disablerepo=* --enablerepo=elrepo-kernel update -y
+
+
+/usr/src/kernels没有相应的头文件 导致显卡驱动无法安装
+![img.png](img.png)
+https://www.cnblogs.com/Leonardo-li/p/18672492
+
+```
+kernel-lt-5.4.278-1.el7.elrepo.x86_64.rpm
+描述：这是核心内核包，包含了所有的内核功能和驱动程序。
+作用：升级内核本身，提供系统的基础功能。
+
+kernel-lt-devel-5.4.278-1.el7.elrepo.x86_64.rpm
+描述：内核开发包，包含构建内核模块所需的头文件和开发文件。
+作用：用于编译和安装第三方内核模块（例如 NVIDIA 驱动、VirtualBox 等）。
+
+kernel-lt-headers-5.4.278-1.el7.elrepo.x86_64.rpm
+描述：内核头文件包，提供与内核交互的 API 和结构体。
+作用：主要用于开发需要与内核交互的用户空间程序。
+
+kernel-lt-doc-5.4.278-1.el7.elrepo.noarch.rpm (可选)
+描述：内核文档包，提供内核开发和配置的详细文档。
+作用：帮助开发者理解内核的工作原理和配置方法。
+
+kernel-lt-tools-5.4.278-1.el7.elrepo.x86_64.rpm
+描述：内核工具包，提供内核相关的工具，如 cpupower 等。
+作用：用于内核的调试、监控和管理。
+
+kernel-lt-tools-libs-5.4.278-1.el7.elrepo.x86_64.rpm
+描述：为内核工具包提供库文件。
+作用：支持内核工具的运行。
+
+kernel-lt-tools-libs-devel-5.4.278-1.el7.elrepo.x86_64.rpm
+描述：内核工具库开发包。
+作用：用于开发与内核工具交互的程序或模块。
+```
+
 
 ## 定时任务配置 vim /etc/crontab
 

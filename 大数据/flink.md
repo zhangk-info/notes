@@ -2,7 +2,7 @@
 
 https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/deployment/resource-providers/standalone/docker/
 
-## docker 安装
+## docker 方式 安装
 
 ```
 // 配置solt数量、集群高可用选举地址、文件默认存储地址、状态后端增加存储、checkpoints存储地址
@@ -155,6 +155,7 @@ RUN rm -rf ${FLINK_HOME}/lib/flink-table-planner-loader-*.jar
 4.执行构建命令
 docker build -t 192.168.10.150:8090/datacenter/dinky-flink:1.18 . -f ./Dockerfile
 
+docker build -t registry.cn-hangzhou.aliyuncs.com/zhangkunc/dinky-flink:1.18 . -f ./Dockerfile
 
 5.推送镜像到私有仓库
 docker push 192.168.10.150:8090/datacenter/dinky-flink:1.18

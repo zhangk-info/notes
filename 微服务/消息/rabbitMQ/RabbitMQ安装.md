@@ -1,4 +1,4 @@
-## docker安装
+## docker方式安装
 镜像仓库去找rabbitmq版本 https://hub.docker.com/
 ```
 docker run -d --restart=always --name rabbitmq -p 5672:5672 -p 15672:15672 -v /data/rabbitmq:/var/lib/rabbitmq --hostname myRabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost -e RABBITMQ_DEFAULT_USER=rabbit -e RABBITMQ_DEFAULT_PASS=rabbit rabbitmq:management

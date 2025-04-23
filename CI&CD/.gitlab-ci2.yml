@@ -19,7 +19,7 @@ test_all:
     MYSQL_DATABASE: db
     MYSQL_ROOT_PASSWORD: password
   before_script:
-    - pip install -U -r requirements.txt
+    - pip install -U -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
   script:
     - flake8 app
     - pytest tests
