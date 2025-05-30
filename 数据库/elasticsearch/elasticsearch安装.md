@@ -21,6 +21,8 @@ docker exec --user=root -it es /usr/share/elasticsearch/bin/elasticsearch-reset-
 rgW4rvClLke_7pKpnncc
 ```
 
+/data/elastic/plugins:/usr/share/elasticsearch/plugins
+
 * docker run --name elasticsearch 创建一个es容器并起一个名字；
 * -p 9200:9200 将linux的9200端口映射到docker容器的9200端口，用来给es发送http请求
 * -p 9300:9300 9300是es在分布式集群状态下节点之间的通信端口 \ 换行符
