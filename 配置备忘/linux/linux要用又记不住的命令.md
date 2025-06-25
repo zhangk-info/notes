@@ -1,66 +1,6 @@
 
-# docker compose 安装
-https://docs.docker.com/compose/install/
-
 # redis压测：
 ./redis-benchmark -n 1000 -c 50 -d 102400 -r 1000 -t set,get -h 192.168.0.148 -p 16379 -a "cmdi..123" -q
-
-
-# 1）共享主机的localtime
-创建容器的时候指定启动参数，挂载localtime文件到容器内，保证两者所采用的时区是一致的。
-# docker run -ti -d --name my-nginx -v /etc/localtime:/etc/localtime:ro  docker.io/nginx  /bin/bash
-
-# --docker 仓库修改 /etc/docer/daemon.json
-{
-  "registry-mirrors": ["http://hub-mirror.c.163.com"],
-  "data-root":"/home/docker"
-}
-记得重启 systemctl restart docker
-
-# 从一个服务器复制文件到另一个服务器 
-scp /data/backup.zip developer@192.168.1.100:/data/
-
-# docker 镜像加速
-
-https://docker.m.daocloud.io
-
-增加前缀 (推荐方式):
-busybox = docker.io/library/busybox
-docker.io/library/busybox
-        |
-        V
-m.daocloud.io/docker.io/library/busybox
-
-创建或修改 /etc/docker/daemon.json 文件
-{
-  "registry-mirrors": [
-    "https://docker.m.daocloud.io",
-    "https://docker.mirrors.ustc.edu.cn",
-    "https://docker.1panel.live",
-    "https://reg-mirror.qiniu.com",
-    "https://docker.m.daocloud.io",
-    "https://noohub.ru",
-    "https://huecker.io",
-    "https://dockerhub.timeweb.cloud",  
-    "https://5tqw56kt.mirror.aliyuncs.com",
-    "https://docker.1panel.live",
-    "http://mirrors.ustc.edu.cn/",
-    "http://mirror.azure.cn/",
-    "https://hub.rat.dev/",
-    "https://docker.ckyl.me/",
-    "https://docker.chenby.cn",
-    "https://docker.hpcloud.cloud",
-    "https://registry.docker-cn.com"
-  ]
-}
-
-systemctl daemon-reload
-systemctl restart docker 
-
-# docker挂载目录 Permission denied
-原因 centos7 selinux把权限禁用了
-1. docker exec 加上  --user=root
-2. docker run 加上   --privileged=true
 
 # 升级系统软件
 yum upgrade -y
@@ -129,8 +69,6 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
    yum -y update：升级所有包同时，也升级软件和系统内核；（时间比较久）
    yum -y upgrade：只升级所有包，不升级软件和系统内核，软件和内核保持原样
 
-## docker 安装
-curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 
 ## 修改文件数（连接数）
 * 方法1：ulimit -n 65535
