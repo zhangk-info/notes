@@ -206,7 +206,13 @@ kubectl apply -f https://192.168.10.160:8443/v3/import/zb7c6qvvz4kbpvhmckmlclkj4
 
 
 ### rke 方式
+rke up
+
 kubectl --kubeconfig kube_config_cluster.yml get nodes
+
+rke etcd snapshot-restore --config cluster.yml --name 2025-06-26T00:36:39Z_etcd
+
+kubectl  --kubeconfig kube_config_cluster.yml get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.capacity.cpu}{"\t"}{.status.capacity.memory}{"\n"}{end}'
 
 
 1. 查看rancher状态 docker logs -n10 -f rancher

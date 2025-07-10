@@ -17,10 +17,11 @@ echo .
 echo .
 echo .
 wmic process where "name='v2rayN.exe'" call setpriority "high priority"
+wmic process where "name='xray.exe'" call setpriority "high priority"
 echo .
 echo .
 echo .
 echo .
-echo v2rayN.exe is ok, start install service.
+echo v2rayN.exe is ok.
 choice /t 5 /d y /n >nul
 @REM
