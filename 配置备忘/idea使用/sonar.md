@@ -19,7 +19,7 @@ jacoco配置
 
 ```
 
-<!-- 在根目录加这个plugin配置，研发云不管多模块还是单模块都只加这个，研发云会自动收集所有的target/site/jacoco/jacoco.xml-->
+<!-- 在根目录加这个plugin配置，研srd发cloud云不管多模块还是单模块都只加这个，研srd发cloud云会自动收集所有的target/site/jacoco/jacoco.xml-->
 <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>

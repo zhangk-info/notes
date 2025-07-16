@@ -22,7 +22,6 @@ missing signature key
 
 修改 /etc/docker/daemon.json 文件
 {
-  "registry-mirrors": ["http://hub-mirror.c.163.com"],
   "insecure-registries": ["ip:port"]
 }
 systemctl daemon-reload
