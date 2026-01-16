@@ -68,3 +68,28 @@ Filter的41种配置（GatewayFilter 31种，GlobalFilter 10种）：
 2.@Component
 3.实现filter和getOrder
 
+
+### 相关配置
+```
+原因： filter、PathPatternParserServerWebExchangeMatcher 、text/event-stream、文件下载等会占用parallel线程。  rachcer等容器内部可能在jvm初始化时获取到更小的cpu数量导致默认值很小或为1，从而卡住请求分发（filter）
+
+-Dreactor.schedulers.defaultPoolSize
+
+public static final int DEFAULT_POOL_SIZE =
+        Optional.ofNullable(System.getProperty("reactor.schedulers.defaultPoolSize"))
+                .map(Integer::parseInt)
+                .orElseGet(() -> Runtime.getRuntime().availableProcessors());
+✅ 说明：
+
+DEFAULT_POOL_SIZE = parallel Scheduler 默认线程数
+
+默认值 = CPU 核数 (Runtime.getRuntime().availableProcessors())
+
+可通过 JVM 参数覆盖：
+
+bash
+复制代码
+-Dreactor.schedulers.defaultPoolSize=8
+也就是说 确实可以控制 parallel Scheduler 线程数，但是必须在 JVM 启动时设置，而且只影响 全局 parallel Scheduler 默认值。
+```
+
