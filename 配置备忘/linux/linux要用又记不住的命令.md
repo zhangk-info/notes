@@ -10,6 +10,11 @@ mv /var/lib/rpm/__db* /tmp;
 rpm --rebuilddb;
 yum clean all
 
+# yum离线安装包下载
+
+yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum -y reinstall docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin docker-model-plugin  --downloadonly --downloaddir=./
+
 # yum切换源
 
 第1步：备份原有yum源：
