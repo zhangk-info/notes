@@ -11,7 +11,8 @@ rpm --rebuilddb;
 yum clean all
 
 # yum离线安装包下载
-
+yum -y -q install yum-utils
+rm -f /etc/yum.repos.d/docker-ce.repo  /etc/yum.repos.d/docker-ce-staging.repo
 yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 yum -y reinstall docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin docker-model-plugin  --downloadonly --downloaddir=./
 

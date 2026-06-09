@@ -98,23 +98,26 @@ m.daocloud.io/docker.io/library/busybox
 创建或修改 /etc/docker/daemon.json 文件
 {
 "registry-mirrors": [
-"https://docker.m.daocloud.io",
-"https://docker.mirrors.ustc.edu.cn",
-"https://docker.1panel.live",
-"https://reg-mirror.qiniu.com",
-"https://docker.m.daocloud.io",
-"https://noohub.ru",
-"https://huecker.io",
-"https://dockerhub.timeweb.cloud",  
-"https://5tqw56kt.mirror.aliyuncs.com",
-"https://docker.1panel.live",
-"http://mirrors.ustc.edu.cn/",
-"http://mirror.azure.cn/",
-"https://hub.rat.dev/",
-"https://docker.ckyl.me/",
-"https://docker.chenby.cn",
-"https://docker.hpcloud.cloud",
-"https://registry.docker-cn.com"
+    "https://docker.m.daocloud.io",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://atomhub.openatom.cn",
+    "https://reg-mirror.qiniu.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://docker.1panel.live",
+    "https://reg-mirror.qiniu.com",
+    "https://docker.m.daocloud.io",
+    "https://noohub.ru",
+    "https://huecker.io",
+    "https://dockerhub.timeweb.cloud",
+    "https://5tqw56kt.mirror.aliyuncs.com",
+    "https://docker.1panel.live",
+    "http://mirrors.ustc.edu.cn/",
+    "http://mirror.azure.cn/",
+    "https://hub.rat.dev/",
+    "https://docker.ckyl.me/",
+    "https://docker.chenby.cn",
+    "https://docker.hpcloud.cloud",
+    "https://registry.docker-cn.com"
 ]
 }
 
